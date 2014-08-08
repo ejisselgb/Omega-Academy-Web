@@ -18,3 +18,7 @@ body {
 img {
 	margin: 0 auto;
 }
+
+.thumbnail:hover {
+	transform: scale(1.1);	
+}
