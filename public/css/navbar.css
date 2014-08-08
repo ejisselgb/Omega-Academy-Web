@@ -1,0 +1,20 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+  background-color: #d40b3a;
+
+}
+
+.active2 {
+	background-color: white;
+	color: #d40b3a;
+}
+
+
+img {
+	margin: 0 auto;
+}
