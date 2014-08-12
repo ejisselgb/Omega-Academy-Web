@@ -26,3 +26,18 @@ footer {
 	padding: 2em;	
     width:100%;       
 }
+
+#bannerMovil {
+	display: none;
+}
+
+@media screen and (max-width: 580px){
+    #banner {
+    	display: none;
+    }
+
+    #bannerMovil {
+    	display: block;
+    }
+    
+}
