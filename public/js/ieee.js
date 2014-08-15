@@ -17,4 +17,22 @@ function decimal2(str) {
   }        
   xmlhttp2.open("GET","../../../controllers/estandarIEEE/getBinary.php?decimal="+str,true);
   xmlhttp2.send();
+
+  var xmlhttp3 = new XMLHttpRequest();
+  xmlhttp3.onreadystatechange = function() {
+    if (xmlhttp3.readyState == 4 && xmlhttp3.status == 200) {            
+      document.getElementById("exponente").value = xmlhttp3.responseText;            
+    }
+  }        
+  xmlhttp3.open("GET","../../../controllers/estandarIEEE/getExponent.php?decimal="+str,true);
+  xmlhttp3.send();
+
+  var xmlhttp4 = new XMLHttpRequest();
+  xmlhttp4.onreadystatechange = function() {
+    if (xmlhttp4.readyState == 4 && xmlhttp4.status == 200) {            
+      document.getElementById("mantisa").value = xmlhttp4.responseText;            
+    }
+  }        
+  xmlhttp4.open("GET","../../../controllers/estandarIEEE/getMantisa.php?decimal="+str,true);
+  xmlhttp4.send();
 }
