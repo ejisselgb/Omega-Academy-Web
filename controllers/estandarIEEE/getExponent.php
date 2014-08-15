@@ -4,11 +4,13 @@ require "../../models/Validator.php";
 require "../../models/Decimal.php";
 
 // Obtengo los valores del formulario conversor de bases y elimino los espacios en blanco.
-$decimal = abs(str_replace(" ", "", $_GET["decimal"]));
+$decimal = str_replace(" ", "", $_GET["decimal"]);
 
 $numeroValidado = new Validator($decimal);
 
 if (strlen($decimal) > 0) {
+	$decimal = abs($decimal);
+	
 	if ($numeroValidado->validator_decimal()) {
 		$number = new Decimal($decimal);
 		
@@ -24,11 +26,11 @@ if (strlen($decimal) > 0) {
 		$exp = $i + 127;
 		$bin = decbin($exp);
 
-		if (strlen($bin) < 8) {
-			echo "0".$bin;
+		if (strlen($bin) < 8 && strlen($bin) > 0) {
+			echo "0".$bin;			
 		}
 		else {
-			echo $bin;
+			echo $bin;			
 		}
 	}
 	else {

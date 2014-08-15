@@ -30,9 +30,17 @@ function decimal2(str) {
   var xmlhttp4 = new XMLHttpRequest();
   xmlhttp4.onreadystatechange = function() {
     if (xmlhttp4.readyState == 4 && xmlhttp4.status == 200) {            
-      document.getElementById("mantisa").value = xmlhttp4.responseText;            
+      document.getElementById("mantisa").value = xmlhttp4.responseText;
     }
   }        
   xmlhttp4.open("GET","../../../controllers/estandarIEEE/getMantisa.php?decimal="+str,true);
   xmlhttp4.send();
+}
+
+function borrar() {
+	document.getElementById("decimal").value = "";
+	document.getElementById("binary").value = "";
+	document.getElementById("signo").value = "";
+	document.getElementById("exponente").value = "";
+	document.getElementById("mantisa").value = "";
 }
