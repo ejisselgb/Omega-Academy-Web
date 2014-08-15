@@ -10,18 +10,37 @@ $octal = str_replace(" ", "", $_GET["octal"]);
 $numeroValidado = new Validator($octal);
 
 if (strlen($octal) > 0) {
-	if ($numeroValidado->validator_octal()) {		
-		$number = new Octal($octal);		
-		
-		$decimal = $number->octal_decimal();
-		$numBinary = new Decimal($decimal);
-		$binary = $numBinary->decimal_binary();
-		
-		echo $binary;
-		
+	if ($octal >= 0) {
+		if ($numeroValidado->validator_octal()) {		
+			$number = new Octal($octal);		
+			
+			$decimal = $number->octal_decimal();
+			$numBinary = new Decimal($decimal);
+			$binary = $numBinary->decimal_binary();
+			
+			echo $binary;
+			
+		}
+		else {
+			echo "¡ERROR!";
+		}
 	}
 	else {
-		echo "¡Número octal no válido!";
+		$octal = abs($octal);
+
+		if ($numeroValidado->validator_octal()) {		
+			$number = new Octal($octal);		
+			
+			$decimal = $number->octal_decimal();
+			$numBinary = new Decimal($decimal);
+			$binary = $numBinary->decimal_binary();
+			
+			echo "-".$binary;
+			
+		}
+		else {
+			echo "¡ERROR!";
+		}
 	}
 }
 

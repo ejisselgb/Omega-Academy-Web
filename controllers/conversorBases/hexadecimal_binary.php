@@ -10,18 +10,37 @@ $hexadecimal = strtoupper(str_replace(" ", "", $_GET["hexadecimal"]));
 $numeroValidado = new Validator($hexadecimal);
 
 if (strlen($hexadecimal) > 0) {
-	if ($numeroValidado->validator_hexadecimal()) {		
-		$number = new Hexadecimal($hexadecimal);		
-		
-		$decimal = $number->hexadecimal_decimal();
-		$numBinary = new Decimal($decimal);
-		$binary = $numBinary->decimal_binary();
-		
-		echo $binary;
-		
+	if ($hexadecimal >= 0) {
+		if ($numeroValidado->validator_hexadecimal()) {		
+			$number = new Hexadecimal($hexadecimal);		
+			
+			$decimal = $number->hexadecimal_decimal();
+			$numBinary = new Decimal($decimal);
+			$binary = $numBinary->decimal_binary();
+			
+			echo $binary;
+			
+		}
+		else {
+			echo "¡ERROR!";
+		}
 	}
 	else {
-		echo "¡Número hexadecimal no válido!";
+		$hexadecimal = abs($hexadecimal);
+
+		if ($numeroValidado->validator_hexadecimal()) {		
+			$number = new Hexadecimal($hexadecimal);		
+			
+			$decimal = $number->hexadecimal_decimal();
+			$numBinary = new Decimal($decimal);
+			$binary = $numBinary->decimal_binary();
+			
+			echo "-".$binary;
+			
+		}
+		else {
+			echo "¡ERROR!";
+		}
 	}
 }
 

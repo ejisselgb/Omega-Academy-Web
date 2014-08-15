@@ -9,16 +9,31 @@ $binary = str_replace(" ", "", $_GET["binary"]);
 $numeroValidado = new Validator($binary);
 
 if (strlen($binary) > 0) {
-	if ($numeroValidado->validator_binary()) {		
-		$number = new Binary($binary);		
-		
-		$decimal = $number->binary_decimal();
+	if ($binary >= 0) {
+		if ($numeroValidado->validator_binary()) {		
+			$number = new Binary($binary);		
+			
+			$decimal = $number->binary_decimal();
 
-		echo $decimal;
-		
+			echo $decimal;		
+		}
+		else {
+			echo "¡ERROR!";
+		}
 	}
 	else {
-		echo "¡Número binario no válido!";
+		$binary = abs($binary);
+
+		if ($numeroValidado->validator_binary()) {		
+			$number = new Binary($binary);		
+			
+			$decimal = $number->binary_decimal();
+
+			echo "-".$decimal;		
+		}
+		else {
+			echo "¡ERROR!";
+		}
 	}
 }
 
