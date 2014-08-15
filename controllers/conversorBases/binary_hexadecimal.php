@@ -1,8 +1,8 @@
 <?php 
 
-require "../models/Validator.php";
-require "../models/Binary.php";
-require "../models/Decimal.php";
+require "../../models/Validator.php";
+require "../../models/Binary.php";
+require "../../models/Decimal.php";
 
 // Obtengo los valores del formulario conversor de bases y elimino los espacios en blanco.
 $binary = str_replace(" ", "", $_GET["binary"]);
