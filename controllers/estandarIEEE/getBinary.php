@@ -9,14 +9,28 @@ $decimal = str_replace(" ", "", $_GET["decimal"]);
 $numeroValidado = new Validator($decimal);
 
 if (strlen($decimal) > 0) {
-	if ($numeroValidado->validator_decimal()) {
-		$number = new Decimal($decimal);
-		
-		$bin = $number->decimal_binary();
-		echo $bin;
+	if ($decimal >= 0) {
+		if ($numeroValidado->validator_decimal()) {
+			$number = new Decimal($decimal);
+			
+			$bin = $number->decimal_binary();
+			echo $bin;
+		}
+		else {
+			echo "¡ERROR!";
+		}
 	}
 	else {
-		echo "¡ERROR!";
+		$decimal = abs($decimal);
+		if ($numeroValidado->validator_decimal()) {
+			$number = new Decimal($decimal);
+			
+			$bin = $number->decimal_binary();
+			echo "-".$bin;
+		}
+		else {
+			echo "¡ERROR!";
+		}
 	}
 }
 
