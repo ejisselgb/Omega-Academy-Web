@@ -1,3 +1,10 @@
+<?php 
+
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -46,60 +53,60 @@
               <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>                    
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="estandarIEEE.html" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/estandarIEEE.html" style="color: white">English</a></li>
+              <li class="active2"><a href="validadorExpresiones.php" style="color: #d40b3a">Español</a></li>              
+              <li><a href="../../en/apps/validadorExpresiones.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </div>          
-      
-      <form class="form-horizontal" action="" role="form">
-        <legend><h2 class="text-center">Estándar IEEE 754 (32 bits)</h2></legend>                
-        <div class="form-group">
-          <label class="col-sm-5 control-label" for="decimal">Número decimal a convertir:</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="decimal" onkeyup="decimal2(this.value)" maxlength="20" autofocus required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-5 control-label" for="binary">Valor binario:</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="binary">
-          </div>
-        </div>
-      </form>
-
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="text-center">Signo</th>
-            <th class="text-center">Exponente</th>
-            <th class="text-center">Mantisa</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="col-md-4 col-md-offset-4">
-                <input id="signo" type="text" class="form-control">
-              </div>
-            </td>
-            <td>
-              <div class="col-md-4 col-md-offset-4">
-                <input id="exponente" type="text" class="form-control">
-              </div>
-            </td>
-            <td><input id="mantisa" type="text" class="form-control"></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div style="text-align: center">
-        <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
       </div>
 
-      <br><br><br><br>
-      <hr>
+      <div class="row">
+        <div class="col-md-4">
+          <img src="../../img/table.png" alt="TABLA DE FUNCIONES" class="img-responsive">    
+        </div>
+        <div class="col-md-6">
+          <form method="POST" action="../../../controllers/validadorExpresiones/validador.php" class="form-horizontal">        
+          <legend><h2 class="text-center">Validador de Expresiones</h2></legend>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="funcion">Ingrese la función f(u) = </label>
+            <div class="col-sm-8">
+              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Ejemplo: ( u^23 ) / sin (-u) " autofocus required>
+            </div>            
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="x">Ingrese el valor para u = </label>
+            <div class="col-sm-8">
+              <input name="x" type="text" id="x" class="form-control">
+            </div>            
+          </div>        
+          <div style="text-align: center;">
+            <a href="index.php" class="btn btn-danger">BORRAR</a>
+            <input type="submit" class="btn btn-primary" value="EVALUAR">  
+          </div>        
+        </form>
+        </div>
+      </div>          
+
+      <br>
+      
+      <section class="text-center">        
+        <?php 
+
+          if (isset($_SESSION["resultado"])) {            
+            echo "<h2 class='text-center bg-danger'>RESULTADO</h2> <br>";
+            $i = 0;
+            while ($i < count($_SESSION["resultado"])) {
+              echo $_SESSION["resultado"][$i];
+              $i++;
+              echo "<br>";
+            }            
+            unset($_SESSION["resultado"]);
+          }
+
+        ?>  
+      </section>
+
+      <br>
       <div style="text-align: center;">
         <a href="../videos.html" type="button" class="btn btn-info btn-lg">Vídeos</a>
         <a href="../documentos.html" type="button" class="btn btn-success btn-lg">Documentos</a>        
@@ -141,7 +148,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../../js/collapse.js"></script>
     <script src="../../js/transition.js"></script>
-    <script src="../../js/dropdown.js"></script>
-    <script src="../../js/ieee.js"></script>
+    <script src="../../js/dropdown.js"></script>    
   </body>
 </html>
