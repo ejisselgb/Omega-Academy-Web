@@ -94,23 +94,19 @@ session_start();
 
           if (isset($_SESSION["resultado"])) {            
             echo "<h2 class='text-center bg-danger'>RESULTADO</h2> <br>";
+            echo "<div class='jumbotron'>";
             $i = 0;
-            while ($i < count($_SESSION["resultado"])) {
+            while ($i < count($_SESSION["resultado"])) {              
               echo $_SESSION["resultado"][$i];
               $i++;
               echo "<br>";
-            }            
+            }
+            echo "</div>";
             unset($_SESSION["resultado"]);
           }
 
         ?>  
-      </section>
-
-      <br>
-      <div style="text-align: center;">
-        <a href="../videos.html" type="button" class="btn btn-info btn-lg">Vídeos</a>
-        <a href="../documentos.html" type="button" class="btn btn-success btn-lg">Documentos</a>        
-      </div>
+      </section>      
 
       <br><br><br><br><br><br><br><br>
 

@@ -46,8 +46,8 @@
               <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>      
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../../es/apps/estandarIEEE.html" style="color: white">Español</a></li>              
-              <li class="active2"><a href="estandarIEEE.html" style="color: #d40b3a">English</a></li>
+              <li><a href="../../es/apps/validadorExpresiones.php" style="color: white">Español</a></li>              
+              <li class="active2"><a href="validadorExpresiones.php" style="color: #d40b3a">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -82,11 +82,11 @@
 
       <br>
       
-      <section class="text-center">        
+      <section class="text-center jumbotron">        
         <?php 
 
           if (isset($_SESSION["resultado"])) {            
-            echo "<h2 class='text-center bg-danger'>RESULTADO</h2> <br>";
+            echo "<h2 class='text-center bg-success'>RESULTADO</h2> <br>";
             $i = 0;
             while ($i < count($_SESSION["resultado"])) {
               echo $_SESSION["resultado"][$i];
@@ -97,14 +97,7 @@
           }
 
         ?>  
-      </section>
-
-      <br><br><br><br>
-      <br>      
-      <div style="text-align: center;">
-        <a href="../videos.html" type="button" class="btn btn-info btn-lg">Videos</a>
-        <a href="../documents.html" type="button" class="btn btn-success btn-lg">Documents</a>        
-      </div>   
+      </section>      
 
       <br><br><br><br><br><br><br><br>
 

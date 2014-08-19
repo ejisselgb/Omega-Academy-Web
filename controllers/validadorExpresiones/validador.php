@@ -59,7 +59,7 @@ if (isset($_POST["funcion"])) {
       header("Location: ../../public/es/apps/validadorExpresiones.php");
     }
     else { //No hay fallo matemático, se muestra el valor
-      $f = "<h4 class='bg-info' style='padding: .6em;'>RESULTADO es: " . $valor."</h4>";
+      $f = "<h4 class='bg-primary' style='padding: .6em;'>RESULTADO es: " . $valor."</h4>";
       $_SESSION["resultado"] = array($b, $c, $d, $f);
       header("Location: ../../public/es/apps/validadorExpresiones.php");
     }
