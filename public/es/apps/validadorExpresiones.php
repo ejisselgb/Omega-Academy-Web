@@ -81,7 +81,9 @@ session_start();
           </div>        
           <div style="text-align: center;">
             <a href="index.php" class="btn btn-danger">BORRAR</a>
-            <input type="submit" class="btn btn-primary" value="EVALUAR">  
+            <input type="submit" class="btn btn-primary" value="EVALUAR">
+            <br><br><br><br>            
+            <a href="../documentos/evaluador.pdf" target="_blank"><h2>Instrucciones de usuario.pdf</h2></a>
           </div>        
         </form>
         </div>
