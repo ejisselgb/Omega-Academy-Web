@@ -17,7 +17,7 @@ class Validator
 	*/
 	function __construct($number) {
 
-		$this->number = abs($number);
+		$this->number = $number;
 	}
 
 	/**
