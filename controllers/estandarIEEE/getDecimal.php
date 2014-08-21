@@ -20,13 +20,13 @@ if (strlen($binary) > 0) {
 			echo "¡ERROR!";
 		}
 	}
-	else {
-		$binary = abs($binary);
+	else {		
+		$numeroValidado = new Validator(abs($binary));
 		if ($numeroValidado->validator_binary()) {
 			$number = new Binary($binary);
 			
 			$decimal = $number->binary_decimal();
-			echo $decimal;
+			echo "-".$decimal;
 		}
 		else {
 			echo "¡ERROR!";

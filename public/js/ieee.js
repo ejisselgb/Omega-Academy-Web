@@ -44,3 +44,41 @@ function borrar() {
 	document.getElementById("exponente").value = "";
 	document.getElementById("mantisa").value = "";
 }
+
+function binary2(str) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {            
+      document.getElementById("decimal").value = xmlhttp.responseText;
+    }
+  }        
+  xmlhttp.open("GET","../../../controllers/estandarIEEE/getDecimal.php?binary="+str,true);
+  xmlhttp.send();
+
+  var xmlhttp2 = new XMLHttpRequest();
+  xmlhttp2.onreadystatechange = function() {
+    if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {            
+      document.getElementById("signo").value = xmlhttp2.responseText;            
+    }
+  }        
+  xmlhttp2.open("GET","../../../controllers/estandarIEEE/getSign2.php?binary="+str,true);
+  xmlhttp2.send();
+
+  var xmlhttp3 = new XMLHttpRequest();
+  xmlhttp3.onreadystatechange = function() {
+    if (xmlhttp3.readyState == 4 && xmlhttp3.status == 200) {            
+      document.getElementById("exponente").value = xmlhttp3.responseText;            
+    }
+  }        
+  xmlhttp3.open("GET","../../../controllers/estandarIEEE/getExponent2.php?binary="+str,true);
+  xmlhttp3.send();
+
+  var xmlhttp4 = new XMLHttpRequest();
+  xmlhttp4.onreadystatechange = function() {
+    if (xmlhttp4.readyState == 4 && xmlhttp4.status == 200) {            
+      document.getElementById("mantisa").value = xmlhttp4.responseText;
+    }
+  }        
+  xmlhttp4.open("GET","../../../controllers/estandarIEEE/getMantisa2.php?binary="+str,true);
+  xmlhttp4.send();
+}
