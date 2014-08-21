@@ -65,7 +65,7 @@
         </div>
         <div class="col-md-6">
           <form method="POST" action="../../../controllers/validadorExpresiones/validador2.php" class="form-horizontal">        
-          <legend><h2 class="text-center">Expressions Validator</h2></legend>
+          <legend><h2 class="text-center">Expression Validator</h2></legend>
           <div class="form-group">
             <label class="control-label col-sm-4" for="funcion">Type in function f(u) = </label>
             <div class="col-sm-8">
