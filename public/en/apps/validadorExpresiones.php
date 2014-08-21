@@ -1,3 +1,9 @@
+<?php 
+
+  session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,28 +61,28 @@
       
       <div class="row">
         <div class="col-md-4">
-          <img src="../../img/table.png" alt="TABLA DE FUNCIONES" class="img-responsive">    
+          <img src="../../img/table2.png" alt="TABLA DE FUNCIONES" class="img-responsive">    
         </div>
         <div class="col-md-6">
-          <form method="POST" action="../../../controllers/validadorExpresiones/validador.php" class="form-horizontal">        
-          <legend><h2 class="text-center">Validador de Expresiones</h2></legend>
+          <form method="POST" action="../../../controllers/validadorExpresiones/validador2.php" class="form-horizontal">        
+          <legend><h2 class="text-center">Expressions Validator</h2></legend>
           <div class="form-group">
-            <label class="control-label col-sm-4" for="funcion">Ingrese la función f(u) = </label>
+            <label class="control-label col-sm-4" for="funcion">Type in function f(u) = </label>
             <div class="col-sm-8">
-              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Ejemplo: ( u^23 ) / sin (-u) " autofocus required>
+              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Example: ( u^23 ) / sin (-u) " autofocus required>
             </div>            
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-4" for="x">Ingrese el valor para u = </label>
+            <label class="control-label col-sm-4" for="x">Type in the value for u:</label>
             <div class="col-sm-8">
               <input name="x" type="text" id="x" class="form-control">
             </div>            
           </div>        
           <div style="text-align: center;">
-            <a href="index.php" class="btn btn-danger">BORRAR</a>
-            <input type="submit" class="btn btn-primary" value="EVALUAR">
+            <a href="index.php" class="btn btn-danger">DELETE</a>
+            <input type="submit" class="btn btn-primary" value="EVALUATE">
             <br><br><br><br>            
-            <a href="../documents/evaluador.pdf" target="_blank"><h2>Instrucciones de usuario.pdf</h2></a>
+            <a href="../documents/evaluador.pdf" target="_blank"><h2>User instructions.pdf</h2></a>
           </div>        
         </form>
         </div>
@@ -88,7 +94,7 @@
         <?php 
 
           if (isset($_SESSION["resultado"])) {            
-            echo "<h2 class='text-center bg-success'>RESULTADO</h2> <br>";
+            echo "<h2 class='text-center bg-success'>RESULT</h2> <br>";
             $i = 0;
             while ($i < count($_SESSION["resultado"])) {
               echo $_SESSION["resultado"][$i];

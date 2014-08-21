@@ -65,7 +65,7 @@ session_start();
           <img src="../../img/table.png" alt="TABLA DE FUNCIONES" class="img-responsive">    
         </div>
         <div class="col-md-6">
-          <form method="POST" action="../../../controllers/validadorExpresiones/validador.php" class="form-horizontal">        
+          <form method="POST" action="../../../controllers/validadorExpresiones/validador1.php" class="form-horizontal">        
           <legend><h2 class="text-center">Validador de Expresiones</h2></legend>
           <div class="form-group">
             <label class="control-label col-sm-4" for="funcion">Ingrese la función f(u) = </label>

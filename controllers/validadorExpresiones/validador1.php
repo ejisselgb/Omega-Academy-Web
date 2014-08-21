@@ -67,7 +67,7 @@ if (isset($_POST["funcion"])) {
   else {
     $g = "<h4>La validación es: " . $evaluadorExpresiones->MensajeSintaxis($chequeoSintaxis)."</h4>";
     $_SESSION["resultado"] = array($b, $c, $d, $g);
-      header("Location: ../../public/es/apps/validadorExpresiones.php");
+    header("Location: ../../public/es/apps/validadorExpresiones.php");
   }
 
 
