@@ -22,15 +22,8 @@ if (isset($_POST["funcion"])) {
   $exprAlgebraica[0] = str_replace("arccos(", "acs(", $exprAlgebraica[0]);
   $exprAlgebraica[0] = str_replace("arctan(", "atn(", $exprAlgebraica[0]);
 
-
-  
-
-
-  $b = "<h4>Initial expression: [" . $exprAlgebraica[0] . "]</h4>";
-
   //Quita espacios, tabuladores, encierra en paréntesis, vuelve a minúsculas
   $Transformado = $evaluadorExpresiones->TransformaExpresion($exprAlgebraica[0]);
-  $c = "<h4>Transform: [" . $Transformado . "]</h4>";
 
   //Chequea la sintaxis de la expresión
   $chequeoSintaxis = $evaluadorExpresiones->EvaluaSintaxis($Transformado);
@@ -38,15 +31,11 @@ if (isset($_POST["funcion"])) {
   {
     //Transforma la expresión para aceptar los menos unarios agregando (0-1)#
     $ExprNegativos = $evaluadorExpresiones->ArreglaNegativos($Transformado);
-    $d = "<h4>Unary negative: [" . $ExprNegativos . "]</h4><br>";
 
     //Analiza la expresión
     $evaluadorExpresiones->Analizar($ExprNegativos);
 
-    //Da valor a las variables
-    $evaluadorExpresiones->ValorVariable('x', 7);
-    $evaluadorExpresiones->ValorVariable('y', 13);
-    $evaluadorExpresiones->ValorVariable('z', 19);
+    //Da valor a las variables   
     $evaluadorExpresiones->ValorVariable('u', 1);
 
     //Evalúa la expresión para retornar un valor
@@ -55,18 +44,18 @@ if (isset($_POST["funcion"])) {
     //Si hay un fallo matemático se captura con este si condicional
     if (is_nan($valor) || is_infinite($valor)) {
       $e = "<h4>Mathematical Error</h4>";
-      $_SESSION["resultado"] = array($b, $c, $d, $e);
+      $_SESSION["resultado"] = $e;
       header("Location: ../../public/en/apps/validadorExpresiones.php");
     }
     else { //No hay fallo matemático, se muestra el valor
       $f = "<h4 class='bg-primary' style='padding: .6em;'>RESULT: " . $valor."</h4>";
-      $_SESSION["resultado"] = array($b, $c, $d, $f);
+      $_SESSION["resultado"] = $f;
       header("Location: ../../public/en/apps/validadorExpresiones.php");
     }
   }
   else {
     $g = "<h4>Validation is: " . $evaluadorExpresiones->MensajeSintaxis($chequeoSintaxis)."</h4>";
-    $_SESSION["resultado"] = array($b, $c, $d, $g);
+    $_SESSION["resultado"] = $g;
   }
 
 

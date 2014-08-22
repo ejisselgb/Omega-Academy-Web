@@ -81,31 +81,21 @@
           <div style="text-align: center;">
             <a href="index.php" class="btn btn-danger">DELETE</a>
             <input type="submit" class="btn btn-primary" value="EVALUATE">
-            <br><br><br><br>            
-            <a href="../documents/evaluador.pdf" target="_blank"><h2>User instructions.pdf</h2></a>
+            <br><br><br><br>
+            <?php 
+                if (isset($_SESSION["resultado"])) {                              
+                  echo $_SESSION["resultado"];
+                  unset($_SESSION["resultado"]);
+                }
+            ?>
+            <br><br>          
+            <a href="../documents/evaluator.pdf" target="_blank"><h2>User instructions.pdf</h2></a>
           </div>        
         </form>
         </div>
       </div>          
 
-      <br>
-      
-      <section class="text-center jumbotron">        
-        <?php 
-
-          if (isset($_SESSION["resultado"])) {            
-            echo "<h2 class='text-center bg-success'>RESULT</h2> <br>";
-            $i = 0;
-            while ($i < count($_SESSION["resultado"])) {
-              echo $_SESSION["resultado"][$i];
-              $i++;
-              echo "<br>";
-            }            
-            unset($_SESSION["resultado"]);
-          }
-
-        ?>  
-      </section>      
+      <br>     
 
       <br><br><br><br><br><br><br><br>
 

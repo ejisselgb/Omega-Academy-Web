@@ -1,3 +1,11 @@
+function borrar() {
+  document.getElementById("decimal").value = "";
+  document.getElementById("binary").value = "";
+  document.getElementById("signo").value = "";
+  document.getElementById("exponente").value = "";
+  document.getElementById("mantisa").value = "";
+}
+
 function decimal2(str) {        
   
   var xmlhttp = new XMLHttpRequest();
@@ -37,15 +45,17 @@ function decimal2(str) {
   xmlhttp4.send();
 }
 
-function borrar() {
-	document.getElementById("decimal").value = "";
-	document.getElementById("binary").value = "";
-	document.getElementById("signo").value = "";
-	document.getElementById("exponente").value = "";
-	document.getElementById("mantisa").value = "";
-}
-
 function binary2(str) {
+  // Obtengo el valor del campo binary, si es vacío
+  // ejecuto la función borrar todos los campos.
+  var campoBinary = document.getElementById("binary");
+  var campoLen = campoBinary.length;
+  alert(campoLen);
+  if () {
+
+    borrar();
+  };
+
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {            

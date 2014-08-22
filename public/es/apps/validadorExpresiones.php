@@ -77,38 +77,25 @@ session_start();
             <label class="control-label col-sm-4" for="x">Ingrese el valor para u = </label>
             <div class="col-sm-8">
               <input name="x" type="text" id="x" class="form-control">
-            </div>            
+            </div>                
           </div>        
           <div style="text-align: center;">
             <a href="index.php" class="btn btn-danger">BORRAR</a>
             <input type="submit" class="btn btn-primary" value="EVALUAR">
-            <br><br><br><br>            
+            <br><br><br><br>
+            <?php 
+                if (isset($_SESSION["resultado"])) {                              
+                  echo $_SESSION["resultado"];
+                  unset($_SESSION["resultado"]);
+                }
+            ?>
+            <br><br>         
             <a href="../documentos/evaluador.pdf" target="_blank"><h2>Instrucciones de usuario.pdf</h2></a>
           </div>        
         </form>
         </div>
       </div>          
-
-      <br>
-      
-      <section class="text-center">        
-        <?php 
-
-          if (isset($_SESSION["resultado"])) {            
-            echo "<h2 class='text-center bg-danger'>RESULTADO</h2> <br>";
-            echo "<div class='jumbotron'>";
-            $i = 0;
-            while ($i < count($_SESSION["resultado"])) {              
-              echo $_SESSION["resultado"][$i];
-              $i++;
-              echo "<br>";
-            }
-            echo "</div>";
-            unset($_SESSION["resultado"]);
-          }
-
-        ?>  
-      </section>      
+    
 
       <br><br><br><br><br><br><br><br>
 
