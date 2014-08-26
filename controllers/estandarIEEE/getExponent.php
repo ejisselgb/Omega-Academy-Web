@@ -8,35 +8,93 @@ $decimal = str_replace(" ", "", $_GET["decimal"]);
 
 $numeroValidado = new Validator($decimal);
 
-if (strlen($decimal) > 0) {
-	$decimal = abs($decimal);
-	
-	if ($numeroValidado->validator_decimal()) {
-		$number = new Decimal($decimal);
-		
-		$bin = $number->decimal_binary();
+if (strlen($decimal) > 0 && $numeroValidado->validator_decimal()) {		
+	if ($decimal >= 0) {
+		$binary = new Decimal($decimal);
 
-		// Obtengo la parte entera del número binario.
-		$array = explode(".", $bin);
+		// Convierto el número decimal a binario
+		$bin = $binary->decimal_binary();
 
-		// Obtengo el número de caracteres de la parte entera y le resto 1.
-		$i = strlen($array[0]) - 1;		
+		// Separo la parte entera de la fraccionaria del número binario
+		$array = explode(".", $bin);	
 
-		// Le sumo 127 para obtener el exponente según el estándar IEEE 754.
-		$exp = $i + 127;
-		$bin = decbin($exp);
+		// Verifico si el primer dígito del número binario es 1
+		if (substr($bin, 0, 1) == "1") {
+			// Posiciones de la coma
+			$pos = strlen($array[0]) - 1;
+			$expo = decbin(127 + $pos);
 
-		if (strlen($bin) < 8 && strlen($bin) > 0) {
-			echo "0".$bin;			
+			if (strlen($expo) == 7)
+			 	echo "0".$expo;
+			else
+				echo $expo;
 		}
-		else {
-			echo $bin;			
+		elseif ($bin == 0) {
+			echo "01111111";
+		}
+		else {						
+			for ($i = 0; $i < strlen($array[1]); $i++) { 
+				if (substr($array[1], $i, 1) == 1) {
+					$pos = $i + 1;
+					$expo = decbin(127 - $pos);
+
+					if (strlen($expo) == 7) {
+			 			echo "0".$expo;
+			 			break;
+			 		}
+			 		else {
+						echo $expo;
+						break;
+					}
+				}
+			}
 		}
 	}
 	else {
-		echo "¡ERROR!";
+		$decimal = abs($decimal);
+		
+		$binary = new Decimal($decimal);
+
+		// Convierto el número decimal a binario
+		$bin = $binary->decimal_binary();
+
+		// Separo la parte entera de la fraccionaria del número binario
+		$array = explode(".", $bin);
+
+		// Verifico si el primer dígito del número binario es 1
+		if (substr($bin, 0, 1) == "1") {
+			// Posiciones de la coma
+			$pos = strlen($array[0]) - 1;
+			$expo = decbin(127 + $pos);
+
+			if (strlen($expo) == 7)
+			 	echo "0".$expo;
+			else
+				echo $expo;
+		}
+		elseif ($bin == 0) {
+			echo "01111111";
+		}
+		else {
+			for ($i = 0; $i < strlen($array[1]); $i++) { 
+				if (substr($array[1], $i, 1) == 1) {
+					$pos = $i + 1;
+					$expo = decbin(127 - $pos);
+
+					if (strlen($expo) == 7) {
+			 			echo "0".$expo;
+			 			break;
+			 		}
+			 		else {
+						echo $expo;
+						break;
+					}
+				}
+			}
+		}
 	}
 }
-
+else
+	echo "ERROR";
 
 ?>
