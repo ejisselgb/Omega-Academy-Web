@@ -35,7 +35,7 @@ class Validator
 	public function validator_binary() {
 		// Divido el número en dos partes, la entera y la fraccionarioa
 		// y los ingreso en un array.
-		$array = explode(".", "".$this->number);
+		$array = explode(".", "".str_replace("-", "", $this->number));
 
 		if (count($array) > 2 || (strspn($this->number, ".") == 1 && count($array) == 1 )) {
 			return false;

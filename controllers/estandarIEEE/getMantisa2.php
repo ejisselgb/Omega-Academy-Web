@@ -1,19 +1,16 @@
 <?php 
 
 require "../../models/Validator.php";
-require "../../models/Decimal.php";
 
 // Obtengo los valores del formulario conversor de bases y elimino los espacios en blanco.
-$decimal = str_replace(" ", "", $_GET["decimal"]);
+$binary = str_replace(" ", "", $_GET["binary"]);
 
-$numeroValidado = new Validator($decimal);
+$numeroValidado = new Validator($binary);
 
-if (strlen($decimal) > 0 && $numeroValidado->validator_decimal()) {		
-	if ($decimal >= 0) {
-		$binary = new Decimal($decimal);
+if (strlen($binary) > 0 && $numeroValidado->validator_binary()) {		
+	if ($binary >= 0) {
 
-		// Convierto el número decimal a binario
-		$bin = $binary->decimal_binary();
+		$bin = $binary;
 
 		// Separo la parte entera de la fraccionaria del número binario
 		$array = explode(".", $bin);	
@@ -71,13 +68,8 @@ if (strlen($decimal) > 0 && $numeroValidado->validator_decimal()) {
 			}
 		}
 	}
-	else {
-		$decimal = abs($decimal);
-		
-		$binary = new Decimal($decimal);
-
-		// Convierto el número decimal a binario
-		$bin = $binary->decimal_binary();
+	else {	
+		$bin = abs($binary);
 
 		// Separo la parte entera de la fraccionaria del número binario
 		$array = explode(".", $bin);	
