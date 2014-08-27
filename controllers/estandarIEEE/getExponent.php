@@ -9,7 +9,7 @@ $decimal = str_replace(" ", "", $_GET["decimal"]);
 $numeroValidado = new Validator($decimal);
 
 if (strlen($decimal) > 0 && $numeroValidado->validator_decimal()) {		
-	if ($decimal >= 0) {
+	if ($decimal > 0) {
 		$binary = new Decimal($decimal);
 
 		// Convierto el número decimal a binario
@@ -30,7 +30,7 @@ if (strlen($decimal) > 0 && $numeroValidado->validator_decimal()) {
 				echo $expo;
 		}
 		elseif ($bin == 0) {
-			echo "01111111";
+			echo "00000000";
 		}
 		else {						
 			for ($i = 0; $i < strlen($array[1]); $i++) { 
@@ -49,6 +49,9 @@ if (strlen($decimal) > 0 && $numeroValidado->validator_decimal()) {
 				}
 			}
 		}
+	}
+	elseif ($decimal == 0) {
+		echo "00000000";
 	}
 	else {
 		$decimal = abs($decimal);
