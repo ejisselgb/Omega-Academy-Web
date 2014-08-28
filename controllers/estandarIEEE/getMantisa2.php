@@ -26,7 +26,7 @@ if (strlen($binary) > 0 && $numeroValidado->validator_binary()) {
 			}
 			elseif (strlen($mantisa) < 23) {
 				$i = strlen($mantisa);
-				while ($i <= 23) {
+				while ($i < 23) {
 					$mantisa = $mantisa."0";
 					$i++;
 				}
@@ -50,7 +50,7 @@ if (strlen($binary) > 0 && $numeroValidado->validator_binary()) {
 					}
 					elseif (strlen($mantisa) < 23) {						
 						$i = strlen($mantisa);
-						while ($i <= 23) {
+						while ($i < 23) {
 							$mantisa = $mantisa."0";
 							$i++;
 						}

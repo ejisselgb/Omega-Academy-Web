@@ -29,7 +29,7 @@ if (strlen($decimal) > 0 && $numeroValidado->validator_decimal()) {
 			}
 			elseif (strlen($mantisa) < 23) {
 				$i = strlen($mantisa);
-				while ($i <= 23) {
+				while ($i < 23) {
 					$mantisa = $mantisa."0";
 					$i++;
 				}
@@ -53,7 +53,7 @@ if (strlen($decimal) > 0 && $numeroValidado->validator_decimal()) {
 					}
 					elseif (strlen($mantisa) < 23) {						
 						$i = strlen($mantisa);
-						while ($i <= 23) {
+						while ($i < 23) {
 							$mantisa = $mantisa."0";
 							$i++;
 						}
