@@ -1,6 +1,6 @@
 <?php 
 
-require "../../models/Binary.php";
+require "../../models/conversorBases/Binary.php";
 
 // Obtengo los valores del formulario conversor de bases y elimino los espacios en blanco.
 $signo = str_replace(" ", "", $_GET["signo"]);

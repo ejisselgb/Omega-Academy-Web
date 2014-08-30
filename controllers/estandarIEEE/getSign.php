@@ -1,6 +1,6 @@
 <?php 
 
-require "../../models/Validator.php";
+require "../../models/conversorBases/Validator.php";
 
 // Obtengo los valores del formulario conversor de bases y elimino los espacios en blanco.
 $decimal = str_replace(" ", "", $_GET["decimal"]);
