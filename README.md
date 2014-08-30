@@ -1,4 +1,6 @@
-## Omega Academy
+# Omega Academy
+
+![OMEGA ACADEMY LOGO](http://omega-academy.co/public/img/bannerMovil.png)
 
 This online course was design by 5 students from Systems Engineering and Multimedia Engineering from the University San Buenaventura, Cali - Colombia. It was created to fulfill the need to implement and share the knowledge obtained up until now, also to offer a work guide for future generations that would allow them to learn in a dynamic way and so it can be a support guide for the professor.
 
