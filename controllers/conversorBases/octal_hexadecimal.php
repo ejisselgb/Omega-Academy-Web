@@ -1,8 +1,8 @@
 <?php 
 
-require "../../models/Validator.php";
-require "../../models/Octal.php";
-require "../../models/Decimal.php";
+require "../../models/conversorBases/Validator.php";
+require "../../models/conversorBases/Octal.php";
+require "../../models/conversorBases/Decimal.php";
 
 // Obtengo los valores del formulario conversor de bases y elimino los espacios en blanco.
 $octal = str_replace(" ", "", $_GET["octal"]);
