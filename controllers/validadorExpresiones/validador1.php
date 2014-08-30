@@ -2,7 +2,7 @@
 
 session_start();
 
-require "../../models/Evaluar.php";
+require "../../models/validadorExpresiones/Evaluar.php";
 
 if (isset($_POST["funcion"])) { 
 
