@@ -15,7 +15,7 @@ session_start();
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Conversor de Bases Numéricas | Omega Academy</title>
+    <title>Validador de Expresiones Algebraicas | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">

@@ -1,9 +1,3 @@
-<?php 
-
-  session_start();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,7 +8,7 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Conversor de Bases Numéricas | Omega Academy</title>
+    <title>Standard IEEE 754 (32 bits) | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -52,50 +46,64 @@
               <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>      
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../../es/apps/validadorExpresiones.php" style="color: white">Español</a></li>              
-              <li class="active2"><a href="validadorExpresiones.php" style="color: #d40b3a">English</a></li>
+              <li><a href="../../es/apps/estandarIEEE.html" style="color: white">Español</a></li>              
+              <li class="active2"><a href="estandarIEEE.html" style="color: #d40b3a">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>          
       
-      <div class="row">
-        <div class="col-md-4">
-          <img src="../../img/table2.png" alt="TABLA DE FUNCIONES" class="img-responsive">    
-        </div>
-        <div class="col-md-6">
-          <form method="POST" action="../../../controllers/validadorExpresiones/validador2.php" class="form-horizontal">        
-          <legend><h2 class="text-center">Expression Validator</h2></legend>
-          <div class="form-group">
-            <label class="control-label col-sm-4" for="funcion">Type in function f(u) = </label>
-            <div class="col-sm-8">
-              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Example: ( u^23 ) / sin (-u) " autofocus required>
-            </div>            
+      <form class="form-horizontal" action="" role="form">
+        <legend><h2 class="text-center">Standard IEEE 754 (32 bits)</h2></legend>                
+        <div class="form-group">
+          <label class="col-sm-5 control-label" for="decimal">Decimal number to convert:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="decimal" onkeyup="decimal2(this.value)" maxlength="20" autofocus>
           </div>
-          <div class="form-group">
-            <label class="control-label col-sm-4" for="x">Type in the value for u:</label>
-            <div class="col-sm-8">
-              <input name="x" type="text" id="x" class="form-control">
-            </div>            
-          </div>        
-          <div style="text-align: center;">
-            <a href="index.php" class="btn btn-danger">DELETE</a>
-            <input type="submit" class="btn btn-primary" value="EVALUATE">
-            <br><br><br><br>
-            <?php 
-                if (isset($_SESSION["resultado"])) {                              
-                  echo $_SESSION["resultado"];
-                  unset($_SESSION["resultado"]);
-                }
-            ?>
-            <br><br>          
-            <a href="../documents/evaluator.pdf" target="_blank"><h2>User instructions.pdf</h2></a>
-          </div>        
-        </form>
         </div>
-      </div>          
+        <div class="form-group">
+          <label class="col-sm-5 control-label" for="binary">Binary value:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="binary" onkeyup="binary2(this.value)">
+          </div>
+        </div>
+      </form>
 
-      <br>     
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">Sign</th>
+            <th class="text-center">Exponent</th>
+            <th class="text-center">Mantissa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="col-md-4 col-md-offset-4">
+                <input id="signo" type="text" class="form-control" maxlength="1" onkeyup="inversa()">
+              </div>
+            </td>
+            <td>
+              <div class="col-md-4 col-md-offset-4">
+                <input id="exponente" type="text" class="form-control" maxlength="8" onkeyup="inversa()">
+              </div>
+            </td>
+            <td><input id="mantisa" type="text" class="form-control" maxlength="23" onkeyup="inversa()"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="text-align: center">
+        <button type="button" class="btn btn-danger" onclick="borrar()">Delete</button>
+      </div>
+
+      <br><br><br><br>
+      <br>      
+      <div style="text-align: center;">
+        <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Videos</a>
+        <a id="boton" href="../documents.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documents</a>        
+      </div>   
 
       <br><br><br><br><br><br><br><br>
 
@@ -131,6 +139,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../../js/collapse.js"></script>
     <script src="../../js/transition.js"></script>
-    <script src="../../js/dropdown.js"></script>    
+    <script src="../../js/dropdown.js"></script>
+    <script src="../../js/ieee.js"></script>
   </body>
 </html>
