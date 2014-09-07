@@ -1,6 +1,6 @@
 <?php
 
-require "../validadorExpresiones/Evaluar.php";
+require "Evaluar.php";
 
 /**
 * Contiene los métodos para Este método consiste en calcular raíces que no se
