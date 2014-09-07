@@ -8,7 +8,7 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Estándar IEEE 754 (32 bits) | Omega Academy</title>
+    <title>Método de Bisección | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -46,25 +46,19 @@
               <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>                    
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="estandarIEEE.html" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/estandarIEEE.html" style="color: white">English</a></li>
+              <li class="active2"><a href="conversorBases.html" style="color: #d40b3a">Español</a></li>              
+              <li><a href="../../en/apps/basesConverter.html" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>          
       
-      <form class="form-horizontal" role="form">
-        <legend><h2 class="text-center">Estándar IEEE 754 (32 bits)</h2></legend>                
+      <form class="form-horizontal" role="form">        
+        <legend><h2 class="text-center">Método de Bisección</h2></legend>
         <div class="form-group">
-          <label class="col-sm-5 control-label" for="decimal">Número decimal a convertir:</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="decimal" onkeyup="decimal2(this.value)" maxlength="18" autofocus>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-5 control-label" for="binary">Valor binario:</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="binary" onkeyup="binary2(this.value)" maxlength="19">
+          <label class="col-sm-5 control-label" for="funcion">Función f(u) = </label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="funcion" autofocus>
           </div>
         </div>
       </form>
@@ -72,24 +66,55 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th class="text-center">Signo</th>
-            <th class="text-center">Exponente</th>
-            <th class="text-center">Mantisa</th>
+            <th class="text-center">Límite inferior A</th>
+            <th class="text-center">Límite superior B</th>
+            <th class="text-center">Dígitos de precisión</th>                        
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>
               <div class="col-md-4 col-md-offset-4">
-                <input id="signo" type="text" class="form-control" maxlength="1" onkeyup="inversa()">
+                <input id="a" type="text" class="form-control">
               </div>
             </td>
             <td>
               <div class="col-md-4 col-md-offset-4">
-                <input id="exponente" type="text" class="form-control" maxlength="8" onkeyup="inversa()">
+                <input id="b" type="text" class="form-control">
               </div>
             </td>
-            <td><input id="mantisa" type="text" class="form-control" maxlength="23" onkeyup="inversa()"></td>
+            <td>
+              <div class="col-md-4 col-md-offset-4">
+                <input id="digitos" type="text" class="form-control">
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+      <h3 class="text-center bg-primary">RESULTADO</h3>
+
+     
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">Raíz</th>
+            <th class="text-center">Error relativo</th>            
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="col-md-4 col-md-offset-4">
+                <input id="a" type="text" class="form-control">
+              </div>
+            </td>
+            <td>
+              <div class="col-md-4 col-md-offset-4">
+                <input id="b" type="text" class="form-control">
+              </div>
+            </td>            
           </tr>
         </tbody>
       </table>
@@ -98,8 +123,7 @@
         <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
       </div>
 
-      <br><br><br><br>
-      <hr>
+      <br><br><br><br><br><br><br><br>
       <div style="text-align: center;">
         <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>
         <a id="boton" href="../documentos.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documentos</a>        
@@ -142,6 +166,6 @@
     <script src="../../js/collapse.js"></script>
     <script src="../../js/transition.js"></script>
     <script src="../../js/dropdown.js"></script>
-    <script src="../../js/ieee.js"></script>    
+    <script src="../../js/conversorBases.js"></script>
   </body>
 </html>
