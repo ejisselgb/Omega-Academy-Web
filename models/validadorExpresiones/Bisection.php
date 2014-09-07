@@ -118,7 +118,7 @@ class Bisection
 	public function getRoot() {
 		if ($this->root_exists($this->a, $this->b)) {
 			// Número de iteraciones
-			$n = 1 + $this->digits;
+			$n = $this->digits;
 			while (0 < $n) {
 				$n--;
 				$this->change_limits();
