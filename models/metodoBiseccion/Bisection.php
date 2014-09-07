@@ -11,21 +11,26 @@ class Bisection
 {
 	// Función a evaluar
 	private $func;
+
 	// Límite inferior
 	private $a;
 
 	// Límite superior
 	private $b;
+
+	// Dígitos de presición.
+	private $digits;
 	
 	/**
 	* Método constructor.
 	* Almacena los límites superior e inferior en la variables $a y $b.
 	* @param string $func - float $a | $b 
 	*/
-	function __construct($func, $a, $b) {
+	function __construct($func, $a, $b, $digits) {
 		$this->func = $func;
 		$this->a = $a;
 		$this->b = $b;
+		$this->digits = $digits;
 	}
 
 	/**
@@ -79,30 +84,52 @@ class Bisection
 
 	/**
 	* Verifica si existe una raíz en el intervalo.
-	* @return boolean true si existe, false de lo contrario.
+	* @return boolean true si existe la raíz, false de lo contrario.
 	*/
-	public function root_exists() {
+	public function root_exists($a, $b) {
 		// Evaluación límite inferior y superior.
-		if ($this->expression($this->a) && $this->expression($this->b)) {		
+		if ($this->expression($a) && $this->expression($b)) {		
 			// Límite inferior evaluado
-			$lower = $this->expression($this->a);			
+			$lower = $this->expression($a);
 
 			// Límite superior evaluado
-			$top = $this->expression($this->b);			
+			$top = $this->expression($b);
 
-			if ($lower * $top < 0)
-				return true;
-			else
-				return false;
+			if ($lower * $top < 0) return true;
+			else return false;
 		}
-		else
-			return false;
+		else return false;
 	}
+
+	/**
+	* Cambia los límites de la función, dependiendo del punto medio que halle.
+	*/
+	public function change_limits() {
+		// Hallo el punto medio de los límites.
+		$middle = ($this->a + $this->b) / 2;
+		if (root_exists($middle, $this->b))	$this->a = $middle;
+		else $this->b = $middle;
+	}
+
+	/**
+	*	Realiza las iteraciones para llegar a la solución del método de bisección.
+	* @return float Retorna la raíz de una función.
+	*/
+	public function getRoot() {
+		// Número de iteraciones
+		$n = 3;
+		while (0 < $n) {
+			$n--;
+
+		}
+	}
+
+
 }
 
 
-$h = new Bisection("(x^5) - 3", 0, 4);
-if ($h->root_exists()) {
+$h = new Bisection("(x^5) - 3", 0, 4, 2);
+if ($h->root_exists(0,4)) {
 	echo "Existe la raíz";
 }
 else
