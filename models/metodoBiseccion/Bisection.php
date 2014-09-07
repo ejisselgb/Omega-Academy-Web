@@ -83,15 +83,25 @@ class Bisection
 	*/
 	public function root_exists() {
 		// Evaluación límite inferior y superior.
-		if ($this->expression($this->a) && $this->expression($this->b))
-			return true;		
+		if ($this->expression($this->a) && $this->expression($this->b)) {		
+			// Límite inferior evaluado
+			$lower = $this->expression($this->a);			
+
+			// Límite superior evaluado
+			$top = $this->expression($this->b);			
+
+			if ($lower * $top < 0)
+				return true;
+			else
+				return false;
+		}
 		else
-			return false;		
+			return false;
 	}
 }
 
 
-$h = new Bisection("ln(x)", -12, 12);
+$h = new Bisection("(x^5) - 3", 0, 4);
 if ($h->root_exists()) {
 	echo "Existe la raíz";
 }
