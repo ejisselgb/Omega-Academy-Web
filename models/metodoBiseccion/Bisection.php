@@ -107,7 +107,7 @@ class Bisection
 	public function change_limits() {
 		// Hallo el punto medio de los límites.
 		$middle = ($this->a + $this->b) / 2;
-		if (root_exists($middle, $this->b))	$this->a = $middle;
+		if ($this->root_exists($middle, $this->b))	$this->a = $middle;
 		else $this->b = $middle;
 	}
 
@@ -116,23 +116,25 @@ class Bisection
 	* @return float Retorna la raíz de una función.
 	*/
 	public function getRoot() {
-		// Número de iteraciones
-		$n = 3;
-		while (0 < $n) {
-			$n--;
-
-		}
+		if ($this->root_exists($this->a, $this->b)) {
+			// Número de iteraciones
+			$n = 1 + $this->digits;
+			while (0 < $n) {
+				$n--;
+				$this->change_limits();
+			}
+			return ($this->a + $this->b) / 2;	
+		}		
 	}
 
+	/**
+	* Obtiene el error relativo.
+	* @return float Retorna el error relativo de la función.
+	*/
+	public function getError() {
+		return (abs($this->b - $this->a) / $this->b);
+	}
 
 }
-
-
-$h = new Bisection("(x^5) - 3", 0, 4, 2);
-if ($h->root_exists(0,4)) {
-	echo "Existe la raíz";
-}
-else
-	echo "No existe !!!!";
 
 ?>
