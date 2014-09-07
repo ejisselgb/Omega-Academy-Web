@@ -11,7 +11,7 @@ $digitos = $_GET["digitos"];
 
 if (isset($funcion) && isset($a) && isset($b) && isset($digitos)) {
 	$root = new Bisection($funcion, $a, $b, $digitos);
-	echo $root->getRoot();
+	echo $root->getError();
 }
 
 ?>

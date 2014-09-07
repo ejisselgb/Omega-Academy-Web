@@ -129,10 +129,11 @@ class Bisection
 
 	/**
 	* Obtiene el error relativo.
-	* @return float Retorna el error relativo de la función.
+	* @return float Retorna el error relativo de la función, false de lo contrario.
 	*/
 	public function getError() {
-		return (abs($this->b - $this->a) / $this->b);
+		if ($this->a == 0) $this->a = 1;
+		return (abs($this->a - $this->b) / $this->a);
 	}
 
 }
