@@ -53,7 +53,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="../../es/apps/validadorExpresiones.php" style="color: white">Español</a></li>              
-              <li class="active2"><a href="validadorExpresiones.php" style="color: #d40b3a">English</a></li>
+              <li class="active2"><a href="expressionValidator.php" style="color: #d40b3a">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -64,34 +64,36 @@
           <img src="../../img/table2.png" alt="TABLA DE FUNCIONES" class="img-responsive">    
         </div>
         <div class="col-md-6">
+
           <form method="POST" action="../../../controllers/validadorExpresiones/validador2.php" class="form-horizontal">        
-          <legend><h2 class="text-center">Expression Validator</h2></legend>
-          <div class="form-group">
-            <label class="control-label col-sm-4" for="funcion">Type in function f(u) = </label>
-            <div class="col-sm-8">
-              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Example: ( u^23 ) / sin (-u) " autofocus required>
-            </div>            
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-4" for="x">Type in the value for u:</label>
-            <div class="col-sm-8">
-              <input name="x" type="text" id="x" class="form-control">
-            </div>            
-          </div>        
-          <div style="text-align: center;">
-            <a href="index.php" class="btn btn-danger">DELETE</a>
-            <input type="submit" class="btn btn-primary" value="EVALUATE">
-            <br><br><br><br>
-            <?php 
-                if (isset($_SESSION["resultado"])) {                              
-                  echo $_SESSION["resultado"];
-                  unset($_SESSION["resultado"]);
-                }
-            ?>
-            <br><br>          
-            <a href="../documents/evaluator.pdf" target="_blank"><h2>User instructions.pdf</h2></a>
-          </div>        
-        </form>
+            <legend><h2 class="text-center">Expression Validator</h2></legend>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="funcion">Type in function f(x) = </label>
+              <div class="col-sm-8">
+                <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Example: ( x^23 ) / sin (-x) " autofocus required>
+              </div>            
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="x">Type in the value for x:</label>
+              <div class="col-sm-8">
+                <input name="x" type="text" id="x" class="form-control" placeholder="Default value x = 0">
+              </div>            
+            </div>        
+            <div style="text-align: center;">
+              <a href="index.php" class="btn btn-danger">DELETE</a>
+              <input type="submit" class="btn btn-primary" value="EVALUATE">
+              <br><br><br><br>
+              <?php 
+                  if (isset($_SESSION["resultado"])) {                              
+                    echo $_SESSION["resultado"];
+                    unset($_SESSION["resultado"]);
+                  }
+              ?>
+              <br><br>          
+              <a href="../documents/evaluator.pdf" target="_blank"><h2>User instructions.pdf</h2></a>
+            </div>        
+          </form>
+        
         </div>
       </div>          
 

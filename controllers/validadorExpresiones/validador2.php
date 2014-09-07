@@ -9,10 +9,6 @@ if (isset($_POST["funcion"])) {
   $evaluadorExpresiones = new Evaluar();
   $exprAlgebraica[0] = $_POST[funcion];
 
-  if (isset($_POST["x"]) && strlen($_POST["x"]) > 0 ) {
-    $exprAlgebraica[0] = str_replace("u", strtolower($_POST["x"]), strtolower($exprAlgebraica[0]));
-  }
-
   // Convierto toda la expresión a letras minúsculas
   $exprAlgebraica[0] = strtolower($exprAlgebraica[0]);
 
@@ -35,9 +31,11 @@ if (isset($_POST["funcion"])) {
     //Analiza la expresión
     $evaluadorExpresiones->Analizar($ExprNegativos);
 
-    //Da valor a las variables   
-    $evaluadorExpresiones->ValorVariable('u', 1);
-
+    //Da valor a las variables
+    if (isset($_POST["x"]) && strlen($_POST["x"]) > 0 ) {
+      $evaluadorExpresiones->ValorVariable('x', $_POST["x"]);
+    }
+    
     //Evalúa la expresión para retornar un valor
     $valor = $evaluadorExpresiones->Calcular();
 
@@ -45,12 +43,12 @@ if (isset($_POST["funcion"])) {
     if (is_nan($valor) || is_infinite($valor)) {
       $e = "<h4>Mathematical Error</h4>";
       $_SESSION["resultado"] = $e;
-      header("Location: ../../public/en/apps/validadorExpresiones.php");
+      header("Location: ../../public/en/apps/expressionValidator.php");
     }
     else { //No hay fallo matemático, se muestra el valor
       $f = "<h4 class='bg-primary' style='padding: .6em;'>RESULT: " . $valor."</h4>";
       $_SESSION["resultado"] = $f;
-      header("Location: ../../public/en/apps/validadorExpresiones.php");
+      header("Location: ../../public/en/apps/expressionValidator.php");
     }
   }
   else {

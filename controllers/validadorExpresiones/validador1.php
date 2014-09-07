@@ -9,10 +9,6 @@ if (isset($_POST["funcion"])) {
   $evaluadorExpresiones = new Evaluar();
   $exprAlgebraica[0] = $_POST[funcion];
 
-  if (isset($_POST["x"]) && strlen($_POST["x"]) > 0 ) {
-    $exprAlgebraica[0] = str_replace("u", strtolower($_POST["x"]), strtolower($exprAlgebraica[0]));
-  }
-
   // Convierto toda la expresión a letras minúsculas
   $exprAlgebraica[0] = strtolower($exprAlgebraica[0]);
 
@@ -35,8 +31,10 @@ if (isset($_POST["funcion"])) {
     //Analiza la expresión
     $evaluadorExpresiones->Analizar($ExprNegativos);
 
-    //Da valor a las variables   
-    $evaluadorExpresiones->ValorVariable('u', 1);
+    //Da valor a las variables    
+    if (isset($_POST["x"]) && strlen($_POST["x"]) > 0 ) {
+      $evaluadorExpresiones->ValorVariable('x', $_POST["x"]);
+    }    
 
     //Evalúa la expresión para retornar un valor
     $valor = $evaluadorExpresiones->Calcular();

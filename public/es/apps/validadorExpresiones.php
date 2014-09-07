@@ -54,7 +54,7 @@ session_start();
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="active2"><a href="validadorExpresiones.php" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/validadorExpresiones.php" style="color: white">English</a></li>
+              <li><a href="../../en/apps/expressionValidator.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -68,15 +68,15 @@ session_start();
           <form method="POST" action="../../../controllers/validadorExpresiones/validador1.php" class="form-horizontal">        
           <legend><h2 class="text-center">Validador de Expresiones</h2></legend>
           <div class="form-group">
-            <label class="control-label col-sm-4" for="funcion">Ingrese la función f(u) = </label>
+            <label class="control-label col-sm-4" for="funcion">Ingrese la función f(x) = </label>
             <div class="col-sm-8">
-              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Ejemplo: ( u^23 ) / sin (-u) " autofocus required>
+              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Ejemplo: ( x^23 ) / sin (-x) " autofocus required>
             </div>            
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-4" for="x">Ingrese el valor para u = </label>
+            <label class="control-label col-sm-4" for="x">Ingrese el valor para x = </label>
             <div class="col-sm-8">
-              <input name="x" type="text" id="x" class="form-control">
+              <input name="x" type="text" id="x" class="form-control" placeholder="Valor por defecto x = 0">
             </div>                
           </div>        
           <div style="text-align: center;">

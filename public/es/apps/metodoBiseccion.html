@@ -58,7 +58,7 @@
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(u) = </label>
           <div class="col-sm-3">
-            <input type="text" class="form-control" id="funcion" autofocus>
+            <input type="text" class="form-control" id="funcion" onkeyup="biseccion()" autofocus>
           </div>
         </div>
       </form>
@@ -75,17 +75,17 @@
           <tr>
             <td>
               <div class="col-md-4 col-md-offset-4">
-                <input id="a" type="text" class="form-control">
+                <input id="a" type="text" class="form-control" onkeyup="biseccion()">
               </div>
             </td>
             <td>
               <div class="col-md-4 col-md-offset-4">
-                <input id="b" type="text" class="form-control">
+                <input id="b" type="text" class="form-control" onkeyup="biseccion()">
               </div>
             </td>
             <td>
               <div class="col-md-4 col-md-offset-4">
-                <input id="digitos" type="text" class="form-control">
+                <input id="digitos" type="text" class="form-control" onkeyup="biseccion()">
               </div>
             </td>
           </tr>
