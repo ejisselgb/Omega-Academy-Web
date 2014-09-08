@@ -18,19 +18,35 @@ class Bisection
 	// Límite superior
 	private $b;
 
-	// Dígitos de presición.
-	private $digits;
+	// Número de iteraciones.
+	private $iter;
 	
 	/**
 	* Método constructor.
 	* Almacena los límites superior e inferior en la variables $a y $b.
 	* @param string $func - float $a | $b 
 	*/
-	function __construct($func, $a, $b, $digits) {
+	function __construct($func, $a, $b, $iter) {
 		$this->func = $func;
 		$this->a = $a;
 		$this->b = $b;
-		$this->digits = $digits;
+		$this->iter = $iter;
+	}
+
+	/**
+	* Retorna el límite inferior.
+	* @return float
+	*/
+	public function getLower() {
+		return $this->a;
+	}
+
+	/**
+	* Retorna el límite superior.
+	* @return float
+	*/
+	public function getTop() {
+		return $this->b;
 	}
 
 	/**
@@ -102,6 +118,14 @@ class Bisection
 	}
 
 	/**
+	* Retorna el punto medio.
+	* @return float Retorna el punto medio.
+	*/
+	public function midpoint() {		
+		return ($this->a + $this->b) / 2;
+	}
+
+	/**
 	* Cambia los límites de la función, dependiendo del punto medio que halle.
 	*/
 	public function change_limits() {
@@ -118,7 +142,7 @@ class Bisection
 	public function getRoot() {
 		if ($this->root_exists($this->a, $this->b)) {
 			// Número de iteraciones
-			$n = $this->digits;
+			$n = $this->iter;
 			while (0 < $n) {
 				$n--;
 				$this->change_limits();

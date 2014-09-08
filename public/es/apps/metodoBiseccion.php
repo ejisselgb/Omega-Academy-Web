@@ -1,3 +1,9 @@
+<?php 
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -53,76 +59,121 @@
         </div><!--/.container-fluid -->
       </div>          
       
-      <form class="form-horizontal" role="form">        
+      <form class="form-horizontal" method="POST" action="metodoBiseccion.php" role="form">        
         <legend><h2 class="text-center">Método de Bisección</h2></legend>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
-            <input type="text" class="form-control" id="funcion" onkeyup="biseccion()" autofocus>
+            <input type="text" class="form-control" name="funcion"  autofocus requried>
           </div>
         </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="text-center">Límite inferior A</th>
+              <th class="text-center">Límite superior B</th>
+              <th class="text-center">Número de iteraciones</th>                        
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="col-md-4 col-md-offset-4">
+                  <input name="a" type="text" class="form-control" requried>
+                </div>
+              </td>
+              <td>
+                <div class="col-md-4 col-md-offset-4">
+                  <input name="b" type="text" class="form-control" requried>
+                </div>
+              </td>
+              <td>
+                <div class="col-md-4 col-md-offset-4">
+                  <input name="iteraciones" type="number" class="form-control" min="1" max="100" requried>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center">
+          <input type="submit" class="btn btn-primary" value="Evaluar">
+          <input type="reset" class="btn btn-danger" value="Borrar">
+        </div>        
       </form>
 
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="text-center">Límite inferior A</th>
-            <th class="text-center">Límite superior B</th>
-            <th class="text-center">Número de iteraciones</th>                        
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="col-md-4 col-md-offset-4">
-                <input id="a" type="text" class="form-control" onkeyup="biseccion()">
-              </div>
-            </td>
-            <td>
-              <div class="col-md-4 col-md-offset-4">
-                <input id="b" type="text" class="form-control" onkeyup="biseccion()">
-              </div>
-            </td>
-            <td>
-              <div class="col-md-4 col-md-offset-4">
-                <input id="digitos" type="text" class="form-control" onkeyup="biseccion()">
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
 
       <br>
       <h3 class="text-center bg-primary">RESULTADO</h3>
 
-     
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="text-center">Raíz</th>
-            <th class="text-center">Error relativo</th>            
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="col-md-4 col-md-offset-4">
-                <input id="root" type="text" class="form-control">
-              </div>
-            </td>
-            <td>
-              <div class="col-md-4 col-md-offset-4">
-                <input id="error" type="text" class="form-control">
-              </div>
-            </td>            
-          </tr>
-        </tbody>
-      </table>
+      
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Límite inferior</th>
+              <th class="text-center">Límite superior</th>
+              <th class="text-center">Punto medio</th>
+              <th class="text-center">Valor f(x)</th>            
+              <th class="text-center">Error relativo</th>            
+            </tr>
+          </thead>
+          <tbody>
+<?php
 
-      <div style="text-align: center">
-        <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
+require "../../../models/validadorExpresiones/Bisection.php";
+
+if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isset($_POST["iteraciones"])
+    && strlen($_POST["funcion"]) > 0 && strlen($_POST["a"]) > 0 &&strlen($_POST["b"]) > 0
+    && strlen($_POST["iteraciones"]) > 0) {
+
+  // Obtengo las variables del formulario.
+  $funcion = $_POST["funcion"];
+  $a = $_POST["a"];
+  $b = $_POST["b"];
+  $iteraciones = $_POST["iteraciones"];
+
+  // Contador de líneas
+  $linea = 1;
+
+  // Auxiliar
+  $aux = 0;
+
+  // Creo una instancia de Bisection.php
+  $bisec = new Bisection($funcion, $a, $b, $iteraciones);
+  if ($bisec->root_exists($a, $b)) {
+    while (0 < $iteraciones) {
+      if ($aux == 0) {
+        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'></td></tr>";
+        $bisec->change_limits();
+        $linea++;
+        $iteraciones--;
+        $aux++;
+      }
+      else {
+        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'></td></tr>";
+        $bisec->change_limits();
+        $linea++;
+        $iteraciones--;
+      }      
+    }    
+  }
+  else {
+    echo "<tr><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td></tr>";
+  }
+
+  
+}
+
+
+?>          
+          
+            
+          </tbody>
+        </table>
       </div>
-
+      
       <br><br><br><br><br><br><br><br>
       <div style="text-align: center;">
         <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>
