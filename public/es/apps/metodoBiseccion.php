@@ -64,7 +64,7 @@ session_start();
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
-            <input type="text" class="form-control" name="funcion"  autofocus requried>
+            <input name="funcion" id="funcion" type="text" class="form-control" autofocus>
           </div>
         </div>
         <table class="table table-bordered">
@@ -79,17 +79,17 @@ session_start();
             <tr>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="a" type="text" class="form-control" requried>
+                  <input name="a" id="a" type="text" class="form-control">
                 </div>
               </td>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="b" type="text" class="form-control" requried>
+                  <input name="b" id="b" type="text" class="form-control">
                 </div>
               </td>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="iteraciones" type="number" class="form-control" min="1" max="100" requried>
+                  <input name="iteraciones" id="iteraciones" type="number" class="form-control" min="1" max="100">
                 </div>
               </td>
             </tr>
@@ -97,7 +97,7 @@ session_start();
         </table>
         <div class="text-center">
           <input type="submit" class="btn btn-primary" value="Evaluar">
-          <input type="reset" class="btn btn-danger" value="Borrar">
+          <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
         </div>        
       </form>
 
@@ -140,27 +140,39 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   // Auxiliar
   $aux = 0;
 
+  // Almaceno los puntos medio para luego sacar el error relativo.
+  $listas[] = NULL;
+
   // Creo una instancia de Bisection.php
   $bisec = new Bisection($funcion, $a, $b, $iteraciones);
   if ($bisec->root_exists($a, $b)) {
     while (0 < $iteraciones) {
       if ($aux == 0) {
-        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'></td></tr>";
+        // Agrego el punto medio al final del array $listas.
+        array_push($listas, $bisec->midpoint());
+
+        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'></td></tr>";        
         $bisec->change_limits();
         $linea++;
         $iteraciones--;
         $aux++;
       }
       else {
-        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'></td></tr>";
+        // Agrego el punto medio al final del array $listas.
+        array_push($listas, $bisec->midpoint());
+
+        // Calculo el error relativo
+        $error = ( ($listas[count($listas) - 1]) - ($listas[count($listas) - 2]) ) / ($listas[count($listas) - 1]);
+
+        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'>".$error."</td></tr>";
         $bisec->change_limits();
         $linea++;
         $iteraciones--;
       }      
-    }    
+    }   
   }
   else {
-    echo "<tr><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td></tr>";
+    echo "<tr><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td></tr>";    
   }
 
   
