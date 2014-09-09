@@ -20,7 +20,9 @@ session_start();
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../css/navbar.css" rel="stylesheet">
+    <link href="../../css/navbar.css" rel="stylesheet"> 
+
+    <script src="../../js/Chart.js"></script>
 
   </head>
 
@@ -131,7 +133,9 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   // Obtengo las variables del formulario.
   $funcion = $_POST["funcion"];
   $a = $_POST["a"];
+  $a2 = $_POST["a"];
   $b = $_POST["b"];
+  $b2 = $_POST["b"];
   $iteraciones = $_POST["iteraciones"];
 
   // Contador de líneas
@@ -169,13 +173,11 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
         $linea++;
         $iteraciones--;
       }      
-    }   
+    }
   }
   else {
     echo "<tr><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td></tr>";    
-  }
-
-  
+  }  
 }
 
 
@@ -183,8 +185,46 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
           
             
           </tbody>
-        </table>
+        </table>        
       </div>
+
+      <br><br><br><br><br><br>      
+
+      <div style="width:100%" heigth="400px">
+        <div>
+          <canvas id="canvas"></canvas>
+        </div>
+      </div>
+
+
+      <script>
+        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+        var lineChartData = {
+          labels : [ <?php echo $a2; ?>, <?php echo $bisec->midpoint(); ?>, <?php echo $b2; ?>],
+          datasets : [            
+            {
+              label: "My Second dataset",
+              fillColor : "rgba(151,187,205,0.2)",
+              strokeColor : "rgba(151,187,205,1)",
+              pointColor : "rgba(151,187,205,1)",
+              pointStrokeColor : "#fff",
+              pointHighlightFill : "#fff",
+              pointHighlightStroke : "rgba(151,187,205,1)",
+              data : [ <?php echo $bisec->expression($a2); ?>, <?php echo $bisec->expression($bisec->midpoint()); ?>, <?php echo $bisec->expression($b2) ?> ]
+            }
+          ]
+
+        }
+
+      window.onload = function(){
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myLine = new Chart(ctx).Line(lineChartData, {
+          responsive: true
+        });
+      }
+
+
+      </script>
       
       <br><br><br><br><br><br><br><br>
       <div style="text-align: center;">
@@ -229,6 +269,6 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
     <script src="../../js/collapse.js"></script>
     <script src="../../js/transition.js"></script>
     <script src="../../js/dropdown.js"></script>
-    <script src="../../js/metodoBiseccion.js"></script>
+    <script src="../../js/metodoBiseccion.js"></script>    
   </body>
 </html>
