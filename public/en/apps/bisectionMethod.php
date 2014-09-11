@@ -9,12 +9,12 @@ session_start();
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Este curso en línea propuesto por 5 estudiantes de ingeniería multimedia e ingeniería de sistemas de la universidad de San Buenaventura Cali, nace de la necesidad de implementar y compartir los conocimientos obtenidos hasta el momento para ofrecer una guía de trabajo para las generaciones futuras, que les permita aprender de forma dinámica y que a la vez sea una plataforma de apoyo para el docente.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="description" content="This online course was design by 5 students from Systems Engineering and Multimedia Engineering from the University San Buenaventura, Cali - Colombia.  It was created to fulfill the need to implement and share the knowledge obtained up until now, also to offer a work guide for future generations that would allow them to learn in a dynamic way and so it can be a support guide for the professor.">
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Método de Bisección | Omega Academy</title>
+    <title>Bisection method | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@ session_start();
 
     <div class="container">
 
-      <img id="banner"  src="../../img/banner.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">      
+      <img id="banner"  src="../../img/banner2.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">      
       <img id="bannerMovil" src="../../img/bannerMovil.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">
 
       <!-- Static navbar -->
@@ -44,25 +44,25 @@ session_start();
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="../index.html" style="color: white">Inicio</a></li>
+              <li><a href="../index.html" style="color: white">Home</a></li>
               <li class="active2"><a href="../software.html" style="color: #d40b3a">Software</a></li>
-              <li><a href="../videos.html" style="color: white">Vídeos</a></li>
-              <li><a href="../documentos.html" style="color: white">Documentos</a></li>                            
-              <li><a href="../nosotros.html" style="color: white">Nosotros</a></li>
+              <li><a href="../videos.html" style="color: white">Videos</a></li>
+              <li><a href="../documentos.html" style="color: white">Documents</a></li>                            
+              <li><a href="../nosotros.html" style="color: white">About us</a></li>
               <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>                    
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="metodoBiseccion.php" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/bisectionMethod.php" style="color: white">English</a></li>
+              <li><a href="../../es/apps/metodoBiseccion.php" style="color: white">Español</a></li>              
+              <li class="active2"><a href="bisectionMethod.php" style="color: #d40b3a">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>          
       
-      <form class="form-horizontal" method="POST" action="metodoBiseccion.php" role="form">        
-        <legend><h2 class="text-center">Método de Bisección</h2></legend>
+      <form class="form-horizontal" method="POST" action="bisectionMethod.php" role="form">        
+        <legend><h2 class="text-center">Bisection Method</h2></legend>
         <div class="form-group">
-          <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
+          <label class="col-sm-5 control-label" for="funcion">Function f(x) = </label>
           <div class="col-sm-3">
             <input name="funcion" id="funcion" type="text" class="form-control" autofocus>
           </div>
@@ -70,9 +70,9 @@ session_start();
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th class="text-center">Límite inferior A</th>
-              <th class="text-center">Límite superior B</th>
-              <th class="text-center">Número de iteraciones</th>                        
+              <th class="text-center">Lower limit A</th>
+              <th class="text-center">Top limit B</th>
+              <th class="text-center">Number of iterations</th>
             </tr>
           </thead>
           <tbody>
@@ -104,7 +104,7 @@ session_start();
 
 
       <br>
-      <h3 class="text-center bg-primary">RESULTADO</h3>
+      <h3 class="text-center bg-primary">RESULT</h3>
 
       
       <div class="table-responsive">
@@ -112,11 +112,11 @@ session_start();
           <thead>
             <tr>
               <th class="text-center">#</th>
-              <th class="text-center">Límite inferior</th>
-              <th class="text-center">Límite superior</th>
-              <th class="text-center">Punto medio</th>
-              <th class="text-center">Valor f(x)</th>            
-              <th class="text-center">Error relativo</th>            
+              <th class="text-center">Lower limit</th>
+              <th class="text-center">Top limit</th>
+              <th class="text-center">Midpoint</th>
+              <th class="text-center">Value f(x)</th>            
+              <th class="text-center">Relative error</th>            
             </tr>
           </thead>
           <tbody>
@@ -185,7 +185,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
     }
   }
   else {
-    echo "<tr><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td></tr>";    
+    echo "<tr><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td></tr>";    
   }  
 }
 
@@ -201,9 +201,9 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th class="text-center">Función</th>
-                <th class="text-center">Raíz</th>
-                <th class="text-center">Error relativo</th>
+                <th class="text-center">Function</th>
+                <th class="text-center">Root</th>
+                <th class="text-center">Relative error</th>
               </tr>
             </thead>
             <tbody>
