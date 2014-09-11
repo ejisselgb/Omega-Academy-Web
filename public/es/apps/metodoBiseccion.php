@@ -72,7 +72,7 @@ session_start();
             <tr>
               <th class="text-center">Límite inferior A</th>
               <th class="text-center">Límite superior B</th>
-              <th class="text-center">Número de iteraciones</th>                        
+              <th class="text-center">Error de tolerancia</th>                        
             </tr>
           </thead>
           <tbody>
@@ -134,9 +134,10 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   $a2 = $_POST["a"];
   $b = $_POST["b"];
   $b2 = $_POST["b"];
+  $errorRelativo = $_POST["iteraciones"];
 
   // Número de iteraciones máximas.
-  $iteraciones = $_POST["iteraciones"];
+  $iteraciones = 50;
 
   // Contador de líneas
   $linea = 1;
@@ -157,7 +158,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   $bisec = new Bisection($funcion, $a, $b, $iteraciones);
   if ($bisec->root_exists($a, $b)) {
     while (0 < $iteraciones) {
-      if ($aux == 0) {
+      if ($aux == 0) {        
         // Agrego el punto medio al final del array $puntosMedios.
         array_push($puntosMedios, $bisec->midpoint());
 
@@ -166,7 +167,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
         $linea++;
         $iteraciones--;
         $aux++;
-      }
+      }      
       else {
         // Agrego el punto medio al final del array $puntosMedios.
         array_push($puntosMedios, $bisec->midpoint());
@@ -177,10 +178,14 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
         // Agrego el error al final del array $errores.
         array_push($errores, $error);
 
+        if (($errorRelativo < $error) == false) {
+          break;
+        }
+
         echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'>".$error."</td></tr>";
         $bisec->change_limits();
         $linea++;
-        $iteraciones--;
+        $iteraciones--;              
       }      
     }
   }

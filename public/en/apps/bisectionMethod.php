@@ -9,12 +9,12 @@ session_start();
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="This online course was design by 5 students from Systems Engineering and Multimedia Engineering from the University San Buenaventura, Cali - Colombia.  It was created to fulfill the need to implement and share the knowledge obtained up until now, also to offer a work guide for future generations that would allow them to learn in a dynamic way and so it can be a support guide for the professor.">
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Bisection method | Omega Academy</title>
+    <title>Bisection Method | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -71,8 +71,8 @@ session_start();
           <thead>
             <tr>
               <th class="text-center">Lower limit A</th>
-              <th class="text-center">Top limit B</th>
-              <th class="text-center">Number of iterations</th>
+              <th class="text-center">Upper limit B</th>
+              <th class="text-center">Tolerance error</th>                        
             </tr>
           </thead>
           <tbody>
@@ -97,7 +97,7 @@ session_start();
         </table>
         <div class="text-center">
           <input type="submit" class="btn btn-primary" value="Evaluar">
-          <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
+          <button type="button" class="btn btn-danger" onclick="borrar()">Delete</button>
         </div>        
       </form>
 
@@ -113,7 +113,7 @@ session_start();
             <tr>
               <th class="text-center">#</th>
               <th class="text-center">Lower limit</th>
-              <th class="text-center">Top limit</th>
+              <th class="text-center">Upper limit</th>
               <th class="text-center">Midpoint</th>
               <th class="text-center">Value f(x)</th>            
               <th class="text-center">Relative error</th>            
@@ -134,9 +134,10 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   $a2 = $_POST["a"];
   $b = $_POST["b"];
   $b2 = $_POST["b"];
+  $errorRelativo = $_POST["iteraciones"];
 
   // Número de iteraciones máximas.
-  $iteraciones = $_POST["iteraciones"];
+  $iteraciones = 50;
 
   // Contador de líneas
   $linea = 1;
@@ -157,7 +158,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   $bisec = new Bisection($funcion, $a, $b, $iteraciones);
   if ($bisec->root_exists($a, $b)) {
     while (0 < $iteraciones) {
-      if ($aux == 0) {
+      if ($aux == 0) {        
         // Agrego el punto medio al final del array $puntosMedios.
         array_push($puntosMedios, $bisec->midpoint());
 
@@ -166,7 +167,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
         $linea++;
         $iteraciones--;
         $aux++;
-      }
+      }      
       else {
         // Agrego el punto medio al final del array $puntosMedios.
         array_push($puntosMedios, $bisec->midpoint());
@@ -177,15 +178,19 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
         // Agrego el error al final del array $errores.
         array_push($errores, $error);
 
+        if (($errorRelativo < $error) == false) {
+          break;
+        }
+
         echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'>".$error."</td></tr>";
         $bisec->change_limits();
         $linea++;
-        $iteraciones--;
+        $iteraciones--;              
       }      
     }
   }
   else {
-    echo "<tr><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td><td class='text-center'>THERE IS NOT ROOT</td></tr>";    
+    echo "<tr><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td></tr>";    
   }  
 }
 
@@ -222,8 +227,8 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
      
       <br><br><br><br><br><br><br><br>
       <div style="text-align: center;">
-        <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>
-        <a id="boton" href="../documentos.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documentos</a>        
+        <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Videos</a>
+        <a id="boton" href="../documents.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documents</a>        
       </div>
 
       <br><br><br><br><br><br><br><br>
@@ -250,7 +255,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
 
     <footer>      
       <p class="text-center">
-        &copy; Omega Academy &middot; Juntos por el conocimiento. <br>
+        &copy; Omega Academy &middot; Together for knowledge. <br>
         2014
       </p>
     </footer>     
