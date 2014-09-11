@@ -20,10 +20,8 @@ session_start();
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../css/navbar.css" rel="stylesheet"> 
-
-    <script src="../../js/Chart.js"></script>
-
+    <link href="../../css/navbar.css" rel="stylesheet">    
+    
   </head>
 
   <body>
@@ -91,7 +89,7 @@ session_start();
               </td>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="iteraciones" id="iteraciones" type="number" class="form-control" min="1" max="100">
+                  <input name="iteraciones" id="iteraciones" type="text" class="form-control">
                 </div>
               </td>
             </tr>
@@ -136,6 +134,8 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   $a2 = $_POST["a"];
   $b = $_POST["b"];
   $b2 = $_POST["b"];
+
+  // Número de iteraciones máximas.
   $iteraciones = $_POST["iteraciones"];
 
   // Contador de líneas
@@ -145,15 +145,21 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   $aux = 0;
 
   // Almaceno los puntos medio para luego sacar el error relativo.
-  $listas[] = NULL;
+  $puntosMedios[] = NULL;
+
+  // Almaceno los errores relativos.
+  $errores[] = NULL;
+
+  // Inicializo la variable error
+  $error = 0;
 
   // Creo una instancia de Bisection.php
   $bisec = new Bisection($funcion, $a, $b, $iteraciones);
   if ($bisec->root_exists($a, $b)) {
     while (0 < $iteraciones) {
       if ($aux == 0) {
-        // Agrego el punto medio al final del array $listas.
-        array_push($listas, $bisec->midpoint());
+        // Agrego el punto medio al final del array $puntosMedios.
+        array_push($puntosMedios, $bisec->midpoint());
 
         echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'></td></tr>";        
         $bisec->change_limits();
@@ -162,11 +168,14 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
         $aux++;
       }
       else {
-        // Agrego el punto medio al final del array $listas.
-        array_push($listas, $bisec->midpoint());
+        // Agrego el punto medio al final del array $puntosMedios.
+        array_push($puntosMedios, $bisec->midpoint());
 
         // Calculo el error relativo
-        $error = ( ($listas[count($listas) - 1]) - ($listas[count($listas) - 2]) ) / ($listas[count($listas) - 1]);
+        $error = abs(( ($puntosMedios[count($puntosMedios) - 1]) - ($puntosMedios[count($puntosMedios) - 2]) ) / ($puntosMedios[count($puntosMedios) - 1]));
+
+        // Agrego el error al final del array $errores.
+        array_push($errores, $error);
 
         echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'>".$error."</td></tr>";
         $bisec->change_limits();
@@ -185,47 +194,32 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
           
             
           </tbody>
-        </table>        
-      </div>
+        </table>
+      </div> <!-- table-responsive -->
 
-      <br><br><br><br><br><br>      
-
-      <div style="width:100%" heigth="400px">
-        <div>
-          <canvas id="canvas"></canvas>
+      <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="text-center">Función</th>
+                <th class="text-center">Raíz</th>
+                <th class="text-center">Error relativo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <?php
+                  if (isset($funcion)) {
+                    echo "<td>f(x) = $funcion</td>";
+                    echo "<td>r = ".$puntosMedios[count($puntosMedios) - 1]."</td>";
+                    echo "<td>Err = ".$errores[count($errores) - 1]."</td>";
+                  }
+                ?>                
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-
-
-      <script>
-        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-        var lineChartData = {
-          labels : [ <?php echo $a2; ?>, <?php echo $bisec->midpoint(); ?>, <?php echo $b2; ?>],
-          datasets : [            
-            {
-              label: "My Second dataset",
-              fillColor : "rgba(151,187,205,0.2)",
-              strokeColor : "rgba(151,187,205,1)",
-              pointColor : "rgba(151,187,205,1)",
-              pointStrokeColor : "#fff",
-              pointHighlightFill : "#fff",
-              pointHighlightStroke : "rgba(151,187,205,1)",
-              data : [ <?php echo $bisec->expression($a2); ?>, <?php echo $bisec->expression($bisec->midpoint()); ?>, <?php echo $bisec->expression($b2) ?> ]
-            }
-          ]
-
-        }
-
-      window.onload = function(){
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myLine = new Chart(ctx).Line(lineChartData, {
-          responsive: true
-        });
-      }
-
-
-      </script>
-      
+     
       <br><br><br><br><br><br><br><br>
       <div style="text-align: center;">
         <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>
@@ -270,5 +264,6 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
     <script src="../../js/transition.js"></script>
     <script src="../../js/dropdown.js"></script>
     <script src="../../js/metodoBiseccion.js"></script>    
+        
   </body>
 </html>
