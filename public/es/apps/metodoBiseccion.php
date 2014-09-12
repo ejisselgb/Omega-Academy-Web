@@ -20,7 +20,9 @@ session_start();
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../css/navbar.css" rel="stylesheet">    
+    <link href="../../css/navbar.css" rel="stylesheet">   
+
+    <script type="text/javascript" src="http://www.geogebratube.org/scripts/deployggb.js"></script> 
     
   </head>
 
@@ -59,12 +61,12 @@ session_start();
         </div><!--/.container-fluid -->
       </div>          
       
-      <form class="form-horizontal" method="POST" action="metodoBiseccion.php" role="form">        
+      <form class="form-horizontal" method="POST" action="metodoBiseccion.php" role="form" onsubmit="document.getElementById('graficarFuncion').submit();">        
         <legend><h2 class="text-center">Método de Bisección</h2></legend>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
-            <input name="funcion" id="funcion" type="text" class="form-control" autofocus>
+            <input name="funcion" id="funcion" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
           </div>
         </div>
         <table class="table table-bordered">
@@ -158,35 +160,23 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   $bisec = new Bisection($funcion, $a, $b, $iteraciones);
   if ($bisec->root_exists($a, $b)) {
     while (0 < $iteraciones) {
-      if ($aux == 0) {        
-        // Agrego el punto medio al final del array $puntosMedios.
-        array_push($puntosMedios, $bisec->midpoint());
+      // Agrego el punto medio al final del array $puntosMedios.
+      array_push($puntosMedios, $bisec->midpoint());
 
-        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'></td></tr>";        
-        $bisec->change_limits();
-        $linea++;
-        $iteraciones--;
-        $aux++;
-      }      
-      else {
-        // Agrego el punto medio al final del array $puntosMedios.
-        array_push($puntosMedios, $bisec->midpoint());
+      // Calculo el error relativo
+      $error = abs(( ($puntosMedios[count($puntosMedios) - 1]) - ($puntosMedios[count($puntosMedios) - 2]) ) / ($puntosMedios[count($puntosMedios) - 1]));
 
-        // Calculo el error relativo
-        $error = abs(( ($puntosMedios[count($puntosMedios) - 1]) - ($puntosMedios[count($puntosMedios) - 2]) ) / ($puntosMedios[count($puntosMedios) - 1]));
+      if (($errorRelativo < $error) == false) {
+        break;
+      }
 
-        // Agrego el error al final del array $errores.
-        array_push($errores, $error);
+      // Agrego el error al final del array $errores.
+      array_push($errores, $error);
 
-        if (($errorRelativo < $error) == false) {
-          break;
-        }
-
-        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'>".$error."</td></tr>";
-        $bisec->change_limits();
-        $linea++;
-        $iteraciones--;              
-      }      
+      echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$bisec->getLower()."</td><td class='text-center'>".$bisec->getTop()."</td><td class='text-center'>".$bisec->midpoint()."</td><td class='text-center'>".$bisec->expression($bisec->midpoint())."</td><td class='text-center'>".$error."</td></tr>";
+      $bisec->change_limits();
+      $linea++;
+      $iteraciones--;     
     }
   }
   else {
@@ -216,7 +206,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
                 <?php
                   if (isset($funcion)) {
                     echo "<td>f(x) = $funcion</td>";
-                    echo "<td>r = ".$puntosMedios[count($puntosMedios) - 1]."</td>";
+                    echo "<td>r = ".$puntosMedios[count($puntosMedios) - 2]."</td>";
                     echo "<td>Err = ".$errores[count($errores) - 1]."</td>";
                   }
                 ?>                
@@ -224,7 +214,8 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
             </tbody>
           </table>
         </div>
-     
+
+      
       <br><br><br><br><br><br><br><br>
       <div style="text-align: center;">
         <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>

@@ -7,7 +7,7 @@ require "Evaluar.php";
 * pueden despejar de manera sencilla aplicando el teorema de Bolzano o teorema
 * del valor intermedio.
 */
-class Bisection
+class FalsePosition
 {
 	// Función a evaluar
 	private $func;
@@ -17,7 +17,7 @@ class Bisection
 
 	// Límite superior
 	private $b;
-
+	
 	/**
 	* Método constructor.
 	* Almacena los límites superior e inferior en la variables $a y $b.
@@ -26,7 +26,7 @@ class Bisection
 	function __construct($func, $a, $b) {
 		$this->func = $func;
 		$this->a = $a;
-		$this->b = $b;
+		$this->b = $b;	
 	}
 
 	/**
@@ -124,19 +124,36 @@ class Bisection
 	/**
 	* Cambia los límites de la función, dependiendo del punto medio que halle.
 	*/
-	public function change_limits() {
-		// Hallo el punto medio de los límites.
-		$middle = ($this->a + $this->b) / 2;
-		if ($this->root_exists($middle, $this->b))	$this->a = $middle;
-		else $this->b = $middle;
+	public function change_limits($root = 0) {
+		if ( $this->expression($this->a) * $this->expression($root) < 0 ) {
+			$this->b = $root;
+			
+		}
+		else $this->a = $root;
+	}
+
+	/**
+	*	Realiza las iteraciones para llegar a la solución del método de bisección.
+	* @return float Retorna la raíz de una función.
+	*/
+	public function getRoot($root = 0) {
+		// Función evaluada en $a.
+		$fl = $this->expression($this->a);
+
+		// Función evaluada en $b.
+		$fu = $this->expression($this->b);
+
+		$xrold = $root;
+		$root = $this->b - $fu * ($this->a - $this->b) / ($fl - $fu);
+		return $root;
 	}
 
 	/**
 	* Obtiene el error relativo.
 	* @return float Retorna el error relativo de la función, false de lo contrario.
 	*/
-	public function getError() {
-		return ($this->b - $this->b) / ($this->b + $this->a);
+	public function getError($newRoot, $oldRoot) {
+		return abs( ($newRoot - $oldRoot) / $newRoot );
 	}
 
 }
