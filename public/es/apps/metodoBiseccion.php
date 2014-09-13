@@ -1,9 +1,3 @@
-<?php 
-
-session_start();
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -61,7 +55,7 @@ session_start();
         </div><!--/.container-fluid -->
       </div>          
       
-      <form class="form-horizontal" method="POST" action="metodoBiseccion.php" role="form" onsubmit="document.getElementById('graficarFuncion').submit();">        
+      <form class="form-horizontal" method="POST" action="metodoBiseccion.php" role="form">
         <legend><h2 class="text-center">Método de Bisección</h2></legend>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
@@ -103,11 +97,8 @@ session_start();
         </div>        
       </form>
 
-
-
       <br>
       <h3 class="text-center bg-primary">RESULTADO</h3>
-
       
       <div class="table-responsive">
         <table class="table table-bordered">
