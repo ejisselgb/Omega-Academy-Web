@@ -53,42 +53,26 @@
         </div><!--/.container-fluid -->
       </div>          
       
-      <form class="form-horizontal" method="POST" action="metodoReglaFalsa.php" role="form">        
+      <form class="form-horizontal" method="POST" action="metodoNewtonRaphson.php" role="form">        
         <legend><h2 class="text-center">Método de Newton - Raphson</h2></legend>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
             <input name="funcion" id="funcion" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
           </div>
+        </div>        
+        <div class="form-group">
+          <label class="col-sm-5 control-label" for="inicial">Punto inicial Xo = </label>
+          <div class="col-sm-3">
+            <input name="inicial" id="inicial" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
+          </div>
         </div>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th class="text-center">Límite inferior A</th>
-              <th class="text-center">Límite superior B</th>
-              <th class="text-center">Error de tolerancia</th>                        
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="col-md-4 col-md-offset-4">
-                  <input name="a" id="a" type="text" class="form-control">
-                </div>
-              </td>
-              <td>
-                <div class="col-md-4 col-md-offset-4">
-                  <input name="b" id="b" type="text" class="form-control">
-                </div>
-              </td>
-              <td>
-                <div class="col-md-4 col-md-offset-4">
-                  <input name="errorRelativo" id="errorRelativo" type="text" class="form-control">
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="form-group">
+          <label class="col-sm-5 control-label" for="errorRelativo">Error relativo Er = </label>
+          <div class="col-sm-3">
+            <input name="errorRelativo" id="errorRelativo" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
+          </div>
+        </div>
         <div class="text-center">
           <input type="submit" class="btn btn-primary" value="Evaluar">
           <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
@@ -102,124 +86,97 @@
 
       
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
-              <th class="text-center">#</th>
-              <th class="text-center">Límite inferior</th>
-              <th class="text-center">Límite superior</th>
+              <th class="text-center">#</th>              
               <th class="text-center">Raíz</th>
-              <th class="text-center">Valor f(x)</th>            
-              <th class="text-center">Error relativo</th>            
+              <th class="text-center">Error relativo</th>
             </tr>
           </thead>
           <tbody>
-<?php
+          <?php
+          
+          require "../../../models/validadorExpresiones/Evaluar.php";
 
-require "../../../models/validadorExpresiones/FalsePosition.php";
+          if (isset($_POST["funcion"]) && isset($_POST["inicial"]) && isset($_POST["errorRelativo"])) {
 
-if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isset($_POST["errorRelativo"])
-    && strlen($_POST["funcion"]) > 0 && strlen($_POST["a"]) > 0 &&strlen($_POST["b"]) > 0
-    && strlen($_POST["errorRelativo"]) > 0) {
+            // Obtengo la función a evaluar.
+            $func = $_POST["funcion"];
 
-  // Obtengo las variables del formulario.
-  $funcion = $_POST["funcion"];
-  $a = $_POST["a"];
-  $a2 = $_POST["a"];
-  $b = $_POST["b"];
-  $b2 = $_POST["b"];
-  $errorRelativo = $_POST["errorRelativo"];
+            // Obtengo el punto a evaluar.
+            $x0 = $_POST["inicial"];
 
-  // Número de iteraciones máximas.
-  $iteraciones = 50;
+            // Obtengo el error relativo.
+            $error = $_POST["errorRelativo"];
 
-  // Contador de líneas
-  $linea = 1;
+            // Línea.
+            $row = 0;
 
-  // Auxiliar
-  $aux = 0;
+            // Iteraciones.
+            $n = 100;
 
-  // Almaceno los puntos medio para luego sacar el error relativo.
-  $raices = array();  
+            // Variable auxiliar.
+            $aux = 0;
 
-  // Almaceno los errores relativos.
-  $errores = array();
+            // Errores relativos.
+            $errores = array();
+            array_push($errores, 1);
 
-  // Inicializo la variable error
-  $error = 0;
+            // Derivadas ( raíces ).
+            $derivadas = array();
+            array_push($derivadas, 0);
 
-  // Creo una instancia de FalsePosition.php
-  $falseP = new FalsePosition($funcion, $a, $b);
-  //if ($falseP->root_exists($a, $b)) {
-    while (0 < $iteraciones) {
-      if ($aux == 0) {    
-        
-        // Agrego la primera raíz al final del array $raices.
-        array_push($raices, $falseP->getRoot());
-      
-        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$falseP->getLower()."</td><td class='text-center'>".$falseP->getTop()."</td><td class='text-center'>".$falseP->getRoot()."</td><td class='text-center'></td><td class='text-center'></td></tr>";   
-        $falseP->change_limits($raices[0]);
-        $linea++;
-        $iteraciones--;
-        $aux++;
-      }      
-      else {
-        // Agrego el punto medio al final del array $raices.
-        array_push($raices, $falseP->getRoot($raices[count($raices) - 1]) );
-      
-        // Calculo el error relativo
-        $error = $falseP->getError($raices[count($raices) - 1], $raices[count($raices) - 2]);      
+            // Creo una instancia de la clase Evaluar.php            
+            $eval = new Evaluar();            
 
-        if (($errorRelativo < $error) == false) {
-          break;
-        }
+            while (0 < $n) {              
+              if ($aux == 0) {
+                echo "<tr class='text-center'><td>$row</td><td>".$derivadas[count($derivadas) - 1]."</td><td>".$errores[count($errores) - 1]."</td></tr>";
 
-        // Agrego el error al final del array $errores.
-        array_push($errores, $error);
-        
-        echo "<tr><td class='text-center'>".$linea."</td><td class='text-center'>".$falseP->getLower()."</td><td class='text-center'>".$falseP->getTop()."</td><td class='text-center'>".$falseP->getRoot($raices[count($raices) - 1])."</td><td class='text-center'>".$falseP->expression($falseP->getRoot($raices[count($raices) - 1]))."</td><td class='text-center'>".$errores[count($errores) - 1]."</td></tr>";
-        $falseP->change_limits($raices[count($raices) - 1]);
-        $linea++;
-        $iteraciones--;              
-      }      
-    }
-  //}
-  // else {
-  //   echo "<tr><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td><td class='text-center'>NO EXISTE LA RAÍZ</td></tr>";    
-  // }  
-}
+                $x0 = $x0 - ($eval->expression($func, $x0) / $eval->getDerived($func, $x0));              
+                array_push($derivadas, $x0);
 
+                $err = ($derivadas[count($derivadas) - 1] - $derivadas[count($derivadas) - 2]) /  $derivadas[count($derivadas) - 1];
+                array_push($errores, $err);               
 
-?>          
+                $row++;
+                $n--;
+                $aux = 1;
+              }
+              else {
+                $tmp = $x0 - ($eval->expression($func, $x0) / $eval->getDerived($func, $x0));
+                array_push($derivadas, $x0);
+
+                $err = ($tmp - $derivadas[count($derivadas) - 2]) /  $tmp;
+                array_push($errores, $err);
+
+                echo "<tr class='text-center'><td>$row</td><td>".$derivadas[count($derivadas) - 1]."</td><td>".$errores[count($errores) - 1]."</td></tr>";
+
+                $x0 = $x0 - ($eval->expression($func, $x0) / $eval->getDerived($func, $x0));              
+                array_push($derivadas, $x0);                
+
+                $err = ($derivadas[count($derivadas) - 1] - $derivadas[count($derivadas) - 2]) /  $derivadas[count($derivadas) - 1];
+                array_push($errores, $err);
+                
+                $row++;
+                $n--;
+
+                if ($error >= $errores[count($errores) - 1]) break;
+              }                          
+            }                                  
+          }
+          
+          ?>          
           
             
           </tbody>
         </table>
-      </div> <!-- table-responsive -->
+      </div> <!-- table-responsive -->      
 
-      <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th class="text-center">Función</th>
-                <th class="text-center">Raíz</th>
-                <th class="text-center">Error relativo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="text-center">
-                <?php
-                  if (isset($funcion)) {
-                    echo "<td>f(x) = $funcion</td>";
-                    echo "<td>r = ".$raices[count($raices) - 2]."</td>";
-                    echo "<td>Err = ".$errores[count($errores) - 1]."</td>";
-                  }
-                ?>                
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+      <table>
+        
+      </table>
       
       <br><br><br><br><br><br><br><br>
       <div style="text-align: center;">

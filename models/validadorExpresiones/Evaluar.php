@@ -794,6 +794,26 @@ class Evaluar {
 	    }
 	  }
 	} // Fin expression()
+
+	/**
+	* Retorna una derivada evaluada en un punto.
+	* @param string $function La función a evaluar.
+	* @param float $x0 El punto que se evaluará en la función.
+	* @return float | bool Retorna la derivada de una función
+	* evaluada en un punto, false de lo contrario.
+	*/
+	function getDerived($function, $x0) {
+		$h = 0.000000001;
+
+		// Evaluo el punto $x0 + $h en la función
+		$func1 = $this->expression($function, $x0 + $h);
+
+		// Evaluo el punto $x0 en la función
+		$func2 = $this->expression($function, $x0);
+
+		// Retorno la derivada de un punto en la función.
+		return ($func1 - $func2) / $h;
+	}
 	
 }
 ?>
