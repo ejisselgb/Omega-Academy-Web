@@ -814,6 +814,32 @@ class Evaluar {
 		// Retorno la derivada de un punto en la función.
 		return ($func1 - $func2) / $h;
 	}
+
+	/**
+	* Retorna una segunda derivada evaluada en un punto.
+	* @param string $function La función a evaluar.
+	* @param float $x0 El punto que se evaluará en la función.
+	* @return float | bool Retorna la derivada de una función
+	* evaluada en un punto, false de lo contrario.
+	*/
+	function getDerived2($function, $x0) {
+		$h = 0.000000001;
+
+		// Evaluo el punto -f($x0 + 3) en la función
+		$func1 = -1 * $this->expression($function, $x0 + 3);
+
+		// Evaluo el punto 4f($x0 + 2) en la función
+		$func2 = 4 * $this->expression($function, $x0 + 2);
+
+		// Evaluo el punto -5f($x0 + h) en la función
+		$func3 = -5 * $this->expression($function, $x0 + $h);
+
+		// Evaluo el punto 2f($x0) en la función
+		$func4 = 2 * $this->expression($function, $x0);
+
+		// Retorno la derivada de un punto en la función.
+		return ($func1 + $func2 + $func3 + $func4 ) / pow($h, 2);
+	}
 	
 }
 ?>

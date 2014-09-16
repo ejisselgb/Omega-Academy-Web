@@ -62,14 +62,14 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-5 control-label" for="inicial">Punto inicial X0 = </label>
+          <label class="col-sm-5 control-label" for="inicial">Punto inicial Xo = </label>
           <div class="col-sm-3">
             <input name="inicial" id="inicial" type="text" class="form-control">
           </div>
         </div>
         <div class="text-center">
           <input type="submit" class="btn btn-primary" value="Evaluar">
-          <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
+          <input type="reset" class="btn btn-danger" value="Borrar">          
         </div>
       </form>
 
@@ -80,7 +80,7 @@
         <thead>
           <tr>
             <th class="text-center">Función f(x)</th>
-            <th class="text-center">Punto inicial X0</th>
+            <th class="text-center">Punto inicial Xo</th>
           </tr>
         </thead>
         <tbody>
@@ -95,12 +95,12 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr>
-              <th class="text-center">f'(x)</th>
-              <th class="text-center">f''(x)</th>
-              <th class="text-center">f'''(x)</th>          
-              <th class="text-center">f⁴(x)</th>
-              <th class="text-center">f⁵(x)</th>
-              <th class="text-center">f⁶(x)</th>
+              <th class="text-center">f'(Xo)</th>
+              <th class="text-center">f''(Xo)</th>
+              <th class="text-center">f'''(Xo)</th>          
+              <th class="text-center">f⁴(Xo)</th>
+              <th class="text-center">f⁵(Xo)</th>
+              <th class="text-center">f⁶(Xo)</th>
             </tr>
           </thead>
           <tbody>
@@ -108,10 +108,10 @@
             <?php
 
             if (isset($_POST["funcion"]) && isset($_POST["inicial"])) {
-              require "../../../models/validadorExpresiones/NumericalDifferentiation.php";
+              require "../../../models/validadorExpresiones/Evaluar.php";
 
-              // Creo una instancia de la clase NumericalDifferentiation.
-              $numericalDe = new NumericalDifferentiation();
+              // Creo una instancia de la clase Evaluar.
+              $numericalDe = new Evaluar();
 
               // Función a derivar.
               $func = $_POST["funcion"];
@@ -120,8 +120,8 @@
               $x0 = $_POST["inicial"];
 
               if (isset($_POST["funcion"])) {
-                echo "<td>".$numericalDe->getDerived1($func, $x0)."</td><td>".$numericalDe->getDerived2($func, $x0)."</td>"
-                      ."<td>".$numericalDe->getDerived3($func, $x0)."</td><td></td>"
+                echo "<td>".$numericalDe->getDerived($func, $x0)."</td><td>".$numericalDe->getDerived2($func, $x0)."</td>"
+                      ."<td>".$numericalDe->getDerived($func, $x0)."</td><td></td>"
                       ."<td></td><td></td>";
               }
 
@@ -179,8 +179,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../../js/collapse.js"></script>
     <script src="../../js/transition.js"></script>
-    <script src="../../js/dropdown.js"></script>
-    <script src="../../js/metodoBiseccion.js"></script>    
-        
+    <script src="../../js/dropdown.js"></script>        
   </body>
 </html>

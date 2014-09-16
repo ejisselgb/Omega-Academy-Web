@@ -3,4 +3,5 @@ function borrar() {
 	document.getElementById('a').value = "";
 	document.getElementById('b').value = "";
 	document.getElementById('errorRelativo').value = "";
+	document.getElementById('inicial').value = "";
 }
