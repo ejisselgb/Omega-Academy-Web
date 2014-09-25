@@ -803,16 +803,19 @@ class Evaluar {
 	* evaluada en un punto, false de lo contrario.
 	*/
 	function getDerived($function, $x0) {
-		$h = 0.000000001;
+		$h = 0.000000001;		
 
-		// Evaluo el punto $x0 + $h en la función
-		$func1 = $this->expression($function, $x0 + $h);
+		// -f(x0 + 2h)
+		$func1 = -1 * $this->expression($function, ($x0 + (2 * $h)) );
 
-		// Evaluo el punto $x0 en la función
-		$func2 = $this->expression($function, $x0);
+		// 4f(x0 + h)
+		$func2 = 4 * $this->expression($function, ($x0 + $h));
 
-		// Retorno la derivada de un punto en la función.
-		return ($func1 - $func2) / $h;
+		// -3f(x0)
+		$func3 = -3 * $this->expression($function, $x0);
+
+		return ($func1 + $func2 + $func3) / (2 * $h);
+
 	}
 
 	/**
@@ -825,20 +828,46 @@ class Evaluar {
 	function getDerived2($function, $x0) {
 		$h = 0.000000001;
 
-		// Evaluo el punto -f($x0 + 3) en la función
-		$func1 = -1 * $this->expression($function, $x0 + 3);
+		// -f(x0 + 3)
+		$func1 = -1 * $this->expression($function, ($x0 + 3));
 
-		// Evaluo el punto 4f($x0 + 2) en la función
-		$func2 = 4 * $this->expression($function, $x0 + 2);
+		// 4f(x0 + 2)
+		$func2 = 4 * $this->expression($function, ($x0 + 2));
 
-		// Evaluo el punto -5f($x0 + h) en la función
-		$func3 = -5 * $this->expression($function, $x0 + $h);
+		// -5f(x0 + h)
+		$func3 = -5 * $this->expression($function, ($x0 + $h));
 
-		// Evaluo el punto 2f($x0) en la función
+		// 2f(x0)
 		$func4 = 2 * $this->expression($function, $x0);
 
-		// Retorno la derivada de un punto en la función.
-		return ($func1 + $func2 + $func3 + $func4 ) / pow($h, 2);
+		return ($func1 + $func2 + $func3 + $func4) / pow($h, 2);
+	}
+
+	/**
+	* Retorna una tercera derivada evaluada en un punto.
+	* @param string $function La función a evaluar.
+	* @param float $x0 El punto que se evaluará en la función.
+	* @return float | bool Retorna la derivada de una función
+	* evaluada en un punto, false de lo contrario.
+	*/
+	function getDerived3($function, $x0) {
+		$h = 0.000000001;
+
+		// −3f(x0 + 4)
+		$func1 = -3 * $this->expression($function, ($x0 + 4));
+
+		// 14f(x0 + 3)
+		$func2 = 14 * $this->expression($function, ($x0 + 3));
+
+		// -24f(x0 + 2)
+		$func3 = -24 * $this->expression($function, ($x0 + 2));
+
+		// 18f(x0 + 1)
+		$func4 = 18 * $this->expression($function, ($x0 + 1));
+
+		return ($func1 + $func2 + $func3 + $func4) / (2 * pow($h, 3));
+
+		
 	}
 	
 }

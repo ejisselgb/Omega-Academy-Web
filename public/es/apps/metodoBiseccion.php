@@ -60,7 +60,11 @@
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
-            <input name="funcion" id="funcion" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
+            <input name="funcion" id="funcion" type="text" class="form-control" <?php 
+              if (isset($_POST["funcion"])) {
+                echo "value=".$_POST["funcion"];
+              }
+            ?>  autofocus required>
           </div>
         </div>
         <table class="table table-bordered">
@@ -75,17 +79,29 @@
             <tr>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="a" id="a" type="text" class="form-control">
+                  <input name="a" id="a" type="text" class="form-control" <?php 
+                    if (isset($_POST["a"])) {
+                      echo "value=".$_POST["a"];
+                    }
+                  ?> required>
                 </div>
               </td>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="b" id="b" type="text" class="form-control">
+                  <input name="b" id="b" type="text" class="form-control" <?php 
+                    if (isset($_POST["b"])) {
+                      echo "value=".$_POST["b"];
+                    }
+                  ?> required>
                 </div>
               </td>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="iteraciones" id="iteraciones" type="text" class="form-control">
+                  <input name="errorRelativo" id="errorRelativo" type="text" class="form-control" <?php 
+                    if (isset($_POST["errorRelativo"])) {
+                      echo "value=".$_POST["errorRelativo"];
+                    }
+                  ?> required>
                 </div>
               </td>
             </tr>
@@ -117,9 +133,9 @@
 
 require "../../../models/validadorExpresiones/Bisection.php";
 
-if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isset($_POST["iteraciones"])
+if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isset($_POST["errorRelativo"])
     && strlen($_POST["funcion"]) > 0 && strlen($_POST["a"]) > 0 &&strlen($_POST["b"]) > 0
-    && strlen($_POST["iteraciones"]) > 0) {
+    && strlen($_POST["errorRelativo"]) > 0) {
 
   // Obtengo las variables del formulario.
   $funcion = $_POST["funcion"];
@@ -127,7 +143,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
   $a2 = $_POST["a"];
   $b = $_POST["b"];
   $b2 = $_POST["b"];
-  $errorRelativo = $_POST["iteraciones"];
+  $errorRelativo = $_POST["errorRelativo"];
 
   // Número de iteraciones máximas.
   $iteraciones = 50;

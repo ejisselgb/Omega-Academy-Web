@@ -58,13 +58,21 @@
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
-            <input name="funcion" id="funcion" type="text" class="form-control" autofocus>
+            <input name="funcion" id="funcion" type="text" class="form-control" <?php 
+              if (isset($_POST["funcion"])) {
+                echo "value=".$_POST["funcion"];
+              }
+            ?> autofocus required>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="inicial">Punto inicial Xo = </label>
           <div class="col-sm-3">
-            <input name="inicial" id="inicial" type="text" class="form-control">
+            <input name="inicial" id="inicial" type="text" class="form-control" <?php 
+              if (isset($_POST["inicial"])) {
+                echo "value=".$_POST["inicial"];
+              }
+            ?> required>
           </div>
         </div>
         <div class="text-center">
@@ -97,10 +105,7 @@
             <tr>
               <th class="text-center">f'(Xo)</th>
               <th class="text-center">f''(Xo)</th>
-              <th class="text-center">f'''(Xo)</th>          
-              <th class="text-center">f⁴(Xo)</th>
-              <th class="text-center">f⁵(Xo)</th>
-              <th class="text-center">f⁶(Xo)</th>
+              <th class="text-center">f'''(Xo)</th>                        
             </tr>
           </thead>
           <tbody>
@@ -121,8 +126,7 @@
 
               if (isset($_POST["funcion"])) {
                 echo "<td>".$numericalDe->getDerived($func, $x0)."</td><td>".$numericalDe->getDerived2($func, $x0)."</td>"
-                      ."<td>".$numericalDe->getDerived($func, $x0)."</td><td></td>"
-                      ."<td></td><td></td>";
+                      ."<td>".$numericalDe->getDerived3($func, $x0)."</td>";
               }
 
             }

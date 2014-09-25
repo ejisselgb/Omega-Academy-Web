@@ -58,19 +58,31 @@
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
-            <input name="funcion" id="funcion" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
+            <input name="funcion" id="funcion" type="text" class="form-control" <?php 
+              if (isset($_POST["funcion"])) {
+                echo "value=".$_POST["funcion"];
+              }
+            ?> autofocus required>
           </div>
         </div>        
         <div class="form-group">
           <label class="col-sm-5 control-label" for="inicial">Punto inicial Xo = </label>
           <div class="col-sm-3">
-            <input name="inicial" id="inicial" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
+            <input name="inicial" id="inicial" type="text" class="form-control" <?php 
+              if (isset($_POST["inicial"])) {
+                echo "value=".$_POST["inicial"];
+              }            
+            ?> required>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="errorRelativo">Error relativo Er = </label>
           <div class="col-sm-3">
-            <input name="errorRelativo" id="errorRelativo" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
+            <input name="errorRelativo" id="errorRelativo" type="text" class="form-control" <?php 
+              if (isset($_POST["errorRelativo"])) {
+                echo "value=".$_POST["errorRelativo"];
+              }
+            ?> required>
           </div>
         </div>
         <div class="text-center">
