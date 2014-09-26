@@ -72,7 +72,7 @@
               if (isset($_POST["inicial"])) {
                 echo "value=".$_POST["inicial"];
               }
-            ?> required>
+            ?>>
           </div>
         </div>
         <div class="text-center">

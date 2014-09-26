@@ -86,7 +86,7 @@
                     echo "value=".$_SESSION["x"];
                     unset($_SESSION["x"]);
                   }
-                ?> required>
+                ?>>
               </div>            
             </div>        
             <div style="text-align: center;">

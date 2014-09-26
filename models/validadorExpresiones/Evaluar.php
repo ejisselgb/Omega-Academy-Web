@@ -805,16 +805,13 @@ class Evaluar {
 	function getDerived($function, $x0) {
 		$h = 0.000000001;		
 
-		// -f(x0 + 2h)
-		$func1 = -1 * $this->expression($function, ($x0 + (2 * $h)) );
+		// f(x0 + h)
+		$func1 = $this->expression($function, ($x0 + $h) );
 
-		// 4f(x0 + h)
-		$func2 = 4 * $this->expression($function, ($x0 + $h));
+		// -f(x0)
+		$func2 = -1 * $this->expression($function, $x0);
 
-		// -3f(x0)
-		$func3 = -3 * $this->expression($function, $x0);
-
-		return ($func1 + $func2 + $func3) / (2 * $h);
+		return ($func1 + $func2) / $h;
 
 	}
 
@@ -826,21 +823,18 @@ class Evaluar {
 	* evaluada en un punto, false de lo contrario.
 	*/
 	function getDerived2($function, $x0) {
-		$h = 0.000000001;
+		$h = 0.00001;
 
-		// -f(x0 + 3)
-		$func1 = -1 * $this->expression($function, ($x0 + 3));
+		// f(x0 + 2h)
+		$func1 = $this->expression($function, ($x0 + 2*$h));
 
-		// 4f(x0 + 2)
-		$func2 = 4 * $this->expression($function, ($x0 + 2));
+		// -2f(x0 + h)
+		$func2 = -2 * $this->expression($function, ($x0 + $h));
 
-		// -5f(x0 + h)
-		$func3 = -5 * $this->expression($function, ($x0 + $h));
+		// f(x0)
+		$func3 = $this->expression($function, ($x0));
 
-		// 2f(x0)
-		$func4 = 2 * $this->expression($function, $x0);
-
-		return ($func1 + $func2 + $func3 + $func4) / pow($h, 2);
+		return ($func1 + $func2 + $func3) / pow($h, 2);
 	}
 
 	/**
@@ -851,21 +845,21 @@ class Evaluar {
 	* evaluada en un punto, false de lo contrario.
 	*/
 	function getDerived3($function, $x0) {
-		$h = 0.000000001;
+		$h = 0.001;
 
-		// −3f(x0 + 4)
-		$func1 = -3 * $this->expression($function, ($x0 + 4));
+		// f(x0 + 3h)
+		$func1 = $this->expression($function, ($x0 + 3*$h));
 
-		// 14f(x0 + 3)
-		$func2 = 14 * $this->expression($function, ($x0 + 3));
+		// -3f(x0 + 2h)
+		$func2 = -3 * $this->expression($function, ($x0 + 2*$h));
 
-		// -24f(x0 + 2)
-		$func3 = -24 * $this->expression($function, ($x0 + 2));
+		// 3f(x0 + h)
+		$func3 = 3 * $this->expression($function, ($x0 + $h));
 
-		// 18f(x0 + 1)
-		$func4 = 18 * $this->expression($function, ($x0 + 1));
+		// -f(x0)
+		$func4 = -1 * $this->expression($function, $x0);
 
-		return ($func1 + $func2 + $func3 + $func4) / (2 * pow($h, 3));
+		return ($func1 + $func2 + $func3 + $func4) / pow($h, 3);
 
 		
 	}
