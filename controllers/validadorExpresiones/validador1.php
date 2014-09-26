@@ -43,17 +43,23 @@ if (isset($_POST["funcion"])) {
     if (is_nan($valor) || is_infinite($valor)) {
       $e = "<h4>Error matemático</h4>";
       $_SESSION["resultado"] = array($e);
+      $_SESSION["funcion"] = $_POST["funcion"];
+      $_SESSION["x"] = $_POST["x"];
       header("Location: ../../public/es/apps/validadorExpresiones.php");
     }
     else { //No hay fallo matemático, se muestra el valor
       $f = "<h4 class='bg-primary' style='padding: .6em;'>RESULTADO es: " . $valor."</h4>";
       $_SESSION["resultado"] = $f;
+      $_SESSION["funcion"] = $_POST["funcion"];
+      $_SESSION["x"] = $_POST["x"];
       header("Location: ../../public/es/apps/validadorExpresiones.php");
     }
   }
   else {
     $g = "<h4>La validación es: " . $evaluadorExpresiones->MensajeSintaxis($chequeoSintaxis)."</h4>";
     $_SESSION["resultado"] = $g;
+    $_SESSION["funcion"] = $_POST["funcion"];
+    $_SESSION["x"] = $_POST["x"];
     header("Location: ../../public/es/apps/validadorExpresiones.php");
   }
 

@@ -70,18 +70,28 @@
             <div class="form-group">
               <label class="control-label col-sm-4" for="funcion">Type in function f(x) = </label>
               <div class="col-sm-8">
-                <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Example: ( x^23 ) / sin (-x) " autofocus required>
+                <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Example: ( x^23 ) / sin (-x) " <?php 
+                  if (isset($_SESSION["funcion"])) {
+                    echo "value=".$_SESSION["funcion"];
+                    unset($_SESSION["funcion"]);
+                  }
+                ?> autofocus required>
               </div>            
             </div>
             <div class="form-group">
               <label class="control-label col-sm-4" for="x">Type in the value for x:</label>
               <div class="col-sm-8">
-                <input name="x" type="text" id="x" class="form-control" placeholder="Default value x = 0">
+                <input name="x" type="text" id="x" class="form-control" placeholder="Default value x = 0" <?php 
+                  if (isset($_SESSION["x"])) {
+                    echo "value=".$_SESSION["x"];
+                    unset($_SESSION["x"]);
+                  }
+                ?> required>
               </div>            
             </div>        
             <div style="text-align: center;">
-              <a href="index.php" class="btn btn-danger">DELETE</a>
               <input type="submit" class="btn btn-primary" value="EVALUATE">
+              <a href="index.php" class="btn btn-danger">DELETE</a>              
               <br><br><br><br>
               <?php 
                   if (isset($_SESSION["resultado"])) {                              

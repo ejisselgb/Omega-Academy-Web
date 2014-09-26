@@ -70,18 +70,28 @@ session_start();
           <div class="form-group">
             <label class="control-label col-sm-4" for="funcion">Ingrese la función f(x) = </label>
             <div class="col-sm-8">
-              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Ejemplo: ( x^23 ) / sin (-x) " autofocus required>
+              <input name="funcion" type="text" id="funcion" class="form-control" placeholder="Ejemplo: ( x^23 ) / sin (-x) " <?php 
+                if (isset($_SESSION["funcion"])) {
+                  echo "value=".$_SESSION["funcion"];
+                  unset($_SESSION["funcion"]);
+                }
+              ?> autofocus required>
             </div>            
           </div>
           <div class="form-group">
             <label class="control-label col-sm-4" for="x">Ingrese el valor para x = </label>
             <div class="col-sm-8">
-              <input name="x" type="text" id="x" class="form-control" placeholder="Valor por defecto x = 0">
+              <input name="x" type="text" id="x" class="form-control" placeholder="Valor por defecto x = 0" <?php 
+                if (isset($_SESSION["x"])) {
+                  echo "value=".$_SESSION["x"];
+                  unset($_SESSION["x"]);
+                }
+              ?> required>
             </div>                
           </div>        
           <div style="text-align: center;">
-            <a href="index.php" class="btn btn-danger">BORRAR</a>
             <input type="submit" class="btn btn-primary" value="EVALUAR">
+            <a href="index.php" class="btn btn-danger">BORRAR</a>            
             <br><br><br><br>
             <?php 
                 if (isset($_SESSION["resultado"])) {                              
