@@ -108,7 +108,7 @@
         <thead>
           <tr>
             <th class="text-center">Función f(x)</th>            
-            <th class="text-center">Punto inicial xi</th>
+            <th class="text-center">Punto xn</th>
             <th class="text-center">Error relativo xi</th>
           </tr>
         </thead>
@@ -124,13 +124,14 @@
                 $fx0 = 0;
                 $x1 = $_POST["x1"];
                 $fx1 = 0;
-                $error = $_POST["error"]; 
-                $xn = 0;                                
+                $error = $_POST["error"];                 
+                $xn = 0;                  
+
 
                 $sec = new Evaluar();
 
-                function secante($func, $x0, $x1, $error, $errorRel = 1, $sec) {
-                  if ($error < $errorRel) {
+                function secante($func, $x0, $x1, $error, $errorRel, $sec) {
+                  if ($error > $errorRel) {
                     echo "<td>".$func."</td>";
                     echo "<td>".$x1."</td>";
                     echo "<td>".$errorRel."</td>";
@@ -144,7 +145,7 @@
                   }
                 }
 
-                secante($func, $x0, $x1, $error, $errorRel = 0, $sec);
+                secante($func, $x0, $x1, $error, $errorRel = 1, $sec);
               }
             ?>            
           </tr>

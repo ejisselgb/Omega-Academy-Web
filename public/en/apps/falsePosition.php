@@ -60,7 +60,11 @@
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Function f(x) = </label>
           <div class="col-sm-3">
-            <input name="funcion" id="funcion" type="text" class="form-control" onkeyup="graficar(this.value)" autofocus>
+            <input name="funcion" id="funcion" type="text" class="form-control" <?php 
+              if (isset($_POST["funcion"])) {
+                echo "value=".$_POST["funcion"];                
+              }
+            ?> autofocus required>
           </div>
         </div>
         <table class="table table-bordered">
@@ -75,17 +79,29 @@
             <tr>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="a" id="a" type="text" class="form-control">
+                  <input name="a" id="a" type="text" class="form-control" <?php 
+                    if (isset($_POST["a"])) {
+                      echo "value=".$_POST["a"];                                            
+                    }
+                  ?> required>
                 </div>
               </td>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="b" id="b" type="text" class="form-control">
+                  <input name="b" id="b" type="text" class="form-control" <?php 
+                    if (isset($_POST["b"])) {
+                      echo "value=".$_POST["b"];                      
+                    }
+                  ?> required>
                 </div>
               </td>
               <td>
                 <div class="col-md-4 col-md-offset-4">
-                  <input name="errorRelativo" id="errorRelativo" type="text" class="form-control">
+                  <input name="errorRelativo" id="errorRelativo" type="text" class="form-control" <?php 
+                    if (isset($_POST["errorRelativo"])) {
+                      echo "value=".$_POST["errorRelativo"];                      
+                    }
+                  ?> required>
                 </div>
               </td>
             </tr>
@@ -152,7 +168,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
 
   // Creo una instancia de FalsePosition.php
   $falseP = new FalsePosition($funcion, $a, $b);
-  //if ($falseP->root_exists($a, $b)) {
+  if ($falseP->root_exists($a, $b)) {
     while (0 < $iteraciones) {
       if ($aux == 0) {    
         
@@ -185,10 +201,10 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
         $iteraciones--;              
       }      
     }
-  //}
-  // else {
-  //   echo "<tr><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td></tr>";    
-  // }  
+  }
+   else {
+     echo "<tr><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td><td class='text-center'>THERE IS NO ROOT</td></tr>";    
+    }  
 }
 
 
@@ -211,7 +227,7 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
             <tbody>
               <tr class="text-center">
                 <?php
-                  if (isset($funcion)) {
+                  if (isset($funcion) && $falseP->root_exists($a, $b)) {
                     echo "<td>f(x) = $funcion</td>";
                     echo "<td>r = ".$raices[count($raices) - 2]."</td>";
                     echo "<td>Err = ".$errores[count($errores) - 1]."</td>";
