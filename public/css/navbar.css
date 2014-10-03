@@ -58,12 +58,7 @@ footer {
 	color: #333;
 }
 
-.softwareLink0:hover {
-	text-decoration: none;
-	color: white;
-}
-
-.softwareLink1:hover {
+.softwareLink:hover {
 	text-decoration: none;
 	color: white;
 }
