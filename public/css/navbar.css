@@ -43,6 +43,27 @@ footer {
 }
 
 #boton:hover {
-	opacity: .8;
+	opacity: .8;	
+}
+
+.softwareDiv0:hover {
+	background-color: #D40B3A;	
+}
+
+.softwareDiv1:hover {
+	background-color: gray;	
+}
+
+.softwareLink {
+	color: #333;
+}
+
+.softwareLink0:hover {
+	text-decoration: none;
+	color: white;
+}
+
+.softwareLink1:hover {
+	text-decoration: none;
 	color: white;
 }
