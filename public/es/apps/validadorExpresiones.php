@@ -91,7 +91,7 @@ session_start();
           </div>        
           <div style="text-align: center;">
             <input type="submit" class="btn btn-primary" value="EVALUAR">
-            <a href="index.php" class="btn btn-danger">BORRAR</a>            
+            <a href="validadorExpresiones.php" class="btn btn-danger">BORRAR</a>
             <br><br><br><br>
             <?php 
                 if (isset($_SESSION["resultado"])) {                              
