@@ -76,28 +76,13 @@
           </div>
         </div>
         <div class="text-center">
-          <input type="submit" class="btn btn-primary" value="Evaluar">
-          <input type="reset" class="btn btn-danger" value="Borrar">          
+          <input type="submit" class="btn btn-primary" value="EVALUAR">
+          <a href="derivacionNumerica.php" class="btn btn-danger">BORRAR</a>
         </div>
       </form>
 
       <br>
       <h3 class="text-center bg-primary">RESULTADO</h3>  
-
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th class="text-center">Función f(x)</th>
-            <th class="text-center">Punto inicial Xo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr  class="text-center">
-            <td><?php if (isset($_POST["funcion"])) echo $_POST["funcion"]; ?></td>
-            <td><?php if (isset($_POST["inicial"])) echo $_POST["inicial"]; ?></td>
-          </tr>
-        </tbody>
-      </table>    
 
       <div class="table-responsive">        
         <table class="table table-bordered table-hover">

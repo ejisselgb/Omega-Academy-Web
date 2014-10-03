@@ -86,8 +86,8 @@
           </div>
         </div>
         <div class="text-center">
-          <input type="submit" class="btn btn-primary" value="Evaluar">
-          <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
+          <input type="submit" class="btn btn-primary" value="EVALUAR">
+          <a href="metodoNewtonRaphson.php" class="btn btn-danger">BORRAR</a>
         </div>        
       </form>
 

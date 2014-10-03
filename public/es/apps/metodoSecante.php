@@ -96,8 +96,8 @@
           </div>
         </div>
         <div class="text-center">
-          <input type="submit" class="btn btn-primary" value="Evaluar">
-          <input type="reset" class="btn btn-danger" value="Borrar">          
+          <input type="submit" class="btn btn-primary" value="EVALUAR">
+          <a href="metodoSecante.php" class="btn btn-danger">BORRAR</a>
         </div>
       </form>
 

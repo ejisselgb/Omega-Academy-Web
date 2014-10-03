@@ -14,9 +14,7 @@
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../css/navbar.css" rel="stylesheet">   
-
-    <script type="text/javascript" src="http://www.geogebratube.org/scripts/deployggb.js"></script> 
+    <link href="../../css/navbar.css" rel="stylesheet">    
     
   </head>
 
@@ -108,8 +106,8 @@
           </tbody>
         </table>
         <div class="text-center">
-          <input type="submit" class="btn btn-primary" value="Evaluar">
-          <button type="button" class="btn btn-danger" onclick="borrar()">Borrar</button>
+          <input type="submit" class="btn btn-primary" value="EVALUAR">
+          <a href="metodoReglaFalsa.php" class="btn btn-danger">BORRAR</a>
         </div>        
       </form>
 
