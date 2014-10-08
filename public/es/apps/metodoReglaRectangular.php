@@ -53,7 +53,7 @@
         </div><!--/.container-fluid -->
       </div>          
       
-      <form method="POST" action="metodoTrapecios.php" class="form-horizontal" role="form">          
+      <form method="POST" action="metodoReglaRectangular.php" class="form-horizontal" role="form">          
         <legend><h2 class="text-center">Método de la Regla Rectangular</h2></legend>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
@@ -123,11 +123,14 @@
 
           function integrate($a, $b, $particiones, $funcion, $eval) {
             $dx = ($b - $a) / $particiones;
-            $suma = 0;
-            for ($i=1; $i < $particiones; $i++) { 
-              $suma += $eval->expression($funcion, $i * $dx);
+            $suma = 0;            
+            $div = $dx/2;
+
+            for ($i=0; $i < $particiones; $i++) { 
+              $suma += $eval->expression($funcion, $a + $div );              
+              $div += $dx;
             }
-            return $suma * $dx;
+            return $dx * $suma;
           }
 
           echo '<h3 class="text-center bg-primary">RESULTADO = '.integrate($a, $b, $particiones, $funcion, $eval).'</h3>';
