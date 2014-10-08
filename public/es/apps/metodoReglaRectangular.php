@@ -8,7 +8,7 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Método de los Trapecios | Omega Academy</title>
+    <title>Método de la Regla Rectangular | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +54,7 @@
       </div>          
       
       <form method="POST" action="metodoTrapecios.php" class="form-horizontal" role="form">          
-        <legend><h2 class="text-center">Método de los Trapecios</h2></legend>
+        <legend><h2 class="text-center">Método de la Regla Rectangular</h2></legend>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
@@ -86,11 +86,11 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="trapecios" class="col-sm-5 control-label">No. de particiones</label>
+          <label for="particiones" class="col-sm-5 control-label">No. de particiones</label>
           <div class="col-sm-3">
-            <input name="trapecios" type="number" class="form-control" id="trapecios" min="1" max="100" <?php 
-              if (isset($_POST['trapecios'])) {
-                echo 'value='.$_POST['trapecios'];
+            <input name="particiones" type="number" class="form-control" id="particiones" min="1" max="100" <?php 
+              if (isset($_POST['particiones'])) {
+                echo 'value='.$_POST['particiones'];
               }
             ?> required>      
           </div>
@@ -98,7 +98,7 @@
         <div class="form-group">
           <div class="text-center">
             <input type="submit" class="btn btn-primary" value="EVALUAR">            
-            <a href="metodoTrapecios.php" class="btn btn-danger">BORRAR</a>
+            <a href="metodoReglaRectangular.php" class="btn btn-danger">BORRAR</a>
           </div>
         </div>
       </form>
@@ -118,19 +118,19 @@
           $a = (float) $_POST['a'];
           // Límite superior b
           $b = (float) $_POST['b'];
-          // Número de trapecios
-          $trapecios = $_POST['trapecios'];          
+          // Número de particiones
+          $particiones = $_POST['particiones'];          
 
-          function integrate($a, $b, $trapecios, $funcion, $eval) {
-            $h = ($b - $a) / $trapecios;
-            $suma = ($eval->expression($funcion, $a) + $eval->expression($funcion, $b));            
-            for ($i=1; $i < $trapecios; $i++) { 
-              $suma += 2 * $eval->expression($funcion, ($a + ($i * $h) ));
+          function integrate($a, $b, $particiones, $funcion, $eval) {
+            $dx = ($b - $a) / $particiones;
+            $suma = 0;
+            for ($i=1; $i < $particiones; $i++) { 
+              $suma += $eval->expression($funcion, $i * $dx);
             }
-            return ($h / 2) * $suma;
+            return $suma * $dx;
           }
 
-          echo '<h3 class="text-center bg-primary">RESULTADO = '.integrate($a, $b, $trapecios, $funcion, $eval).'</h3>';
+          echo '<h3 class="text-center bg-primary">RESULTADO = '.integrate($a, $b, $particiones, $funcion, $eval).'</h3>';
         }        
       ?>
       
