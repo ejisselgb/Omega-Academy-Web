@@ -43,7 +43,8 @@
               <li><a href="../videos.html" style="color: white">Videos</a></li>
               <li><a href="../documents.html" style="color: white">Documents</a></li>                            
               <li><a href="../about.html" style="color: white">About us</a></li>
-              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>        
+              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>
+              <li><a href="../contact.php" style="color: white">Contact</a></li>        
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="../../es/apps/metodoNewtonRaphson.php" style="color: white">Español</a></li>              

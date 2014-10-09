@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -8,7 +9,7 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../img/icon.png">
 
-    <title>Documentos | Omega Academy</title>
+    <title>Contacto | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +22,7 @@
   <body>
 
     <div class="container">
-
+      
       <img id="banner"  src="../img/banner.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">      
       <img id="bannerMovil" src="../img/bannerMovil.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">
 
@@ -41,48 +42,62 @@
               <li><a href="index.html" style="color: white">Inicio</a></li>
               <li><a href="software.html" style="color: white">Software</a></li>
               <li><a href="videos.html" style="color: white">Vídeos</a></li>
-              <li class="active2"><a href="documentos.html" style="color: #d40b3a">Documentos</a></li>     
-              <li><a href="nosotros.html" style="color: white">Nosotros</a></li>   
+              <li><a href="documentos.html" style="color: white">Documentos</a></li>                            
+              <li><a href="nosotros.html" style="color: white">Nosotros</a></li>  
               <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>
-              <li><a href="contacto.php" style="color: white">Contacto</a></li>                
+              <li class="active2"><a href="contacto.php" style="color: #d40b3a">Contacto</a></li>                
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="documentos.html" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../en/documents.html" style="color: white">English</a></li>
+              <li class="active2"><a href="contacto.php" style="color: #d40b3a">Español</a></li>              
+              <li><a href="../en/contact.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>
 
-        <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
 
-          <h2 class="text-center">UNIDADES</h2>          
-          <ul class="text-justify">
-            <li><h3><a href="documentos/unidad1.pdf" target="_blank">Unidad I - Conversión de un número decimal a diferentes bases numéricas</a></h3></li>            
-            <li><h3><a href="documentos/unidad2.pdf" target="_blank">Unidad II - Conversión de un número decimal al estándar IEEE 754 (32 bits).</a></h3></li>
-            <li><h3><a href="documentos/unidad3.pdf" target="_blank">Unidad III - Método de Bisección.</a></h3></li>
-            <li><h3><a href="documentos/unidad4.pdf" target="_blank">Unidad IV - Método de Newton Raphson.</a></h3></li>
-            <li><h3><a href="documentos/unidad5.pdf" target="_blank">Unidad V - Método de la Falsa Posición.</a></h3></li>
-            <li><h3><a href="documentos/unidad6.pdf" target="_blank">Unidad VI - Derivación Numérica.</a></h3></li>
-            <li><h3><a href="documentos/unidad7.pdf" target="_blank">Unidad VII - Método de la Secante.</a></h3></li>
-            <li><h3><a href="documentos/unidad8.pdf" target="_blank">Unidad VIII - Raíces de Polinomios.</a></h3></li>
-            <li><h3><a href="documentos/unidad9.pdf" target="_blank">Unidad IX - Método de los Trapecios.</a></h3></li>
-            <li><h3><a href="documentos/unidad10.pdf" target="_blank">Unidad X - Método de la Regla Rectangular.</a></h3></li>
-          </ul>
-          <br>
-          <div style="text-align: center;">
-            <a id="boton" href="software.html" type="button" class="btn btn-lg" style="background: gray; color: white">Software</a>
-            <a id="boton" href="videos.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Vídeos</a>        
+        <h1>Contacto</h1>
+        <?php if (isset($_SESSION['enviado'])) {
+          echo "<script>alert('¡Tu mensaje ha sido enviado exitosamente!');</script>";
+          unset($_SESSION['enviado']);          
+        } ?>
+        <div class="row">
+          <div class="col-md-6">
+            <p class="lead text-justify">
+              Tus opiniones son muy importantes para nosotros.
+              Escríbenos tus inquietudes para ponernos en contacto.
+            </p>
+            <aside class="text-center">
+            <a href="" target="_blank"><img src="../img/twitter.png" alt="TWITTER"></a>
+            <a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank"><img src="../img/github.png" alt="GITHUB"></a>
+            <a href="https://www.facebook.com/omegacademyusb" target="_blank"><img src="../img/facebook.png" alt="FACEBOOK"></a>
+            
+                       
+            </aside>
+            <br>
           </div>
-
-        </div>           
-
+            <div class="col-md-6">
+              <form method="post" action="formulario.php" role="form">
+                <div class="form-group">
+                  <input name="nombre" type="text" class="form-control" placeholder="Nombre completo (5 a 30 caracteres)" pattern=".{5,30}" maxlength="30" required>
+                </div>            
+                <div class="form-group">              
+                  <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo electrónico" required>
+                </div>
+                <div class="form-group">              
+                  <textarea name="texto" class="form-control" rows="6" maxlength="2048" placeholder="Escribe tus inquietudes (máximo 2048 caracteres)" required></textarea>
+                </div>            
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            </div> <!-- col-md-6 -->
+        </div> <!-- row --> 
+        
       </div>
       
-      
     </div> <!-- /container -->
-    <br><br><br><br><br><br><br><br>
+
     <footer>      
       <p class="text-center">
         &copy; Omega Academy &middot; Juntos por el conocimiento. <br>

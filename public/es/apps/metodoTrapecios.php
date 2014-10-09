@@ -43,7 +43,8 @@
               <li><a href="../videos.html" style="color: white">Vídeos</a></li>
               <li><a href="../documentos.html" style="color: white">Documentos</a></li>                            
               <li><a href="../nosotros.html" style="color: white">Nosotros</a></li>
-              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>                    
+              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li> 
+              <li><a href="../contacto.php" style="color: white">Contacto</a></li>                   
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="active2"><a href="metodoTrapecios.php" style="color: #d40b3a">Español</a></li>              
@@ -139,7 +140,7 @@
       <br><br><br><br>
       <div style="text-align: center;">
         <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>
-        <a id="boton" href="../documentos.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documentos</a>        
+        <a id="boton" href="../documentos/unidad9.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>
       </div>
 
       <br><br><br><br><br><br><br><br>
