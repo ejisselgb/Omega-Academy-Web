@@ -135,6 +135,12 @@
         }        
       ?>
 
+      <br><br><br><br>
+      <div style="text-align: center;">
+        <a id="boton" href="https://www.youtube.com/watch?v=hmZ4A8nPuSU&feature=youtu.be" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Video</a>
+        <a id="boton" href="../documents/unit9.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Document</a>
+      </div>
+
       <br><br><br><br><br><br><br><br>
 
 

@@ -60,7 +60,7 @@
 
         <h1>Contact</h1>
         <?php if (isset($_SESSION['enviado'])) {
-          echo "<script>alert('¡Tu mensaje ha sido enviado exitosamente!');</script>";
+          echo "<script>alert('¡Your message has been successfully sent!');</script>";
           unset($_SESSION['enviado']);          
         } ?>
         <div class="row">
@@ -78,7 +78,7 @@
             <br>
           </div>
             <div class="col-md-6">
-              <form method="post" action="formulario.php" role="form">
+              <form method="post" action="form.php" role="form">
                 <div class="form-group">
                   <input name="nombre" type="text" class="form-control" placeholder="Full Name (5 a 30 characters)" pattern=".{5,30}" maxlength="30" required>
                 </div>            
