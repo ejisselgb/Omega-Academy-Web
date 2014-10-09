@@ -46,8 +46,8 @@
               <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>                    
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="conversorBases.html" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/basesConverter.html" style="color: white">English</a></li>
+              <li class="active2"><a href="metodoMuller.php" style="color: #d40b3a">Español</a></li>              
+              <li><a href="../../en/apps/mullerMethod.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -87,7 +87,7 @@
         </div>        
         <div class="form-group">
           <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="ENVIAR">
+            <input type="submit" class="btn btn-primary" value="EVALUAR">
             <a href="metodoMuller.php" class="btn btn-danger">BORRAR</a>            
           </div>
         </div>

@@ -8,14 +8,14 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Numeric Converter Bases | Omega Academy</title>
+    <title>Müller Method | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../css/navbar.css" rel="stylesheet">
-
+    <link href="../../css/navbar.css" rel="stylesheet">    
+    
   </head>
 
   <body>
@@ -43,53 +43,117 @@
               <li><a href="../videos.html" style="color: white">Videos</a></li>
               <li><a href="../documents.html" style="color: white">Documents</a></li>                            
               <li><a href="../about.html" style="color: white">About us</a></li>
-              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>      
+              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>        
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../../es/apps/conversorBases.html" style="color: white">Español</a></li>              
-              <li class="active2"><a href="basesConverter.html" style="color: #d40b3a">English</a></li>
+              <li><a href="../../es/apps/metodoMuller.php" style="color: white">Español</a></li>              
+              <li class="active2"><a href="mullerMethod.php" style="color: #d40b3a">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>          
       
-      <form class="form-horizontal" method="POST" role="form">        
-        <legend><h2 class="text-center">Numeric Converter Bases</h2></legend>
+      <form method="POST" action="mullerMethod.php" class="form-horizontal" role="form">
+        <legend><h2 class="text-center">Müller Method</h2></legend>
         <div class="form-group">
-          <label class="col-sm-4 control-label" for="decimal">DECIMAL</label>
-          <div class="col-sm-5">
-            <input name="decimal" type="text" class="form-control" id="decimal" onkeyup="decimal2(this.value)" maxlength="19">          
+          <label class="col-sm-5 control-label" for="funcion">Function f(x) = </label>
+          <div class="col-sm-3">
+            <input name="funcion" type="text" class="form-control" id="funcion" <?php 
+              if (isset($_POST['funcion'])) {
+                echo 'value='.$_POST['funcion'];
+              }
+            ?> required>          
           </div>
         </div>
         <div class="form-group">
-          <label for="binary" class="col-sm-4 control-label">BINARY</label>
-          <div class="col-sm-5">
-            <input name="binary" type="text" class="form-control" id="binary" onkeyup="binary2(this.value)" maxlength="60" >            
+          <label class="col-sm-5 control-label" for="xr">Xr = </label>
+          <div class="col-sm-3">
+            <input name="xr" type="text" class="form-control" id="xr" <?php 
+              if (isset($_POST['xr'])) {
+                echo 'value='.$_POST['xr'];
+              }
+            ?> required>          
           </div>
-        </div>
+        </div>        
         <div class="form-group">
-          <label for="octal" class="col-sm-4 control-label">OCTAL</label>
-          <div class="col-sm-5">
-            <input name="octal" type="text" class="form-control" id="octal" onkeyup="octal2(this.value)" maxlength="21">            
+          <label for="eps" class="col-sm-5 control-label">eps = </label>
+          <div class="col-sm-3">
+            <input name="eps" type="text" class="form-control" id="eps" <?php 
+              if (isset($_POST['eps'])) {
+                echo 'value='.$_POST['eps'];
+              }
+            ?> required>
           </div>
-        </div>
+        </div>        
         <div class="form-group">
-          <label for="hexadecimal" class="col-sm-4 control-label">HEXADECIMAL</label>
-          <div class="col-sm-5">
-            <input name="hexadecimal" type="text" class="form-control" id="hexadecimal" onkeyup="hexadecimal2(this.value)" maxlength="15">         
+          <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="EVALUATE">
+            <a href="mullerMethod.php" class="btn btn-danger">DELETE</a>            
           </div>
         </div>
-        <div class="form-group">
-          <div class="col-sm-offset-8">
-            <input type="reset" class="btn btn-danger" value="DELETE">
-          </div>
-        </div>
-      </form>   
+      </form>
       <br>
       <div style="text-align: center;">
-        <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Videos</a>
-        <a id="boton" href="../documents.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documents</a>        
-      </div>   
+        <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>
+        <a id="boton" href="../documentos.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documentos</a>        
+      </div>
+
+
+
+      <?php 
+
+      if (isset($_POST['xr']) && isset($_POST['eps']) && isset($_POST['funcion'])) {
+        $funcion = $_POST['funcion'];
+        $xr = $_POST['xr'];        
+        $eps = $_POST['eps'];
+
+        $h = 0.01;
+        $maxit = 50;
+
+        require '../../../models/validadorExpresiones/Evaluar.php';
+
+        // Instancio la clase evaluar
+        $eval = new Evaluar();
+
+        function muller($xr, $h, $eps, $maxit, $funcion, $eval) {
+          $x2 = $xr;
+          $x1 = $xr + ($h * $xr);
+          $x0 = $xr - ($h * $xr);          
+          $ite = 1;
+
+          while (true) {            
+            $h0 = $x1 + $x0;
+            $h1 = $x2 - $x1;
+            $d0 = ($eval->expression($funcion, $x1) - $eval->expression($funcion, $x0)) / $h0;
+            $d1 = ($eval->expression($funcion, $x2) - $eval->expression($funcion, $x1)) / $h1;
+            $a = ($d1 - $d0) / ($h1 + $h0);
+            $b = ($a * $h1) + $d1;
+            $c = $eval->expression($funcion, $x2);
+            $rad = sqrt(($b * $b) - (4 * $a * $c));
+            if (abs($b + $rad) > abs($b - $rad)) {
+              $den = $b + $rad;
+            }
+            else {
+              $den = $b - $rad;
+            }
+            $dxr = -2 * $c / $den;
+            $xr = $x2 + $dxr;
+            echo "<br>Iteraciones: $ite - Xr = $xr <br>";
+            if ( abs($dxr) < ($eps * $xr) || $ite + 1 > $maxit) break;
+            $x0 = $x1;
+            $x1 = $x2;
+            $x2 = $xr;
+            $ite++;
+          }                    
+        }
+
+        muller($xr, $h, $eps, $maxit, $funcion, $eval);
+
+      }
+
+
+      ?>
+
 
       <br><br><br><br><br><br><br><br>
 
@@ -108,8 +172,10 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
            
     </div> <!-- /container -->
+
 
     <footer>      
       <p class="text-center">
@@ -126,6 +192,7 @@
     <script src="../../js/collapse.js"></script>
     <script src="../../js/transition.js"></script>
     <script src="../../js/dropdown.js"></script>
-    <script src="../../js/conversorBases.js"></script>
+    <script src="../../js/metodoBiseccion.js"></script>    
+        
   </body>
 </html>

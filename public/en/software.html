@@ -56,12 +56,134 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
 
-        <a id="boton" href="apps/basesConverter.html" type="button" class="btn btn-lg btn-block" style="background: gray; color: white">Base converter</a>
-        <a id="boton" href="apps/standardIEEE.html" type="button" class="btn btn-lg btn-block" style="background: #D40B3A; color: white">Standard IEEE 754 (32 bits)</a>
-        <a id="boton" href="apps/expressionValidator.php" type="button" class="btn btn-lg btn-block" style="background: gray; color: white">Expression Validator</a>
-        <a id="boton" href="apps/bisectionMethod.php" type="button" class="btn btn-lg btn-block" style="background: #D40B3A; color: white">Bisection method</a>
-        <a id="boton" href="apps/falsePosition.php" type="button" class="btn btn-lg btn-block" style="background: gray; color: white">False Position Method</a>
-        <a id="boton" href="apps/numericalDerivation.php" type="button" class="btn btn-lg btn-block" style="background: #D40B3A; color: white">Numerical Derivation</a>
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">              
+              <div class="caption softwareDiv0">
+                <a href="" class="softwareLink" data-toggle="modal" data-target="#basesConversor"><h3 class="text-center"><b>Bases and Converter</b></h3></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">              
+              <div class="caption softwareDiv1">
+                <a href="" class="softwareLink" data-toggle="modal" data-target="#evaluadorDerivacion"><h3 class="text-center"><b>Evaluator and Derivation</b></h3></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">              
+              <div class="caption softwareDiv0">
+                <a href="" class="softwareLink" data-toggle="modal" data-target="#ecuaciones"><h3 class="text-center"><b>Equations</b></h3></a>    
+              </div>
+            </div>
+          </div>          
+        </div>
+
+        <!-- Modal - Bases y Conversor -->
+        <div class="modal fade" id="basesConversor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Bases and Converter</h4>
+              </div>
+              <div class="modal-body">
+                <a id="boton" href="apps/basesConverter.html" type="button" class="btn  btn-lg btn-block" style="background: #D40B3A; color: white">Numeric Converter Bases</a>
+                <a id="boton" href="apps/standardIEEE.html" type="button" class="btn btn-lg btn-block" style="background: gray; color: white">Standard IEEE 754 (32 bits)</a>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal - Evaluador y Derivadas -->
+        <div class="modal fade" id="evaluadorDerivacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Evaluator and Derivation</h4>
+              </div>
+              <div class="modal-body">
+                <a id="boton" href="apps/expressionValidator.php" type="button" class="btn btn-lg btn-block" style="background: #D40B3A; color: white">Expression Evaluator</a>
+                <a id="boton" href="apps/numericalDerivation.php" type="button" class="btn btn-lg btn-block" style="background: gray; color: white">Numerical Derivation</a>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal - Ecuaciones -->
+        <div class="modal fade" id="ecuaciones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Equations</h4>
+              </div>
+              <div class="modal-body">
+                <a id="boton" href="apps/bisectionMethod.php" type="button" class="btn btn-lg btn-block" style="background: #D40B3A; color: white">Bisection Method</a>
+                <a id="boton" href="apps/falsePosition.php" type="button" class="btn btn-lg btn-block" style="background: gray; color: white">Method False Position</a>        
+                <a id="boton" href="apps/newtonRaphsonMethod.php" type="button" class="btn btn-lg btn-block" style="background: #D40B3A; color: white">Newton - Raphson Method</a>
+                <a id="boton" href="apps/secantMethod.php" type="button" class="btn btn-lg btn-block" style="background: gray; color: white">Secant Method</a>
+                <a id="boton" href="apps/mullerMethod.php" type="button" class="btn btn-lg btn-block" style="background: #D40B3A; color: white">Müller Method</a>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">              
+              <div class="caption softwareDiv1">
+                <a href="" class="softwareLink" data-toggle="modal" data-target="#integracionNumerica"><h3 class="text-center"><b>Numerical Integration</b></h3></a> 
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">              
+              <div class="caption softwareDiv0">
+                <a href="" class="softwareLink" data-toggle="modal" data-target="#"><h3 class="text-center"><b>Matrices</b></h3></a>    
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">              
+              <div class="caption softwareDiv1">
+                <a href="" class="softwareLink" data-toggle="modal" data-target="#"><h3 class="text-center"><b>Curve Adjustment</b></h3></a>  
+              </div>
+            </div>
+          </div>          
+        </div>
+
+        <!-- Modal - Integracion -->
+        <div class="modal fade" id="integracionNumerica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Numerical integration</h4>
+              </div>
+              <div class="modal-body">
+                <a id="boton" href="apps/trapezoidalRule.php" type="button" class="btn btn-lg btn-block" style="background: #D40B3A; color: white">Trapezoidal Rule</a>
+                <a id="boton" href="apps/rectangleRule.php" type="button" class="btn btn-lg btn-block" style="background: gray; color: white">Rectangle Rule</a>        
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
            
     </div> <!-- /container -->
@@ -81,5 +203,6 @@
     <script src="../js/collapse.js"></script>
     <script src="../js/transition.js"></script>
     <script src="../js/dropdown.js"></script>
+    <script src="../js/modal.js"></script>
   </body>
 </html>
