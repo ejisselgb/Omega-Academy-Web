@@ -187,6 +187,12 @@
 
 
       <br><br><br><br><br><br><br><br>
+      <div style="text-align: center;">
+        <a id="boton" href="http://www.youtube.com/watch?v=GKwzBrzsPSU" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Video</a>
+        <a id="boton" href="../documents/unit7.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Document</a>        
+      </div>
+
+      <br><br><br><br><br><br><br><br>
 
 
       <div id="disqus_thread"></div>

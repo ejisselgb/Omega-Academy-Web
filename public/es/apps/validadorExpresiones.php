@@ -15,7 +15,7 @@ session_start();
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Validador de Expresiones Algebraicas | Omega Academy</title>
+    <title>Evaluador de Expresiones Algebraicas | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +66,7 @@ session_start();
         </div>
         <div class="col-md-6">
           <form method="POST" action="../../../controllers/validadorExpresiones/validador1.php" class="form-horizontal">        
-          <legend><h2 class="text-center">Validador de Expresiones</h2></legend>
+          <legend><h2 class="text-center">Evaluador de Expresiones Algebraicas</h2></legend>
           <div class="form-group">
             <label class="control-label col-sm-4" for="funcion">Ingrese la función f(x) = </label>
             <div class="col-sm-8">

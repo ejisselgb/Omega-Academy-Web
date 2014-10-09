@@ -260,8 +260,8 @@ if (isset($_POST["funcion"]) && isset($_POST["a"]) && isset($_POST["b"]) && isse
       
       <br><br><br><br><br><br><br><br>
       <div style="text-align: center;">
-        <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>
-        <a id="boton" href="../documentos.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documentos</a>        
+        <a id="boton" href="http://www.youtube.com/watch?v=uW7m8hl0cj0" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeo</a>
+        <a id="boton" href="../documentos/unidad3.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>        
       </div>
 
       <br><br><br><br><br><br><br><br>
