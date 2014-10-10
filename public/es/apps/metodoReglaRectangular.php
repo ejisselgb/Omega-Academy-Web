@@ -89,7 +89,7 @@
         <div class="form-group">
           <label for="particiones" class="col-sm-5 control-label">No. de particiones</label>
           <div class="col-sm-3">
-            <input name="particiones" type="number" class="form-control" id="particiones" min="1" max="100" <?php 
+            <input name="particiones" type="number" class="form-control" id="particiones" min="1" <?php 
               if (isset($_POST['particiones'])) {
                 echo 'value='.$_POST['particiones'];
               }
@@ -105,41 +105,82 @@
       </form>
 
       <br>
-      <?php 
-        if (isset($_POST['funcion'])) {
+      <h3 class="bg-primary text-center" style="padding: .2em; border-radius: 5px">RESULTADO</h3>
+      <br>
 
-          require '../../../models/validadorExpresiones/Evaluar.php';
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="text-center">Extremo izquierdo</th>
+              <th class="text-center">Punto medio</th>
+              <th class="text-center">Extremo derecho</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+            <?php 
+              if (isset($_POST['funcion'])) {
 
-          // Creo una instancia de Evaluar
-          $eval = new Evaluar();
+                require '../../../models/validadorExpresiones/Evaluar.php';
 
-          // Función
-          $funcion = $_POST['funcion'];
-          // Límite inferior a
-          $a = (float) $_POST['a'];
-          // Límite superior b
-          $b = (float) $_POST['b'];
-          // Número de particiones
-          $particiones = $_POST['particiones'];          
+                // Creo una instancia de Evaluar
+                $eval = new Evaluar();
 
-          function integrate($a, $b, $particiones, $funcion, $eval) {
-            $dx = ($b - $a) / $particiones;
-            $suma = 0;            
-            $div = $dx/2;
+                $funcion = $_POST['funcion'];
+                $a = $_POST['a'];
+                $b = $_POST['b'];
+                $particiones = $_POST['particiones'];
 
-            for ($i=0; $i < $particiones; $i++) { 
-              $suma += $eval->expression($funcion, $a + $div );              
-              $div += $dx;
-            }
-            return $dx * $suma;
-          }
+                function extremoIzq($funcion, $a, $b, $particiones, $eval) {
+                  $delta = ($b - $a) / $particiones;
+                  $iter = $a + $delta;
+                  $suma = $eval->expression($funcion, $a) * $delta;
 
-          echo '<h3 class="text-center bg-primary">RESULTADO = '.integrate($a, $b, $particiones, $funcion, $eval).'</h3>';
-        }        
-      ?>
+                  while ($iter < $b) {
+                    $suma += $eval->expression($funcion, $iter);
+                    $iter += $delta;
+                  }
+                  return $suma * $delta;
+                }
+
+                function extremoDer($funcion, $a, $b, $particiones, $eval) {
+                  $delta = ($b - $a) / $particiones;
+                  $iter = $a + $delta;
+                  $suma = $eval->expression($funcion, $iter) * $delta;                  
+                  
+                  while ($iter <= $b-$delta) {
+                    $iter += $delta;
+                    $suma += $eval->expression($funcion, $iter);
+                    
+                  }
+                  return $suma * $delta;
+                }
+
+                function puntoMedio($funcion, $a, $b, $particiones, $eval) {
+                  $delta = ($b - $a) / $particiones;
+                  $x = $a;
+                  $y = $a + $delta;
+                  $suma = $eval->expression($funcion, ($x + $y) / 2 );                     
+
+                  while ($y < $b) {                    
+                    $x += $delta;
+                    $y += $delta;
+                    $suma = $eval->expression($funcion, ($x + $y) / 2 );                    
+                  }
+                  return $suma * $delta;
+                }
+                echo "<td>".extremoIzq($funcion, $a, $b, $particiones, $eval)."</td><td>".puntoMedio($funcion, $a, $b, $particiones, $eval)."</td><td>".extremoDer($funcion, $a, $b, $particiones, $eval)."</td>";                                
+              }        
+            ?>
+            </tr>      
+          </tbody>
+        </table>
+      </div>
+
+
+
       
-
-
       <br><br><br><br>
       <div style="text-align: center;">
         <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeos</a>

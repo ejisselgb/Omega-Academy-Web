@@ -151,7 +151,7 @@
                 array_push($derivadas, $x0);
 
                 $err = ($derivadas[count($derivadas) - 1] - $derivadas[count($derivadas) - 2]) /  $derivadas[count($derivadas) - 1];
-                array_push($errores, $err);               
+                array_push($errores, abs($err) );               
 
                 $row++;
                 $n--;
@@ -162,7 +162,7 @@
                 array_push($derivadas, $x0);
 
                 $err = ($tmp - $derivadas[count($derivadas) - 2]) /  $tmp;
-                array_push($errores, $err);
+                array_push($errores, abs($err) );
 
                 echo "<tr class='text-center'><td>$row</td><td>".$derivadas[count($derivadas) - 1]."</td><td>".$errores[count($errores) - 1]."</td></tr>";
 
@@ -170,7 +170,7 @@
                 array_push($derivadas, $x0);                
 
                 $err = ($derivadas[count($derivadas) - 1] - $derivadas[count($derivadas) - 2]) /  $derivadas[count($derivadas) - 1];
-                array_push($errores, $err);
+                array_push($errores, abs($err) );
                 
                 $row++;
                 $n--;
