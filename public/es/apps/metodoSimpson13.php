@@ -47,8 +47,8 @@
               <li><a href="../contacto.php" style="color: white">Contacto</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="conversorBases.html" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/basesConverter.html" style="color: white">English</a></li>
+              <li class="active2"><a href="metodoSimpson13.php" style="color: #d40b3a">Español</a></li>              
+              <li><a href="../../en/apps/simpsonMethod13.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -137,12 +137,6 @@
 
     echo '<h3 class="text-center bg-primary">RESULTADO = '.simpson13($a, $b, $h, $funcion, $eval).'</h3>';
     
-
-
-
-
-
-
   }
 ?>
 
