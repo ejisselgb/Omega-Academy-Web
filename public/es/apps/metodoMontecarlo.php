@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="This online course was design by 5 students from Systems Engineering and Multimedia Engineering from the University San Buenaventura, Cali - Colombia.  It was created to fulfill the need to implement and share the knowledge obtained up until now, also to offer a work guide for future generations that would allow them to learn in a dynamic way and so it can be a support guide for the professor.">
+    <meta name="description" content="Este curso en línea propuesto por 5 estudiantes de ingeniería multimedia e ingeniería de sistemas de la universidad de San Buenaventura Cali, nace de la necesidad de implementar y compartir los conocimientos obtenidos hasta el momento para ofrecer una guía de trabajo para las generaciones futuras, que les permita aprender de forma dinámica y que a la vez sea una plataforma de apoyo para el docente.">
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Rectangle Rule | Omega Academy</title>
+    <title>Método de Montecarlo | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../css/navbar.css" rel="stylesheet">    
-    
+    <link href="../../css/navbar.css" rel="stylesheet">
+
   </head>
 
   <body>
 
     <div class="container">
 
-      <img id="banner"  src="../../img/banner2.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">      
+      <img id="banner"  src="../../img/banner.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">      
       <img id="bannerMovil" src="../../img/bannerMovil.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">
 
       <!-- Static navbar -->
@@ -38,27 +38,26 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="../index.html" style="color: white">Home</a></li>
+              <li><a href="../index.html" style="color: white">Inicio</a></li>
               <li class="active2"><a href="../software.html" style="color: #d40b3a">Software</a></li>
-              <li><a href="../videos.html" style="color: white">Videos</a></li>
-              <li><a href="../documents.html" style="color: white">Documents</a></li>                            
-              <li><a href="../about.html" style="color: white">About us</a></li>
-              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>
-              <li><a href="../contact.php" style="color: white">Contact</a></li>        
+              <li><a href="../videos.html" style="color: white">Vídeos</a></li>
+              <li><a href="../documentos.html" style="color: white">Documentos</a></li>                            
+              <li><a href="../nosotros.html" style="color: white">Nosotros</a></li>
+              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li> 
+              <li><a href="../contacto.php" style="color: white">Contacto</a></li>                   
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../../es/apps/metodoReglaRectangular.php" style="color: white">Español</a></li>              
-              <li class="active2"><a href="rectangleRule.php" style="color: #d40b3a">English</a></li>
+              <li class="active2"><a href="metodoMontecarlo.php" style="color: #d40b3a">Español</a></li>              
+              <li><a href="../../en/apps/montecarloMethod.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>          
       
-
-      <form method="POST" action="rectangleRule.php" class="form-horizontal" role="form">          
-        <legend><h2 class="text-center">Rectangle Rule</h2></legend>
+      <form method="POST" action="metodoMontecarlo.php" class="form-horizontal" role="form">          
+        <legend><h2 class="text-center">Método de Montecarlo</h2></legend>
         <div class="form-group">
-          <label class="col-sm-5 control-label" for="funcion">Function f(x) = </label>
+          <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
           <div class="col-sm-3">
             <input name="funcion" type="text" class="form-control" id="funcion" <?php 
               if (isset($_POST['funcion'])) {
@@ -68,7 +67,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-5 control-label" for="a">Lower limit A</label>
+          <label class="col-sm-5 control-label" for="a">Límite inferior A</label>
           <div class="col-sm-3">
             <input name="a" type="text" class="form-control" id="a" <?php 
               if (isset($_POST['a'])) {
@@ -78,7 +77,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="b" class="col-sm-5 control-label">Upper limit B</label>
+          <label for="b" class="col-sm-5 control-label">Límite superior B</label>
           <div class="col-sm-3">
             <input name="b" type="text" class="form-control" id="b" <?php 
               if (isset($_POST['b'])) {
@@ -88,25 +87,35 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="particiones" class="col-sm-5 control-label">Number of partitions</label>
+          <label for="puntos" class="col-sm-5 control-label">No. de puntos</label>
           <div class="col-sm-3">
-            <input name="particiones" type="number" class="form-control" id="particiones" min="1" <?php 
-              if (isset($_POST['particiones'])) {
-                echo 'value='.$_POST['particiones'];
+            <input name="puntos" type="number" class="form-control" id="puntos" min="1" <?php 
+              if (isset($_POST['puntos'])) {
+                echo 'value='.$_POST['puntos'];
               }
             ?> required>      
           </div>
-        </div>        
+        </div>
+        <div class="form-group">
+          <label for="cota" class="col-sm-5 control-label">Cota superior de f(x) en [a,b]</label>
+          <div class="col-sm-3">
+            <input name="cota" type="number" class="form-control" id="cota" min="1" <?php 
+              if (isset($_POST['cota'])) {
+                echo 'value='.$_POST['cota'];
+              }
+            ?> required>      
+          </div>
+        </div>
         <div class="form-group">
           <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="EVALUATE">            
-            <a href="rectangleRule.php" class="btn btn-danger">DELETE</a>
+            <input type="submit" class="btn btn-primary" value="EVALUAR">            
+            <a href="metodoTrapecios.php" class="btn btn-danger">BORRAR</a>
           </div>
         </div>
       </form>
 
       <br>
-      <?php 
+      <?php       
         if (isset($_POST['funcion'])) {
 
           require '../../../models/validadorExpresiones/Evaluar.php';
@@ -120,31 +129,36 @@
           $a = (float) $_POST['a'];
           // Límite superior b
           $b = (float) $_POST['b'];
-          // Número de particiones
-          $particiones = $_POST['particiones'];          
+          // Número de puntos
+          $puntos = $_POST['puntos']; 
+          // Cota superior de f(x)        
+          $cota = $_POST["cota"];
 
-          function integrate($a, $b, $particiones, $funcion, $eval) {
-            $dx = ($b - $a) / $particiones;
-            $suma = 0;            
-            $div = $dx/2;
-
-            for ($i=0; $i < $particiones; $i++) { 
-              $suma += $eval->expression($funcion, $a + $div );              
-              $div += $dx;
+          function montecarlo($a, $b, $puntos, $cota, $funcion, $eval) {
+            $longitud = $b - $a;
+            $xi = $a + lcg_value() * $longitud;            
+            $ni = 0;
+            
+            for ($i=0; $i < $puntos ; $i++) { 
+              $yi = lcg_value() * $cota;
+              if ($yi <= $eval->expression($funcion, $xi)) {
+                $ni++;
+              }
             }
-            return $dx * $suma;
+            return ($ni / $puntos) * ($longitud * $cota);
           }
 
-          echo '<h3 class="text-center bg-primary">RESULT = '.integrate($a, $b, $particiones, $funcion, $eval).'</h3>';
+          echo '<h3 class="text-center bg-primary">RESULTADO = '.montecarlo($a, $b, $puntos, $cota, $funcion, $eval).'</h3>';
         }        
       ?>
+      
+
 
       <br><br><br><br>
       <div style="text-align: center;">
-        <a id="boton" href="../videos.html" type="button" class="btn btn-lg" style="background: gray; color: white">Videos</a>
-        <a id="boton" href="../documents.html" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documents</a>        
+        <a id="boton" href="https://www.youtube.com/watch?v=hmZ4A8nPuSU&feature=youtu.be" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeo</a>
+        <a id="boton" href="../documentos/unidad9.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>
       </div>
-      
 
       <br><br><br><br><br><br><br><br>
 
@@ -170,7 +184,7 @@
 
     <footer>      
       <p class="text-center">
-        &copy; Omega Academy &middot; Together for knowledge. <br>
+        &copy; Omega Academy &middot; Juntos por el conocimiento. <br>
         2014
       </p>
     </footer>     
@@ -183,7 +197,6 @@
     <script src="../../js/collapse.js"></script>
     <script src="../../js/transition.js"></script>
     <script src="../../js/dropdown.js"></script>
-    <script src="../../js/metodoBiseccion.js"></script>    
-        
+    <script src="../../js/conversorBases.js"></script>
   </body>
 </html>

@@ -89,7 +89,7 @@
         <div class="form-group">
           <label for="trapecios" class="col-sm-5 control-label">Number of partitions</label>
           <div class="col-sm-3">
-            <input name="trapecios" type="number" class="form-control" id="trapecios" min="1" max="100" <?php 
+            <input name="trapecios" type="number" class="form-control" id="trapecios" min="1" <?php 
               if (isset($_POST['trapecios'])) {
                 echo 'value='.$_POST['trapecios'];
               }
