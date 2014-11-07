@@ -8,7 +8,7 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Método de Simpson 3/8 | Omega Academy</title>
+    <title>Suma de Matrices | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -47,105 +47,123 @@
               <li><a href="../contacto.php" style="color: white">Contacto</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="metodoSimpson38.php" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/simpsonMethod38.php" style="color: white">English</a></li>
+              <li class="active2"><a href="sumarMatrices.php" style="color: #d40b3a">Español</a></li>              
+              <li><a href="../../en/apps/addingMatrices.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </div>          
-      
-      <form method="POST" action="metodoSimpson38.php" class="form-horizontal" role="form">          
-        <legend><h2 class="text-center">Método de Simpson 3/8</h2></legend>
-        <div class="form-group">
-          <label class="col-sm-5 control-label" for="funcion">Función f(x) = </label>
-          <div class="col-sm-3">
-            <input name="funcion" type="text" class="form-control" id="funcion" <?php 
-              if (isset($_POST['funcion'])) {
-                echo 'value='.$_POST['funcion'];                
-              }
-            ?> required>
-          </div>
+      </div>                
+    
+      <form method="POST" action="sumarMatrices.php" class="form-inline text-center" role="form">
+        <legend><h2>Suma de Matrices</h2></legend>
+        <div class="form-group">          
+          <input name="filas" type="number" class="form-control" id="filas" placeholder="Número de filas" <?php 
+            if (isset($_POST["filas"])) {
+              echo "value=".$_POST["filas"];;
+            }
+          ?> required autofocus>
         </div>
-        <div class="form-group">
-          <label class="col-sm-5 control-label" for="a">Límite inferior A</label>
-          <div class="col-sm-3">
-            <input name="a" type="text" class="form-control" id="a" <?php 
-              if (isset($_POST['a'])) {
-                echo 'value='.$_POST['a'];                
-              }
-            ?> required>          
-          </div>
+        <div class="form-group">          
+          <input name="columnas" type="number" class="form-control" id="columnas" placeholder="Número de columnas" <?php 
+            if (isset($_POST["columnas"])) {
+              echo "value=".$_POST["columnas"];
+            }
+          ?> required>
         </div>
-        <div class="form-group">
-          <label for="b" class="col-sm-5 control-label">Límite superior B</label>
-          <div class="col-sm-3">
-            <input name="b" type="text" class="form-control" id="b" <?php 
-              if (isset($_POST['b'])) {
-                echo 'value='.$_POST['b'];                
-              }
-            ?> required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="particiones" class="col-sm-5 control-label">No. de particiones</label>
-          <div class="col-sm-3">
-            <input name="particiones" type="number" class="form-control" id="particiones" min="3" step="3" <?php 
-              if (isset($_POST['particiones'])) {
-                echo 'value='.$_POST['particiones'];
-              }
-            ?> required>      
-          </div>
-        </div>        
-        <div class="form-group">
-          <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="EVALUAR">            
-            <a href="metodoTrapecios.php" class="btn btn-danger">BORRAR</a>
-          </div>
-        </div>
+        <button type="submit" class="btn btn-default">Crear Matriz</button>
       </form>
 
+
 <?php 
-  if (isset($_POST["funcion"])) {
-    $funcion = $_POST["funcion"];
-    $a = $_POST["a"];
-    $b = $_POST["b"];
-    $n = $_POST["particiones"];
 
+if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
   
-    require "../../../models/validadorExpresiones/Evaluar.php";
+  $filas = $_POST["filas"];
+  $columnas = $_POST["columnas"];
 
-    $eval = new Evaluar();
-    
-    $h = ($b - $a) / $n;
+}
 
-    function simpson38($a, $b, $h, $funcion, $eval) {
-      $x0 = $a;
-      $f0 = $eval->expression($funcion, $x0);            
-
-      $x1 = $x0 + $h;      
-      $f1 = $eval->expression($funcion, $x0 + $h);
-      $fx1 = $eval->expression($funcion, $x1);                  
-
-      $x2 = $x1 + $h;
-      $f2 = $eval->expression($funcion, $x1 + $h);
-      $fx2 = $eval->expression($funcion, $x2);                  
-
-
-      $x3 = $x2 + $h;
-      $f3 = $eval->expression($funcion, $x3);                  
-
-      if (round($x3) >= $b) {
-        return (3 * $h / 8) * ($f0 + 3*$fx1 + 3*$fx2 + $f3);
-      }
-      else return simpson38($x3, $b, $h, $funcion, $eval);
-      
-    }
-
-    echo '<h3 class="text-center bg-primary">RESULTADO = '.simpson38($a, $b, $h, $funcion, $eval).'</h3>';
-    
-
-  }
 ?>
+
+      <div class="table-responsive">
+        <table class="table table-responsive table-bordered text-center">
+          <tbody>
+            <?php 
+              if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
+                echo "<h3 class='text-center'>Matriz 1</h3>";
+                $tmp = 0;
+                for ($i=0; $i < $filas; $i++) { 
+                  echo "<tr>";              
+                  for ($j=0; $j < $columnas; $j++) { 
+                    echo "<td><input id='a$tmp' type='text'></td>";
+                    $tmp++;
+                  }
+                  echo "</tr>";
+                }
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-responsive table-bordered text-center">
+          <tbody>
+            <?php 
+              if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
+                echo "<h3 class='text-center'>Matriz 2</h3>";
+                $tmp = 0;
+                for ($i=0; $i < $filas; $i++) { 
+                  echo "<tr>";              
+                  for ($j=0; $j < $columnas; $j++) { 
+                    echo "<td><input id='b$tmp' type='text'></td>";
+                    $tmp++;
+                  }
+                  echo "</tr>";
+                }
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
+
+      
+
+      <div class="text-center">        
+        <?php 
+          if (isset($_POST["filas"]) && isset($_POST["columnas"])) {            
+            echo '<br><br>
+                  <button class="btn btn-primary" onclick="sumar()">Sumar Matrices</button>
+                  <button class="btn btn-danger" onclick="borrar()">Borrar</button>
+                  <br><br><br><br>
+                  <h2 class="bg-primary">RESULTADO</h2>';
+          }
+        ?>        
+      </div>  
+
+      <div class="table-responsive">
+        <table class="table table-responsive table-bordered text-center">
+          <tbody>
+            <?php 
+              if (isset($_POST["filas"]) && isset($_POST["columnas"])) {                
+                $tmp = 0;
+                for ($i=0; $i < $filas; $i++) { 
+                  echo "<tr>";              
+                  for ($j=0; $j < $columnas; $j++) { 
+                    echo "<td><input id='c$tmp' type='text'></td>";
+                    $tmp++;
+                  }
+                  echo "</tr>";
+                }
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
+
+
+
+
 
       <br><br>
       <div style="text-align: center;">
@@ -191,5 +209,6 @@
     <script src="../../js/transition.js"></script>
     <script src="../../js/dropdown.js"></script>
     <script src="../../js/conversorBases.js"></script>
+    <script src="../../js/matrices/suma.js"></script>
   </body>
 </html>
