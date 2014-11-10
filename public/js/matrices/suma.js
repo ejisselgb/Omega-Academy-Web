@@ -58,6 +58,9 @@ function borrar() {
 	for (var i = 0; i < campos; i++) {
 		document.getElementById('c'+i).value = "";
 	}
+
+	document.getElementById('filas').value = "";
+	document.getElementById('columnas').value = "";
 }
 
 

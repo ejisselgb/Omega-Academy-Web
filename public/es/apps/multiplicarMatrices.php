@@ -8,7 +8,7 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Suma de Matrices | Omega Academy</title>
+    <title>Multiplicación de Matrices | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -47,39 +47,60 @@
               <li><a href="../contacto.php" style="color: white">Contacto</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="sumarMatrices.php" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/addingMatrices.php" style="color: white">English</a></li>
+              <li class="active2"><a href="multiplicarMatrices.php" style="color: #d40b3a">Español</a></li>              
+              <li><a href="../../en/apps/matrixMultiplication.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>                
     
-      <form method="POST" action="sumarMatrices.php" class="form-inline text-center" role="form">
-        <legend><h2>Suma de Matrices</h2></legend>
+
+      <!-- MATRIZ 1 -->
+
+      <form method="POST" action="multiplicarMatrices.php" class="form-inline text-center" role="form">
+        <legend><h2>Multiplicación de Matrices</h2></legend>
+        <h4>Matriz 1</h4>
         <div class="form-group">          
-          <input name="filas" type="number" class="form-control" id="filas" placeholder="Número de filas" <?php 
-            if (isset($_POST["filas"])) {
-              echo "value=".$_POST["filas"];;
+          <input name="filas1" type="text" class="form-control" id="filas1" onkeyup="crearValidar()" placeholder="Número de filas" <?php 
+            if (isset($_POST["filas1"])) {
+              echo "value=".$_POST["filas1"];;
             }
           ?> required autofocus>
         </div>
         <div class="form-group">          
-          <input name="columnas" type="number" class="form-control" id="columnas" placeholder="Número de columnas" <?php 
-            if (isset($_POST["columnas"])) {
-              echo "value=".$_POST["columnas"];
+          <input name="columnas1" type="text" class="form-control" id="columnas1" onkeyup="crearValidar()" placeholder="Número de columnas" <?php 
+            if (isset($_POST["columnas1"])) {
+              echo "value=".$_POST["columnas1"];
             }
           ?> required>
         </div>
+        <br><br>
+        <h4>Matriz 2</h4>
+        <div class="form-group">          
+          <input name="filas2" type="text" class="form-control" id="filas2" onkeyup="crearValidar()" placeholder="Número de filas" <?php 
+            if (isset($_POST["filas2"])) {
+              echo "value=".$_POST["filas2"];;
+            }
+          ?> required autofocus>
+        </div>
+        <div class="form-group">          
+          <input name="columnas2" type="text" class="form-control" id="columnas2" onkeyup="crearValidar()" placeholder="Número de columnas" <?php 
+            if (isset($_POST["columnas2"])) {
+              echo "value=".$_POST["columnas2"];
+            }
+          ?> required>
+        </div>
+        <br><br>
         <button type="submit" class="btn btn-primary">Crear Matrices</button>
       </form>
 
 
 <?php 
 
-if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
+if (isset($_POST["filas1"]) && isset($_POST["columnas1"])) {
   
-  $filas = $_POST["filas"];
-  $columnas = $_POST["columnas"];
+  $filas1 = $_POST["filas1"];
+  $columnas1 = $_POST["columnas1"];
 
 }
 
@@ -89,34 +110,13 @@ if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
         <table class="table table-responsive table-bordered text-center">
           <tbody>
             <?php 
-              if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
+              if (isset($_POST["filas1"]) && isset($_POST["columnas1"])) {
                 echo "<h3 class='text-center'>Matriz 1</h3>";
                 $tmp = 0;
-                for ($i=0; $i < $filas; $i++) { 
+                for ($i=0; $i < $filas1; $i++) { 
                   echo "<tr>";              
-                  for ($j=0; $j < $columnas; $j++) { 
-                    echo "<td><input id='a$tmp' type='text'></td>";
-                    $tmp++;
-                  }
-                  echo "</tr>";
-                }
-              }
-            ?>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="table-responsive">
-        <table class="table table-responsive table-bordered text-center">
-          <tbody>
-            <?php 
-              if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
-                echo "<h3 class='text-center'>Matriz 2</h3>";
-                $tmp = 0;
-                for ($i=0; $i < $filas; $i++) { 
-                  echo "<tr>";              
-                  for ($j=0; $j < $columnas; $j++) { 
-                    echo "<td><input id='b$tmp' type='text'></td>";
+                  for ($j=0; $j < $columnas1; $j++) { 
+                    echo "<td><input id='a$tmp' type='text' value='1'></td>";
                     $tmp++;
                   }
                   echo "</tr>";
@@ -129,11 +129,46 @@ if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
 
       
 
+      <!-- MATRIZ 2 -->      
+
+
+<?php 
+
+if (isset($_POST["filas2"]) && isset($_POST["columnas2"])) {
+  
+  $filas2 = $_POST["filas2"];
+  $columnas2 = $_POST["columnas2"];
+
+}
+
+?>
+
+      <div class="table-responsive">
+        <table class="table table-responsive table-bordered text-center">
+          <tbody>
+            <?php 
+              if (isset($_POST["filas2"]) && isset($_POST["columnas2"])) {
+                echo "<h3 class='text-center'>Matriz 2</h3>";
+                $tmp = 0;
+                for ($i=0; $i < $filas2; $i++) { 
+                  echo "<tr>";              
+                  for ($j=0; $j < $columnas2; $j++) { 
+                    echo "<td><input id='b$tmp' type='text' value='1'></td>";
+                    $tmp++;
+                  }
+                  echo "</tr>";
+                }
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
+
       <div class="text-center">        
         <?php 
-          if (isset($_POST["filas"]) && isset($_POST["columnas"])) {            
+          if (isset($_POST["filas1"]) && isset($_POST["columnas2"])) {            
             echo '<br><br>
-                  <button class="btn btn-primary" onclick="sumar()">Sumar Matrices</button>
+                  <button class="btn btn-primary" onclick="multiplicacion()">Multiplicar Matrices</button>
                   <button class="btn btn-danger" onclick="borrar()">Borrar</button>
                   <br><br><br><br>
                   <h2 class="bg-primary">RESULTADO</h2><br>';
@@ -145,11 +180,11 @@ if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
         <table class="table table-responsive table-bordered text-center">
           <tbody>
             <?php 
-              if (isset($_POST["filas"]) && isset($_POST["columnas"])) {                
+              if (isset($_POST["filas1"]) && isset($_POST["columnas2"])) {
                 $tmp = 0;
-                for ($i=0; $i < $filas; $i++) { 
+                for ($i=0; $i < $filas1; $i++) { 
                   echo "<tr>";              
-                  for ($j=0; $j < $columnas; $j++) { 
+                  for ($j=0; $j < $columnas2; $j++) { 
                     echo "<td><input id='c$tmp' type='text'></td>";
                     $tmp++;
                   }
@@ -160,9 +195,6 @@ if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
           </tbody>
         </table>
       </div>
-
-
-
 
 
       <br><br>
@@ -208,7 +240,7 @@ if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
     <script src="../../js/collapse.js"></script>
     <script src="../../js/transition.js"></script>
     <script src="../../js/dropdown.js"></script>
-    <script src="../../js/conversorBases.js"></script>
-    <script src="../../js/matrices/suma.js"></script>
+    <script src="../../js/conversorBases.js"></script>    
+    <script src="../../js/matrices/multiplicacion.js"></script>
   </body>
 </html>
