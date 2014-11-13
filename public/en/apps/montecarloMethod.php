@@ -8,7 +8,7 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Simpson Method | Omega Academy</title>
+    <title>Método de Montecarlo | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -43,19 +43,19 @@
               <li><a href="../videos.html" style="color: white">Videos</a></li>
               <li><a href="../documents.html" style="color: white">Documents</a></li>                            
               <li><a href="../about.html" style="color: white">About us</a></li>
-              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>
-              <li><a href="../contact.php" style="color: white">Contact</a></li>
+              <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li> 
+              <li><a href="../contact.php" style="color: white">Contact</a></li>                   
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../../es/apps/metodoSimpson38.php" style="color: white">Español</a></li>              
-              <li class="active2"><a href="simpsonMethod38.php" style="color: #d40b3a">English</a></li>
+              <li><a href="../../es/apps/metodoMontecarlo.php" style="color: white">Español</a></li>              
+              <li class="active2"><a href="montecarloMethod.php" style="color: #d40b3a">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>          
       
-      <form method="POST" action="simpsonMethod38.php" class="form-horizontal" role="form">          
-        <legend><h2 class="text-center">Simpson Method 3/8</h2></legend>
+      <form method="POST" action="metodoMontecarlo.php" class="form-horizontal" role="form">          
+        <legend><h2 class="text-center">Montecarlo Method</h2></legend>
         <div class="form-group">
           <label class="col-sm-5 control-label" for="funcion">Function f(x) = </label>
           <div class="col-sm-3">
@@ -87,72 +87,78 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="particiones" class="col-sm-5 control-label">Number of partitions</label>
+          <label for="puntos" class="col-sm-5 control-label">Points</label>
           <div class="col-sm-3">
-            <input name="particiones" type="number" class="form-control" id="particiones" min="3" step="2" <?php 
-              if (isset($_POST['particiones'])) {
-                echo 'value='.$_POST['particiones'];
+            <input name="puntos" type="number" class="form-control" id="puntos" min="1" <?php 
+              if (isset($_POST['puntos'])) {
+                echo 'value='.$_POST['puntos'];
               }
             ?> required>      
           </div>
-        </div>        
+        </div>
+        <div class="form-group">
+          <label for="cota" class="col-sm-5 control-label">Upper bound f(x) in [a,b]</label>
+          <div class="col-sm-3">
+            <input name="cota" type="number" class="form-control" id="cota" min="1" <?php 
+              if (isset($_POST['cota'])) {
+                echo 'value='.$_POST['cota'];
+              }
+            ?> required>      
+          </div>
+        </div>
         <div class="form-group">
           <div class="text-center">
             <input type="submit" class="btn btn-primary" value="EVALUATE">            
-            <a href="simpsonMethod.php" class="btn btn-danger">DELETE</a>
+            <a href="metodoTrapecios.php" class="btn btn-danger">DELETE</a>
           </div>
         </div>
       </form>
 
-<?php 
-  if (isset($_POST["funcion"])) {
-    $funcion = $_POST["funcion"];
-    $a = $_POST["a"];
-    $b = $_POST["b"];
-    $n = $_POST["particiones"];
-
-  
-    require "../../../models/validadorExpresiones/Evaluar.php";
-
-    $eval = new Evaluar();
-    
-    $h = ($b - $a) / $n;
-
-    function simpson38($a, $b, $h, $funcion, $eval) {
-      $x0 = $a;
-      $f0 = $eval->expression($funcion, $x0);            
-
-      $x1 = $x0 + $h;      
-      $f1 = $eval->expression($funcion, $x0 + $h);
-      $fx1 = $eval->expression($funcion, $x1);                  
-
-      $x2 = $x1 + $h;
-      $f2 = $eval->expression($funcion, $x1 + $h);
-      $fx2 = $eval->expression($funcion, $x2);                  
-
-
-      $x3 = $x2 + $h;
-      $f3 = $eval->expression($funcion, $x3);                  
-
-      if (round($x3) >= $b) {
-        return (3 * $h / 8) * ($f0 + 3*$fx1 + 3*$fx2 + $f3);
-      }
-      else return simpson38($x3, $b, $h, $funcion, $eval);
-      
-    }
-
-    echo '<h3 class="text-center bg-primary">RESULT = '.simpson38($a, $b, $h, $funcion, $eval).'</h3>';
-    
-
-  }
-?>     
-      
-
       <br>
+      <?php       
+        if (isset($_POST['funcion'])) {
+
+          require '../../../models/validadorExpresiones/Evaluar.php';
+
+          // Creo una instancia de Evaluar
+          $eval = new Evaluar();
+
+          // Función
+          $funcion = $_POST['funcion'];
+          // Límite inferior a
+          $a = (float) $_POST['a'];
+          // Límite superior b
+          $b = (float) $_POST['b'];
+          // Número de puntos
+          $puntos = $_POST['puntos']; 
+          // Cota superior de f(x)        
+          $cota = $_POST["cota"];
+
+          function montecarlo($a, $b, $puntos, $cota, $funcion, $eval) {
+            $longitud = $b - $a;
+            $xi = $a + lcg_value() * $longitud;            
+            $ni = 0;
+            
+            for ($i=0; $i < $puntos ; $i++) { 
+              $yi = lcg_value() * $cota;
+              if ($yi <= $eval->expression($funcion, $xi)) {
+                $ni++;
+              }
+            }
+            return ($ni / $puntos) * ($longitud * $cota);
+          }
+
+          echo '<h3 class="text-center bg-primary">RESULT = '.montecarlo($a, $b, $puntos, $cota, $funcion, $eval).'</h3>';
+        }        
+      ?>
+      
+
+
+      <br><br><br><br>
       <div style="text-align: center;">
-        <a id="boton" href="../videos.html" target="" type="button" class="btn btn-lg" style="background: gray; color: white">Video</a>
-        <a id="boton" href="../documents.html" target="" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Document</a>        
-      </div>   
+        <a id="boton" href="../videos.html" target="" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeo</a>
+        <a id="boton" href="../documents.html" target="" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>
+      </div>
 
       <br><br><br><br><br><br><br><br>
 
@@ -171,8 +177,10 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
            
     </div> <!-- /container -->
+
 
     <footer>      
       <p class="text-center">

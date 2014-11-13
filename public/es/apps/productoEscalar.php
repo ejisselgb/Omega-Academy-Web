@@ -48,7 +48,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="active2"><a href="productoEscalar.php" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/scalarMultiplication.php" style="color: white">English</a></li>
+              <li><a href="../../en/apps/scalarProduct.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -155,8 +155,8 @@ if (isset($_POST["filas1"]) && isset($_POST["columnas1"]) && isset($_POST["escal
 
       <br><br>
       <div style="text-align: center;">
-        <a id="boton" href="http://www.youtube.com/watch?v=yEyCnQ3bfS0" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeo</a>
-        <a id="boton" href="../documentos/unidad1.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>        
+        <a id="boton" href="https://www.youtube.com/watch?v=BOSdUYChQRY&list=UUMeIDix7FsMr9WGK-uaQ5DA" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeo</a>
+        <a id="boton" href="../documentos/unidad19.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>        
       </div>
 
       <br><br><br><br><br><br><br><br>

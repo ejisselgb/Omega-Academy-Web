@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Este curso en línea propuesto por 5 estudiantes de ingeniería multimedia e ingeniería de sistemas de la universidad de San Buenaventura Cali, nace de la necesidad de implementar y compartir los conocimientos obtenidos hasta el momento para ofrecer una guía de trabajo para las generaciones futuras, que les permita aprender de forma dinámica y que a la vez sea una plataforma de apoyo para el docente.">
+    <meta name="description" content="This online course was design by 5 students from Systems Engineering and Multimedia Engineering from the University San Buenaventura, Cali - Colombia.  It was created to fulfill the need to implement and share the knowledge obtained up until now, also to offer a work guide for future generations that would allow them to learn in a dynamic way and so it can be a support guide for the professor.">
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Multiplicación de Matrices | Omega Academy</title>
+    <title>Multiply Matrices | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
     <div class="container">
 
-      <img id="banner"  src="../../img/banner.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">      
+      <img id="banner"  src="../../img/banner2.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">      
       <img id="bannerMovil" src="../../img/bannerMovil.png" class="img-responsive" alt="BANNER OMEGA ACADEMY">
 
       <!-- Static navbar -->
@@ -38,17 +38,17 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="../index.html" style="color: white">Inicio</a></li>
+              <li><a href="../index.html" style="color: white">Home</a></li>
               <li class="active2"><a href="../software.html" style="color: #d40b3a">Software</a></li>
-              <li><a href="../videos.html" style="color: white">Vídeos</a></li>
-              <li><a href="../documentos.html" style="color: white">Documentos</a></li>                            
-              <li><a href="../nosotros.html" style="color: white">Nosotros</a></li>
+              <li><a href="../videos.html" style="color: white">Videos</a></li>
+              <li><a href="../documents.html" style="color: white">Documents</a></li>                            
+              <li><a href="../about.html" style="color: white">About us</a></li>
               <li><a href="https://github.com/frankdaza2/Omega-Academy-Web" target="_blank" style="color: white">Github</a></li>
-              <li><a href="../contacto.php" style="color: white">Contacto</a></li>
+              <li><a href="../contact.php" style="color: white">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active2"><a href="multiplicarMatrices.php" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/multiplyMatrices.php" style="color: white">English</a></li>
+              <li><a href="../../es/apps/multiplicarMatrices.php" style="color: white">Español</a></li>              
+              <li class="active2"><a href="multiplyMatrices.php" style="color: #d40b3a">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -57,41 +57,41 @@
 
       <!-- MATRIZ 1 -->
 
-      <form method="POST" action="multiplicarMatrices.php" class="form-inline text-center" role="form">
-        <legend><h2>Multiplicación de Matrices</h2></legend>
-        <h4>Matriz 1</h4>
+      <form method="POST" action="multiplyMatrices.php" class="form-inline text-center" role="form">
+        <legend><h2>Multiply Matrices</h2></legend>
+        <h4>Matrix 1</h4>
         <div class="form-group">          
-          <input name="filas1" type="text" class="form-control" id="filas1" onkeyup="crearValidar()" placeholder="Número de filas" <?php 
+          <input name="filas1" type="text" class="form-control" id="filas1" onkeyup="crearValidar()" placeholder="Rows" <?php 
             if (isset($_POST["filas1"])) {
               echo "value=".$_POST["filas1"];;
             }
           ?> required autofocus>
         </div>
         <div class="form-group">          
-          <input name="columnas1" type="text" class="form-control" id="columnas1" onkeyup="crearValidar()" placeholder="Número de columnas" <?php 
+          <input name="columnas1" type="text" class="form-control" id="columnas1" onkeyup="crearValidar()" placeholder="Columns" <?php 
             if (isset($_POST["columnas1"])) {
               echo "value=".$_POST["columnas1"];
             }
           ?> required>
         </div>
         <br><br>
-        <h4>Matriz 2</h4>
+        <h4>Matrix 2</h4>
         <div class="form-group">          
-          <input name="filas2" type="text" class="form-control" id="filas2" onkeyup="crearValidar()" placeholder="Número de filas" <?php 
+          <input name="filas2" type="text" class="form-control" id="filas2" onkeyup="crearValidar()" placeholder="Rows" <?php 
             if (isset($_POST["filas2"])) {
               echo "value=".$_POST["filas2"];;
             }
           ?> required autofocus>
         </div>
         <div class="form-group">          
-          <input name="columnas2" type="text" class="form-control" id="columnas2" onkeyup="crearValidar()" placeholder="Número de columnas" <?php 
+          <input name="columnas2" type="text" class="form-control" id="columnas2" onkeyup="crearValidar()" placeholder="Columns" <?php 
             if (isset($_POST["columnas2"])) {
               echo "value=".$_POST["columnas2"];
             }
           ?> required>
         </div>
         <br><br>
-        <button type="submit" class="btn btn-primary">Crear Matrices</button>
+        <button type="submit" class="btn btn-primary">Create Matrices</button>
       </form>
 
 
@@ -111,7 +111,7 @@ if (isset($_POST["filas1"]) && isset($_POST["columnas1"])) {
           <tbody>
             <?php 
               if (isset($_POST["filas1"]) && isset($_POST["columnas1"])) {
-                echo "<h3 class='text-center'>Matriz 1</h3>";
+                echo "<h3 class='text-center'>Matrix 1</h3>";
                 $tmp = 0;
                 for ($i=0; $i < $filas1; $i++) { 
                   echo "<tr>";              
@@ -148,7 +148,7 @@ if (isset($_POST["filas2"]) && isset($_POST["columnas2"])) {
           <tbody>
             <?php 
               if (isset($_POST["filas2"]) && isset($_POST["columnas2"])) {
-                echo "<h3 class='text-center'>Matriz 2</h3>";
+                echo "<h3 class='text-center'>Matrix 2</h3>";
                 $tmp = 0;
                 for ($i=0; $i < $filas2; $i++) { 
                   echo "<tr>";              
@@ -168,10 +168,10 @@ if (isset($_POST["filas2"]) && isset($_POST["columnas2"])) {
         <?php 
           if (isset($_POST["filas1"]) && isset($_POST["columnas2"])) {            
             echo '<br><br>
-                  <button class="btn btn-primary" onclick="multiplicacion()">Multiplicar Matrices</button>
-                  <button class="btn btn-danger" onclick="borrar()">Borrar</button>
+                  <button class="btn btn-primary" onclick="multiplicacion()">Multiply Matrices</button>
+                  <button class="btn btn-danger" onclick="borrar()">DELETE</button>
                   <br><br><br><br>
-                  <h2 class="bg-primary">RESULTADO</h2><br>';
+                  <h2 class="bg-primary">RESULT</h2><br>';
           }
         ?>        
       </div>  
@@ -199,8 +199,8 @@ if (isset($_POST["filas2"]) && isset($_POST["columnas2"])) {
 
       <br><br>
       <div style="text-align: center;">
-        <a id="boton" href="https://www.youtube.com/watch?v=6McOvOyRT2M&list=UUMeIDix7FsMr9WGK-uaQ5DA" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeo</a>
-        <a id="boton" href="../documentos/unidad19.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>        
+        <a id="boton" href="../videos.html" target="" type="button" class="btn btn-lg" style="background: gray; color: white">Video</a>
+        <a id="boton" href="../documents.html" target="" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Document</a>        
       </div>
 
       <br><br><br><br><br><br><br><br>

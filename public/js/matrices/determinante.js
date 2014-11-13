@@ -27,47 +27,45 @@ function validarMatriz1() {
 }
 
 function det(matriz) {
+	var filas1 = document.getElementById('filas1').value;		
+	var columnas1 = document.getElementById('columnas1').value;
+
 	var sum = 0;
-    var s = 0;
-    if (matriz.length == 1) {
-    	return matriz[0][0];
-    }
-    for (var i = 0; i < matriz.length; i++) {
-    	matriz3 = [];
-		var tmp3 = [];		
+	var s = 0;
 
-		for (var i = 0; i < filas1; i++) {
-			for (var j = 0; j < columnas2; j++) {
-				tmp3.push(0);				
+	if (matriz.length == 1) {
+		alert("Debe ingresar mínimo una matriz de 2x2");		
+	} else {
+		for (var i = 0; i < matriz.length; i++) {
+			smaller = [];
+			var tmp3 = [];		
+
+			for (var ii = 0; ii < filas1; ii++) {
+				for (var jj = 0; jj < columnas1; jj++) {
+					tmp3.push(0);				
+				}
+				smaller.push(tmp3);
+				tmp3 = [];
 			}
-			matriz3.push(tmp3);
-			tmp3 = [];
+			for (var a = 1; a < matriz.length; a++) {
+				for (var b = 0; b < matriz.length; b++) {
+					if (b < i) {
+						smaller[(a-1)][b] = matriz[a][b];
+					} else if (b > i) {
+						smaller[(a-1)][(b-1)] = matriz[a][b];
+					}
+				}
+			}
+			if (i % 2 == 0) {
+				s = 1;
+			} else {
+				s = -1;
+			}
+			sum += s * matriz[0][i] * (det(smaller));
 		}
-    }
+		return sum;
+	}
 }
-
-
-def det(M):
-    
-    
-    for i in range(len(M)):
-            smaller= [ (len(M[0]) - 1 ) * [0] for i in range(len(M) - 1)]
-            a=1
-            for a in range (len(M)):
-                for b in range(len(M)):
-                    if (b < i):
-                        smaller[a-1][b]= M[a][b]
-                    elif(b > i):
-                        smaller[a-1][b-1]= M[a][b]
-            if(i % 2 == 0):
-                s = 1
-            else:
-                s = -1
-            sum += s * M[0][i] * (det(smaller))
-    return sum
-print(det(M))
-
-
 
 function determinante() {
 	if (validarMatriz1()) {
@@ -88,11 +86,13 @@ function determinante() {
 			matriz1.push(tmp1);
 			tmp1 = [];			
 		}
-		
-		alert("resultado = " +  matriz1);
-		
+
+		var resultado = det(matriz1);
+
+		alert("matriz1 = " + resultado);
+
 
 	} else {
-		alert("LLenar campos Matriz 1");
-	}	
+		alert("Llene todos los campo de la matriz");
+	}
 }

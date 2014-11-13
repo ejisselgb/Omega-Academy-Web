@@ -143,8 +143,8 @@
 
       <br>
       <div style="text-align: center;">
-        <a id="boton" href="http://www.youtube.com/watch?v=yEyCnQ3bfS0" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Video</a>
-        <a id="boton" href="../documents/unit1.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Document</a>        
+        <a id="boton" href="../videos.html" target="" type="button" class="btn btn-lg" style="background: gray; color: white">Video</a>
+        <a id="boton" href="../documents.html" target="" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Document</a>        
       </div>   
 
       <br><br><br><br><br><br><br><br>

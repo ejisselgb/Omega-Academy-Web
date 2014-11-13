@@ -167,8 +167,8 @@ if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
 
       <br><br>
       <div style="text-align: center;">
-        <a id="boton" href="http://www.youtube.com/watch?v=yEyCnQ3bfS0" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeo</a>
-        <a id="boton" href="../documentos/unidad1.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>        
+        <a id="boton" href="../videos.html" target="" type="button" class="btn btn-lg" style="background: gray; color: white">Vídeo</a>
+        <a id="boton" href="../documentos/unidad15.pdf" target="" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Documento</a>        
       </div>
 
       <br><br><br><br><br><br><br><br>

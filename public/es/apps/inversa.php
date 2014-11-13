@@ -48,7 +48,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="active2"><a href="inversa.php" style="color: #d40b3a">Español</a></li>              
-              <li><a href="../../en/apps/reverse.php" style="color: white">English</a></li>
+              <li><a href="../../en/apps/inverse.php" style="color: white">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

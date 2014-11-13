@@ -8,7 +8,7 @@
     <meta name="author" content="Omega Academy Group.">
     <link rel="icon" href="../../img/icon.png">
 
-    <title>Simpson Method | Omega Academy</title>
+    <title>Inverse of a Matrix | Omega Academy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -47,112 +47,108 @@
               <li><a href="../contact.php" style="color: white">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../../es/apps/metodoSimpson38.php" style="color: white">Español</a></li>              
-              <li class="active2"><a href="simpsonMethod38.php" style="color: #d40b3a">English</a></li>
+              <li><a href="../../es/apps/inversa.php" style="color: white">Español</a></li>              
+              <li class="active2"><a href="inverse.php" style="color: #d40b3a">English</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </div>          
-      
-      <form method="POST" action="simpsonMethod38.php" class="form-horizontal" role="form">          
-        <legend><h2 class="text-center">Simpson Method 3/8</h2></legend>
-        <div class="form-group">
-          <label class="col-sm-5 control-label" for="funcion">Function f(x) = </label>
-          <div class="col-sm-3">
-            <input name="funcion" type="text" class="form-control" id="funcion" <?php 
-              if (isset($_POST['funcion'])) {
-                echo 'value='.$_POST['funcion'];                
-              }
-            ?> required>
-          </div>
+      </div>                
+    
+
+      <!-- MATRIZ 1 -->
+
+      <form method="POST" action="inverse.php" class="form-inline text-center" role="form">
+        <legend><h2>Inverse of a Matrix</h2></legend>        
+        <h4>Matriz 1</h4>
+        <div class="form-group">          
+          <input name="filas1" type="text" class="form-control" id="filas1" placeholder="Rows" <?php 
+            if (isset($_POST["filas1"])) {
+              echo "value=".$_POST["filas1"];
+            }
+          ?> required autofocus>
         </div>
-        <div class="form-group">
-          <label class="col-sm-5 control-label" for="a">Lower limit A</label>
-          <div class="col-sm-3">
-            <input name="a" type="text" class="form-control" id="a" <?php 
-              if (isset($_POST['a'])) {
-                echo 'value='.$_POST['a'];                
-              }
-            ?> required>          
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="b" class="col-sm-5 control-label">Upper limit B</label>
-          <div class="col-sm-3">
-            <input name="b" type="text" class="form-control" id="b" <?php 
-              if (isset($_POST['b'])) {
-                echo 'value='.$_POST['b'];                
-              }
-            ?> required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="particiones" class="col-sm-5 control-label">Number of partitions</label>
-          <div class="col-sm-3">
-            <input name="particiones" type="number" class="form-control" id="particiones" min="3" step="2" <?php 
-              if (isset($_POST['particiones'])) {
-                echo 'value='.$_POST['particiones'];
-              }
-            ?> required>      
-          </div>
-        </div>        
-        <div class="form-group">
-          <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="EVALUATE">            
-            <a href="simpsonMethod.php" class="btn btn-danger">DELETE</a>
-          </div>
-        </div>
+        <div class="form-group">          
+          <input name="columnas1" type="text" class="form-control" id="columnas1" placeholder="Columns" <?php 
+            if (isset($_POST["columnas1"])) {
+              echo "value=".$_POST["columnas1"];
+            }
+          ?> required>
+        </div>                
+        <br><br>
+        <button type="submit" class="btn btn-primary">Create Matrix</button>
       </form>
 
+
 <?php 
-  if (isset($_POST["funcion"])) {
-    $funcion = $_POST["funcion"];
-    $a = $_POST["a"];
-    $b = $_POST["b"];
-    $n = $_POST["particiones"];
 
+if (isset($_POST["filas1"]) && isset($_POST["columnas1"]) ) {
   
-    require "../../../models/validadorExpresiones/Evaluar.php";
+$filas1 = $_POST["filas1"];
+$columnas1 = $_POST["columnas1"];
 
-    $eval = new Evaluar();
-    
-    $h = ($b - $a) / $n;
+}
 
-    function simpson38($a, $b, $h, $funcion, $eval) {
-      $x0 = $a;
-      $f0 = $eval->expression($funcion, $x0);            
+?>
 
-      $x1 = $x0 + $h;      
-      $f1 = $eval->expression($funcion, $x0 + $h);
-      $fx1 = $eval->expression($funcion, $x1);                  
+      <div class="table-responsive">
+        <table class="table table-responsive table-bordered text-center">
+          <tbody>
+            <?php 
+              if (isset($_POST["filas1"]) && isset($_POST["columnas1"])) {
+                echo "<h3 class='text-center'>Matrix 1</h3>";
+                $tmp = 0;
+                for ($i=0; $i < $filas1; $i++) { 
+                  echo "<tr>";              
+                  for ($j=0; $j < $columnas1; $j++) { 
+                    echo "<td><input id='a$tmp' type='text' value='1'></td>";
+                    $tmp++;
+                  }
+                  echo "</tr>";
+                }
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
 
-      $x2 = $x1 + $h;
-      $f2 = $eval->expression($funcion, $x1 + $h);
-      $fx2 = $eval->expression($funcion, $x2);                  
+      <div class="text-center">        
+        <?php 
+          if (isset($_POST["filas1"])) {            
+            echo '<br><br>
+                  <button class="btn btn-primary" onclick="inversa()">CACULATE</button>
+                  <button class="btn btn-danger" onclick="borrar()">DELETE</button>
+                  <br><br><br><br>
+                  <h2 class="bg-primary">RESULTADO</h2><br>';
+          }
+        ?>        
+      </div>  
+
+      <div class="table-responsive">
+        <table class="table table-responsive table-bordered text-center">
+          <tbody>
+            <?php 
+              if (isset($_POST["filas1"]) && isset($_POST["columnas1"])) {
+                $tmp = 0;
+                for ($i=0; $i < $filas1; $i++) { 
+                  echo "<tr>";              
+                  for ($j=0; $j < $columnas1; $j++) { 
+                    echo "<td><input id='c$tmp' type='text'></td>";
+                    $tmp++;
+                  }
+                  echo "</tr>";
+                }
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
 
 
-      $x3 = $x2 + $h;
-      $f3 = $eval->expression($funcion, $x3);                  
-
-      if (round($x3) >= $b) {
-        return (3 * $h / 8) * ($f0 + 3*$fx1 + 3*$fx2 + $f3);
-      }
-      else return simpson38($x3, $b, $h, $funcion, $eval);
-      
-    }
-
-    echo '<h3 class="text-center bg-primary">RESULT = '.simpson38($a, $b, $h, $funcion, $eval).'</h3>';
-    
-
-  }
-?>     
-      
-
-      <br>
+      <br><br>
       <div style="text-align: center;">
-        <a id="boton" href="../videos.html" target="" type="button" class="btn btn-lg" style="background: gray; color: white">Video</a>
-        <a id="boton" href="../documents.html" target="" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Document</a>        
-      </div>   
+        <a id="boton" href="http://www.youtube.com/watch?v=yEyCnQ3bfS0" target="_blank" type="button" class="btn btn-lg" style="background: gray; color: white">Video</a>
+        <a id="boton" href="../documentos/unidad1.pdf" target="_blank" type="button" class="btn btn-lg" style="background: #D40B3A; color: white">Document</a>        
+      </div>
 
       <br><br><br><br><br><br><br><br>
 
@@ -171,8 +167,10 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
            
     </div> <!-- /container -->
+
 
     <footer>      
       <p class="text-center">
@@ -190,5 +188,6 @@
     <script src="../../js/transition.js"></script>
     <script src="../../js/dropdown.js"></script>
     <script src="../../js/conversorBases.js"></script>
+    <script src="../../js/matrices/inversa.js"></script>
   </body>
 </html>
